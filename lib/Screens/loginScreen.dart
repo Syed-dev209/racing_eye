@@ -84,6 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             width: double.maxFinite,
                             padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 5.0),
                             decoration: BoxDecoration(
+
                                 color: myFocusNode1.hasFocus?Color(0xffF9FAFB):Colors.white,
                                 borderRadius: BorderRadius.circular(15.0)
                             ),
@@ -114,6 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+//<<<<<<< Updated upstream
                               Container(
                                 height:20.0,
                                 width: 20.0,
@@ -133,7 +135,20 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(width: 12.0,),
                               Text('Keep me logged in',style: TextStyle(
                                 fontSize: 12.0
-                              ),)
+                              ),),
+
+                              Checkbox(
+                                  side: BorderSide(color: Color(0xffBBC3CE)),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0)),
+                                  value: checkBoxValue,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      checkBoxValue = val!;
+                                    });
+                                  }),
+                              Text('Keep me logged in')
+//>>>>>>> Stashed changes
                             ],
                           ),
                           SizedBox(height: 32.0,),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:racing_eye/Screens/loginScreen.dart';
+import 'package:racing_eye/Screens/register_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: myColor,
       ),
-      home: LoginScreen(),
+      home: RegisterScreen(),
     );
   }
 }
