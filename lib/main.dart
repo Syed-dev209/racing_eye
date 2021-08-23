@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:racing_eye/Screens/loginScreen.dart';
+import 'package:racing_eye/Screens/password_recovery.dart';
 import 'package:racing_eye/Screens/register_screen.dart';
 
 void main() async {
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: myColor,
       ),
-      home: RegisterScreen(),
+      home: LoginScreen(),
     );
   }
 }

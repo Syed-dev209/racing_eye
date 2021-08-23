@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:racing_eye/Screens/ownerDetails.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -9,15 +10,16 @@ class _LoginScreenState extends State<LoginScreen> {
   FocusNode myFocusNode = new FocusNode();
   FocusNode myFocusNode1 = new FocusNode();
   bool checkBoxValue = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 15.0,vertical: 15.0),
-            height: MediaQuery.of(context).size.height*0.964,
-            width:  MediaQuery.of(context).size.width,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+          height: MediaQuery.of(context).size.height * 0.964,
+          width: MediaQuery.of(context).size.width,
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -25,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 30.0,
                 ),
                 Padding(
-                  padding:EdgeInsets.only(left: 18.0),
+                  padding: EdgeInsets.only(left: 18.0),
                   child: Text(
                     'Login',
                     style: TextStyle(
@@ -56,38 +58,42 @@ class _LoginScreenState extends State<LoginScreen> {
                           Container(
                             height: 70.0,
                             width: double.maxFinite,
-                            padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 5.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 5.0),
                             decoration: BoxDecoration(
-                              color: myFocusNode.hasFocus?Color(0xffF9FAFB):Colors.white,
-                              borderRadius: BorderRadius.circular(15.0)
-                            ),
+                                color: myFocusNode.hasFocus
+                                    ? Color(0xffF9FAFB)
+                                    : Colors.white,
+                                borderRadius: BorderRadius.circular(15.0)),
                             child: TextFormField(
                               onTap: () {
                                 setState(() {});
                               },
                               focusNode: myFocusNode,
                               decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Color(0xffBBC3CE))),
-                                  labelText: 'User Name',
-                                  labelStyle: TextStyle(
-                                      fontSize: 16.0,
-                                      color: myFocusNode.hasFocus
-                                          ? Color(0xff02458A)
-                                          : Color(0xffBBC3CE)),
-                                  ),
+                                enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Color(0xffBBC3CE))),
+                                labelText: 'User Name',
+                                labelStyle: TextStyle(
+                                    fontSize: 16.0,
+                                    color: myFocusNode.hasFocus
+                                        ? Color(0xff02458A)
+                                        : Color(0xffBBC3CE)),
+                              ),
                             ),
                           ),
                           Container(
                             height: 70.0,
                             width: double.maxFinite,
-                            padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 5.0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 5.0),
                             decoration: BoxDecoration(
 
                                 color: myFocusNode1.hasFocus?Color(0xffF9FAFB):Colors.white,
                                 borderRadius: BorderRadius.circular(15.0)
                             ),
+
                             child: TextFormField(
                               onTap: () {
                                 setState(() {
@@ -97,16 +103,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                               focusNode: myFocusNode1,
                               decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Color(0xffBBC3CE))),
-                                  labelText: 'Password',
-                                  labelStyle: TextStyle(
-                                      fontSize: 16.0,
-                                      color: myFocusNode1.hasFocus
-                                          ? Color(0xff02458A)
-                                          : Color(0xffBBC3CE)),
-                                  ),
+                                enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Color(0xffBBC3CE))),
+                                labelText: 'Password',
+                                labelStyle: TextStyle(
+                                    fontSize: 16.0,
+                                    color: myFocusNode1.hasFocus
+                                        ? Color(0xff02458A)
+                                        : Color(0xffBBC3CE)),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -115,59 +121,66 @@ class _LoginScreenState extends State<LoginScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-//<<<<<<< Updated upstream
                               Container(
-                                height:20.0,
+                                height: 20.0,
                                 width: 20.0,
                                 child: Checkbox(
-                                    side: BorderSide(color: Color(0xffBBC3CE)),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(6.0)),
-                                    value: checkBoxValue,
-                                    onChanged: (val) {
-                                      setState(() {
-                                        checkBoxValue = val!;
-                                      });
-                                    },
-                                  splashRadius: 0.0,
-                                ),
-                              ),
-                              SizedBox(width: 12.0,),
-                              Text('Keep me logged in',style: TextStyle(
-                                fontSize: 12.0
-                              ),),
-
-                              Checkbox(
                                   side: BorderSide(color: Color(0xffBBC3CE)),
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5.0)),
+                                      borderRadius: BorderRadius.circular(6.0)),
                                   value: checkBoxValue,
                                   onChanged: (val) {
                                     setState(() {
                                       checkBoxValue = val!;
                                     });
-                                  }),
-                              Text('Keep me logged in')
-//>>>>>>> Stashed changes
+                                  },
+                                  splashRadius: 0.0,
+                                ),
+                              ),
+
+                              SizedBox(
+                                width: 12.0,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    checkBoxValue = !checkBoxValue;
+                                  });
+                                },
+                                child: Text(
+                                  'Keep me logged in',
+                                  style: TextStyle(fontSize: 12.0),
+                                ),
+                              )
                             ],
                           ),
-                          SizedBox(height: 32.0,),
+                          SizedBox(
+                            height: 32.0,
+                          ),
                           SizedBox(
                             width: double.maxFinite,
                             height: 45.0,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(23.0)
-                                )
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(23.0))),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => OwnerDetails()));
+                              },
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16.0),
                               ),
-                                onPressed: (){},
-                                child: Text('Login',style: TextStyle(
-                              color: Colors.white,
-                                  fontSize: 16.0
-                            ),),),
+                            ),
                           ),
-                          SizedBox(height: 13.0,),
+                          SizedBox(
+                            height: 13.0,
+                          ),
                           Align(
                             alignment: Alignment.centerRight,
                             child: GestureDetector(
@@ -179,8 +192,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-
-                SizedBox(height: 50.0,),
+                SizedBox(
+                  height: 50.0,
+                ),
                 Row(
                   children: [
                     Expanded(
@@ -189,45 +203,51 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: 500,
                         decoration: BoxDecoration(
                             color: Color(0xffF0F0F8),
-                            borderRadius: BorderRadius.circular(2.0)
-                        ),
+                            borderRadius: BorderRadius.circular(2.0)),
                       ),
                     ),
-                    SizedBox(width: 15.0,),
+                    SizedBox(
+                      width: 15.0,
+                    ),
                     Text('or continue with'),
-                    SizedBox(width: 15.0,),
+                    SizedBox(
+                      width: 15.0,
+                    ),
                     Expanded(
                       child: Container(
                         height: 2.0,
                         width: double.maxFinite,
                         decoration: BoxDecoration(
-                          color: Color(0xffF0F0F8),
-                          borderRadius: BorderRadius.circular(2.0)
-                        ),
-
+                            color: Color(0xffF0F0F8),
+                            borderRadius: BorderRadius.circular(2.0)),
                       ),
                     ),
-
                   ],
                 ),
-                SizedBox(height: 15.0,),
+                SizedBox(
+                  height: 15.0,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      height: 55.0,
+                        height: 55.0,
                         width: 55.0,
-                        child: Image.asset('images/google.png')
+                        child: Image.asset('images/google.png')),
+                    SizedBox(
+                      width: 15.0,
                     ),
-                    SizedBox(width: 15.0,),
-                    Container(
-                      height: 43.0,
-                        width: 43.0,
-                        child: Image.asset('images/fb.png')),
-                    SizedBox(width: 25.0,),
                     Container(
                         height: 43.0,
-                        width: 43.0,child: Image.asset('images/Apple.png'))
+                        width: 43.0,
+                        child: Image.asset('images/fb.png')),
+                    SizedBox(
+                      width: 25.0,
+                    ),
+                    Container(
+                        height: 43.0,
+                        width: 43.0,
+                        child: Image.asset('images/Apple.png'))
                   ],
                 ),
                 SizedBox(
@@ -237,22 +257,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: FractionalOffset.bottomCenter,
                   child: Center(
                     child: RichText(
-                      text:
-                      TextSpan(
-                          text:'Already have an account?',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15.0
-                          ),
+                      text: TextSpan(
+                          text: 'Already have an account?',
+                          style: TextStyle(color: Colors.black, fontSize: 15.0),
                           children: [
-                      TextSpan(
-                        text: '   Sign In',
-                        style: TextStyle(
-                            color: Color(0xFF02458A),
-                          fontWeight: FontWeight.bold,
-                        )
-                      )
-                    ]),),
+                            TextSpan(
+                                text: '   Sign In',
+                                style: TextStyle(
+                                  color: Color(0xFF02458A),
+                                  fontWeight: FontWeight.bold,
+                                ))
+                          ]),
+                    ),
                   ),
                 ),
               ],
