@@ -9,9 +9,13 @@ class CustomWhiteAppBar extends StatelessWidget {
     return  Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Image.asset('images/backWhite.png'),
+        GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+            child: Image.asset('images/backWhite.png')),
         Text(headerText,style: TextStyle(
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
             fontSize: 20.0
         ),),
         SizedBox(
@@ -20,11 +24,7 @@ class CustomWhiteAppBar extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                  child: GestureDetector(
-                    onTap: (){
-                      Navigator.pop(context);
-                    },
-                  child: Image.asset('images/Favorite.png'))),
+                  child: Image.asset('images/Favorite.png')),
               SizedBox(width: 8.0,),
               Expanded(child: Image.asset('images/searchBlue.png'))
             ],
