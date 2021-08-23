@@ -28,6 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size=MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -37,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 65.0,
+                  height: size.height*0.08,
                 ),
                 Text(
                   'Register',
@@ -54,7 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0)),
                   child: Container(
-                    height: MediaQuery.of(context).size.height*0.85,
+                    height: MediaQuery.of(context).size.height*0.75,
                     width: double.maxFinite,
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -65,12 +66,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 15.0,
-                          ),
+                          // SizedBox(
+                          //   height: 15.0,
+                          // ),
 
                           Container(
-                            height: 70.0,
+                            height: size.height*0.085,
                             width: double.maxFinite,
                             padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 5.0),
                             decoration: BoxDecoration(
@@ -109,11 +110,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
 
                           SizedBox(
-                            height: 25.0,
+                            height: 10.0,
                           ),
 
                           Container(
-                            height: 70.0,
+                            height: size.height*0.085,
                             width: double.maxFinite,
                             padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 5.0),
                             decoration: BoxDecoration(
@@ -155,12 +156,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
 
                           SizedBox(
-                            height: 25.0,
+                            height: 10.0,
                           ),
 
 
                           Container(
-                            height: 70.0,
+                            height:size.height*0.085,
                             width: double.maxFinite,
                             padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 5.0),
                             decoration: BoxDecoration(
@@ -202,10 +203,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
 
                           SizedBox(
-                            height: 25.0,
+                            height: 10.0,
                           ),
                         Container(
-                          height: 70.0,
+                          height:size.height*0.085,
                           width: double.maxFinite,
                           padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 5.0),
                           decoration: BoxDecoration(
@@ -257,44 +258,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
 
 
-
-                          SizedBox(
-                            height: 25.0,
-                          ),
-
-
-                          // TextFormField(
-                          //   onTap: (){
-                          //     setState(() {
-                          //
-                          //
-                          //     });
-                          //   },
-                          //   //focusNode: myFocusNode1,
-                          //   //obscureText: _hidePassword,
-                          //   controller: category,
-                          //   onChanged:(value){
-                          //
-                          //   },
-                          //   decoration: InputDecoration(
-                          //     hintText: 'Select Category',
-                          //     //focusColor: Color(0xff02458A),
-                          //       suffixIcon: Icon(Icons.arrow_downward),
-                          //       enabledBorder: UnderlineInputBorder(
-                          //           borderSide:
-                          //           BorderSide(color: Color(0xffBBC3CE))),
-                          //       labelText: 'Category',
-                          //       labelStyle: TextStyle(
-                          //           fontSize: 16.0,
-                          //
-                          //           //color: Color(0xffBBC3CE)
-                          //           color: myFocusNode1.hasFocus ? Color(0xff02458A) : Color(0xffBBC3CE)
-                          //       ),
-                          //       contentPadding: EdgeInsets.zero
-                          //   ),
-                          // ),
-
-
                       Container(
                         width: MediaQuery.of(context).size.width,
                         child: DropdownButtonHideUnderline(
@@ -316,31 +279,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
 
-                          // Container(
-                          //   width: 300,
-                          //   child: DropdownButton<String>(
-                          //     icon: Icon(Icons.arrow_downward),
-                          //
-                          //
-                          //     value: selectedItem,
-                          //     onChanged: (String? string) => setState(() => selectedItem = string!),
-                          //     selectedItemBuilder: (BuildContext context) {
-                          //       return items.map<Widget>((String item) {
-                          //         return Text(item);
-                          //       }).toList();
-                          //     },
-                          //     items: items.map((String item) {
-                          //       return DropdownMenuItem<String>(
-                          //         child: Text('Log $item'),
-                          //         value: item,
-                          //       );
-                          //     }).toList(),
-                          //   ),
-                          // ),
+
 
 
                           SizedBox(
-                            height: 25.0,
+                            height: size.height*0.025,
                           ),
 
                           Column(
@@ -385,7 +328,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ],
                           ),
                           SizedBox(
-                            height: 25.0,
+                            height: size.height*0.025,
                           ),
                           Container(
                             width: MediaQuery.of(context).size.width,
@@ -412,10 +355,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Divider(color: Colors.black,)
                       ),
 
-                      SizedBox(width: 25,),
+                      SizedBox(width: size.height*0.025,),
                       Text("OR Continue with"),
 
-                      SizedBox(width: 25,),
+                      SizedBox(width: size.height*0.025,),
                       Expanded(
                           child: Divider(
                             color: Colors.black,
@@ -424,7 +367,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ]
                 ),
 
-                SizedBox(height: 25,),
+                SizedBox(height: size.height*0.025,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -448,7 +391,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     )
                   ],
                 ),
-                SizedBox(height: 25,),
+                SizedBox(height: size.height*0.025,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
