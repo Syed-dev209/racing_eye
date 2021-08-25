@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:racing_eye/Models/ownerData.dart';
+import 'package:racing_eye/Models/OwnerModels/ownerData.dart';
 import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
-import 'package:racing_eye/Screens/Components/ownerCard.dart';
+import 'package:racing_eye/Screens/Components/OwnerComponents/ownerCard.dart';
 
 class OwnerList extends StatefulWidget {
-  List<Owners>? data;
+  List<OwnersData>? data;
   OwnerList({this.data});
   @override
   _OwnerListState createState() => _OwnerListState();
 }
 
 class _OwnerListState extends State<OwnerList> {
-  List<Owners> ownersList = [];
+  List<OwnersData> ownersList = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -54,10 +54,8 @@ class _OwnerListState extends State<OwnerList> {
                           padding: EdgeInsets.only(bottom: 15.0),
                           child: OwnerCard(
                               bgColorWhite: true,
-                              ownerName: ownersList[index].ownerName!,
-                              flagUrl:
-                                  "https://www.publicdomainpictures.net/pictures/350000/velka/uae-flag.jpg",
-                              ownerImage: "images/pic.PNG"),
+                            ownerData: ownersList[index],
+                              ),
                         );
                       }))
             ],

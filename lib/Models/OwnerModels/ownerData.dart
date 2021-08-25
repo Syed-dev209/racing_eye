@@ -1,4 +1,4 @@
-class Owners {
+class OwnersData {
   int? id;
   int? uid;
   String? ownerName;
@@ -9,7 +9,7 @@ class Owners {
   String? createdAt;
   String? updatedAt;
 
-  Owners(
+  OwnersData(
       {required this.id,
       required this.uid,
       required this.ownerName,
@@ -20,7 +20,7 @@ class Owners {
       required this.createdAt,
       required this.updatedAt});
 
-  Owners.fromJson(Map<String, dynamic> json) {
+  OwnersData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     uid = json['uid'];
     ownerName = json['owner_name'];
