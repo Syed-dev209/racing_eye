@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_tab_bar/custom_tab_bar.dart';
 import 'package:flutter_custom_tab_bar/indicator/standard_indicator.dart';
 import 'package:flutter_custom_tab_bar/library.dart';
+import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Models/OwnerModels/OwnerFormDataTableModel.dart';
+import 'package:racing_eye/Models/OwnerModels/horseModel.dart';
 import 'package:racing_eye/Models/OwnerModels/ownerData.dart';
+import 'package:racing_eye/Models/OwnerModels/ownerEntriesModel.dart';
+import 'package:racing_eye/Models/OwnerModels/ownerLast14Days.dart';
 import 'package:racing_eye/Screens/Components/OwnerComponents/ownerTables.dart';
 import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
 import 'package:racing_eye/Screens/Components/imageplaceHolder.dart';
@@ -134,11 +138,39 @@ class _OwnerDataTableState extends State<OwnerDataTable>
     ),
   ];
   TabController? controller;
+  List<Last14Days> formList=[];
+  List<Entries> entriesList=[];
+  List<Horses> horseList=[];
+
+  generateLists()async{
+    await getOwnerLast14DaysData(widget.ownersData.uid!).then((value) async{
+      if(value!=null){
+        setState(() {
+          formList = value.data!.last14Days!;
+        });
+          await getOwnerEntries(widget.ownersData.uid!).then((value)async{
+            if(value!=null){
+              setState(() {
+                entriesList = value.data!.entries!;
+              });
+                await getOwnerHorses(widget.ownersData.uid!).then((value) {
+                  if(value!=null){
+                    setState(() {
+                      horseList = value.data!.horses!;
+                    });
+                  }
+                });
+            }
+          });
+      }
+    });
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    generateLists();
     controller = TabController(length: tabs.length, vsync: this);
   }
 
@@ -184,9 +216,9 @@ class _OwnerDataTableState extends State<OwnerDataTable>
             child: TabBarView(
               controller: controller,
               children: [
-                OwnerDataTables(dataTable: FormDataTable(ownerId: widget.ownersData.uid!,)),
-                OwnerDataTables(dataTable: EntriesDataTable()),
-                OwnerDataTables(dataTable: HorsesDataTable()),
+                OwnerDataTables(dataTable: FormDataTable(ownerId: widget.ownersData.uid!,list: formList,)),
+                OwnerDataTables(dataTable: EntriesDataTable(ownerId: widget.ownersData.uid!,list: entriesList,)),
+                OwnerDataTables(dataTable: HorsesDataTable(ownerId: widget.ownersData.uid!,list: horseList,)),
                 Text('results'),
               ],
             ),

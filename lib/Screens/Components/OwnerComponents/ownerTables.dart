@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Models/OwnerModels/OwnerFormDataTableModel.dart';
+import 'package:racing_eye/Models/OwnerModels/horseModel.dart';
+import 'package:racing_eye/Models/OwnerModels/ownerEntriesModel.dart';
 import 'package:racing_eye/Models/OwnerModels/ownerLast14Days.dart';
 
 class OwnerDataTables extends StatefulWidget {
@@ -34,39 +36,27 @@ class _OwnerDataTablesState extends State<OwnerDataTables> {
 
 class FormDataTable extends StatefulWidget {
   int ownerId;
-  FormDataTable({required this.ownerId});
+  List<Last14Days> list=[];
+  FormDataTable({required this.ownerId,required this.list});
   @override
   _FormDataTableState createState() => _FormDataTableState();
 }
 
 class _FormDataTableState extends State<FormDataTable> {
-  List<Last14Days> list=[];
-  int i=0;
-  bool loaded =false;
-  generateList()async {
 
-   await getOwnerLast14DaysData(widget.ownerId).then((value) {
-     if(value!=null){
-       print(value);
-       setState(() {
-         loaded=true;
-         list = value.data!.last14Days!;
-       });
-     }
-   });
-  }
+  int i=0;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    generateList();
+
 
   }
 
   @override
   Widget build(BuildContext context) {
     print("Owner Id;- ${widget.ownerId}");
-    return loaded? SizedBox(
+    return widget.list.isNotEmpty? SizedBox(
       width: double.maxFinite,
       child: DataTable(
           headingRowColor: MaterialStateColor.resolveWith(
@@ -118,7 +108,7 @@ class _FormDataTableState extends State<FormDataTable> {
               ),
             ),
           ],
-          rows: list.isEmpty?
+          rows: widget.list.isEmpty?
               [
                 DataRow(
                   cells: [
@@ -130,7 +120,7 @@ class _FormDataTableState extends State<FormDataTable> {
                   ]
                 )
           ]
-              : list.map((e) {
+              : widget.list.map((e) {
             if(i==0){
               i=0;
             }
@@ -168,91 +158,107 @@ class _FormDataTableState extends State<FormDataTable> {
 
 //////////////////////////////////////////////////////////////////
 class EntriesDataTable extends StatefulWidget {
-  const EntriesDataTable({Key? key}) : super(key: key);
+  int ownerId;
+  List<Entries> list;
+  EntriesDataTable({required this.ownerId,required this.list}) ;
 
   @override
   _EntriesDataTableState createState() => _EntriesDataTableState();
 }
 
 class _EntriesDataTableState extends State<EntriesDataTable> {
-  List<OwnerFormDataItems>? list;
 
-  List<OwnerFormDataItems> generateList() {
-    return List.generate(10, (index) {
-      return OwnerFormDataItems(
-          index: index,
-          date: '18/7/21',
-          crs: 'DON',
-          pos: '5/9',
-          horse: "Horse name",
-          sp: '11/1');
-    });
-  }
+  int i =0;
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    list = generateList();
+
   }
   @override
   Widget build(BuildContext context) {
-    return DataTable(
-        headingRowColor: MaterialStateColor.resolveWith(
-              (states) => Color(0xffF3F3F3),
+    return widget.list.isNotEmpty? SizedBox(
+      width: double.maxFinite,
+      child: DataTable(
+          headingRowColor: MaterialStateColor.resolveWith(
+                (states) => Color(0xffF3F3F3),
+          ),
+          headingRowHeight: 43.0,
+          dataRowHeight: 43.0,
+          dividerThickness: 0.0,
+          columnSpacing: 5.0,
+          horizontalMargin: 0,
+          columns: [
+            DataColumn(
+              label: Expanded(
+                child: Text(
+                  'Date',
+                  style: TextStyle(
+                    color: Color(0xFF02458A),
+                  ),
+                ),
+              ),
+            ),
+            DataColumn(
+              label: Text(
+                'Horse',
+                style: TextStyle(
+                  color: Color(0xFF02458A),
+                ),
+              ),
+            ),
+            DataColumn(
+              label: Text(
+                'Title',
+                style: TextStyle(
+                  color: Color(0xFF02458A),
+                ),
+              ),
+            ),
+            DataColumn(
+              label: Text(
+                'Course',
+                style: TextStyle(
+                  color: Color(0xFF02458A),
+                ),
+              ),
+            ),
+          ],
+          rows: widget.list.map((e) {
+            if(i == 0){
+              i=0;
+            }
+            else {
+              i = i + 1;
+            }
+            return DataRow(
+                color: MaterialStateColor.resolveWith(
+                      (states) =>
+                 i % 2 != 0 ? Color(0xffF3F3F3) : Colors.white,
+                ),
+                cells: [
+                  DataCell(Text(e.raceDatetime!.substring(0,10))),
+                  DataCell(Text(e.horseName!)),
+                  DataCell(Text(e.raceInstanceTitle!,overflow: TextOverflow.fade,softWrap: false,)),
+                  DataCell(Text(e.courseStyleName!)),
+                  //DataCell(Text(e.sp)),
+                ]);
+          }).toList()),
+    ):Container(
+      height: MediaQuery.of(context).size.height*0.5,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(height: 20.0,),
+            Text('Loading...')
+          ],
         ),
-        headingRowHeight: 43.0,
-        dataRowHeight: 43.0,
-        dividerThickness: 0.0,
-        columnSpacing: 25.0,
-        columns: [
-          DataColumn(
-            label: Text(
-              'Date',
-              style: TextStyle(
-                color: Color(0xFF02458A),
-              ),
-            ),
-          ),
-          DataColumn(
-            label: Text(
-              'Horse',
-              style: TextStyle(
-                color: Color(0xFF02458A),
-              ),
-            ),
-          ),
-          DataColumn(
-            label: Text(
-              'Title',
-              style: TextStyle(
-                color: Color(0xFF02458A),
-              ),
-            ),
-          ),
-          DataColumn(
-            label: Text(
-              'Course',
-              style: TextStyle(
-                color: Color(0xFF02458A),
-              ),
-            ),
-          ),
-        ],
-        rows: list!.map((e) {
-          return DataRow(
-              color: MaterialStateColor.resolveWith(
-                    (states) =>
-                e.index % 2 != 0 ? Color(0xffF3F3F3) : Colors.white,
-              ),
-              cells: [
-                DataCell(Text(e.date)),
-                DataCell(Text(e.crs)),
-                DataCell(Text(e.pos)),
-                DataCell(Text(e.horse)),
-                //DataCell(Text(e.sp)),
-              ]);
-        }).toList());
+      ),
+    );
   }
 }
 
@@ -260,35 +266,26 @@ class _EntriesDataTableState extends State<EntriesDataTable> {
 ////////////////////////////////////////////////////////////////////
 
 class HorsesDataTable extends StatefulWidget {
-  const HorsesDataTable({Key? key}) : super(key: key);
+  int ownerId;
+  List<Horses> list;
+  HorsesDataTable({required this.ownerId,required this.list});
 
   @override
   _HorsesDataTableState createState() => _HorsesDataTableState();
 }
 
 class _HorsesDataTableState extends State<HorsesDataTable> {
-  List<OwnerFormDataItems>? list;
+  int i=-1;
 
-  List<OwnerFormDataItems> generateList() {
-    return List.generate(10, (index) {
-      return OwnerFormDataItems(
-          index: index,
-          date: '18/7/21',
-          crs: 'DON',
-          pos: '5/9',
-          horse: "Horse name",
-          sp: '11/1');
-    });
-  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    list = generateList();
+
   }
   @override
   Widget build(BuildContext context) {
-    return DataTable(
+    return widget.list.isNotEmpty? DataTable(
         headingRowColor: MaterialStateColor.resolveWith(
               (states) => Color(0xffF3F3F3),
         ),
@@ -330,19 +327,35 @@ class _HorsesDataTableState extends State<HorsesDataTable> {
             ),
           ),
         ],
-        rows: list!.map((e) {
+        rows:  widget.list.map((e) {
+          i=i+1;
           return DataRow(
               color: MaterialStateColor.resolveWith(
                     (states) =>
-                e.index % 2 != 0 ? Color(0xffF3F3F3) : Colors.white,
+                i % 2 != 0 ? Color(0xffF3F3F3) : Colors.white,
               ),
               cells: [
-                DataCell(Text(e.date)),
-                DataCell(Text(e.crs)),
-                DataCell(Text(e.pos)),
-                DataCell(Text(e.horse)),
+                DataCell(Text(e.horseName!)),
+                DataCell(Text(e.place1stNumber!.toString())),
+                DataCell(Text(e.racesNumber!.toString())),
+                DataCell(Text(e.netTotalPrizeMoney!.toString())),
                 //DataCell(Text(e.sp)),
               ]);
-        }).toList());
+        }
+
+        ).toList()
+    ):Container(
+      height: MediaQuery.of(context).size.height*0.5,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(height: 20.0,),
+            Text('Loading...')
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -66,6 +66,7 @@ class Horses {
   int? horseUid;
   String? horseName;
 
+
   Horses(
       {this.racesNumber,
         this.place1stNumber,
@@ -86,13 +87,13 @@ class Horses {
   Horses.fromJson(Map<String, dynamic> json) {
     racesNumber = json['races_number'];
     place1stNumber = json['place_1st_number'];
-    winPrize = json['win_prize'];
-    totalPrize = json['total_prize'];
+    winPrize = double.parse(json['win_prize'].toString());
+    totalPrize = double.parse(json['total_prize'].toString());
     euroWinPrize = json['euro_win_prize'];
     euroTotalPrize = json['euro_total_prize'];
-    netWinPrizeMoney = json['net_win_prize_money'];
-    netTotalPrizeMoney = json['net_total_prize_money'];
-    stake = json['stake'];
+    netWinPrizeMoney = double.parse(json['net_win_prize_money'].toString());
+    netTotalPrizeMoney = double.parse( json['net_total_prize_money'].toString());
+    stake = double.parse( json['stake'].toString());
     rpr = json['rpr'];
     trainerUid = json['trainer_uid'];
     trainerName = json['trainer_name'];

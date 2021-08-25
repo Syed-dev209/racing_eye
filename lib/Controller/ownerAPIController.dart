@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:racing_eye/Models/OwnerModels/bigRaceWins.dart';
+import 'package:racing_eye/Models/OwnerModels/horseModel.dart';
 import 'package:racing_eye/Models/OwnerModels/ownerData.dart';
 import 'package:http/http.dart' as http;
 import 'package:racing_eye/Models/OwnerModels/ownerEntriesModel.dart';
@@ -24,7 +26,7 @@ Future<List<OwnersData>> getAllOwnerList() async {
 }
 
 
-getOwnerEntries(int ownerId )async{
+Future<OwnerEntries?> getOwnerEntries(int ownerId )async{
   String url = "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/entries";
   try {
     var response = await http.get(Uri.parse(url), headers: {
@@ -46,7 +48,7 @@ getOwnerEntries(int ownerId )async{
 
 Future<OwnerLast14Days?> getOwnerLast14DaysData (int ownerId)async{
   String url = "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/last_14_days";
- // try{
+ try{
     var response = await http.get(Uri.parse(url),headers: {
       "Api-Key":apiKey
     });
@@ -57,11 +59,11 @@ Future<OwnerLast14Days?> getOwnerLast14DaysData (int ownerId)async{
     else{
       return null;
     }
- // }
- // catch(e){
- //   print(e);
-  //  return null;
-  //}
+  }
+  catch(e){
+    print(e);
+    return null;
+  }
 }
 
 getOwnerStatsSummary(int ownerId)async{
@@ -84,7 +86,7 @@ getOwnerStatsSummary(int ownerId)async{
   }
 }
 
-getOwnerBigRaceWins(int ownerId)async{
+Future<BigRaceWinsModel?> getOwnerBigRaceWins(int ownerId)async{
   String url ="https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/big_race_wins";
   try{
     var response = await http.get(Uri.parse(url),headers: {
@@ -92,7 +94,7 @@ getOwnerBigRaceWins(int ownerId)async{
     });
     if(response.statusCode==200){
       var decodedData = jsonDecode(response.body);
-      return StatsSummary.fromJson(decodedData);
+      return BigRaceWinsModel.fromJson(decodedData);
     }
     else{
       return null;
@@ -104,22 +106,22 @@ getOwnerBigRaceWins(int ownerId)async{
   }
 }
 
-getOwnerHorses(int ownerId)async{
+Future<HorseModel?> getOwnerHorses(int ownerId)async{
   String url ="https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/horses";
-  try{
+  //try{
     var response = await http.get(Uri.parse(url),headers: {
       "Api-Key":apiKey
     });
     if(response.statusCode==200){
       var decodedData = jsonDecode(response.body);
-      return StatsSummary.fromJson(decodedData);
+      return HorseModel.fromJson(decodedData);
     }
     else{
       return null;
     }
-  }
-  catch(e){
-    print("Error in getting horses list :- $e");
-    return  null;
-  }
+  //}
+  // catch(e){
+  //   print("Error in getting horses list :- $e");
+  //   return  null;
+  // }
 }
