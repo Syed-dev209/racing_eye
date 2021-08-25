@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:racing_eye/Controller/ownerAPIController.dart';
+import 'package:racing_eye/Screens/dashboardBase.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
+import 'package:racing_eye/Screens/ownerList.dart';
+import 'package:racing_eye/Screens/password_recovery.dart';
+import 'package:racing_eye/Screens/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -19,12 +24,13 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
           height: MediaQuery.of(context).size.height * 0.964,
           width: MediaQuery.of(context).size.width,
+          //color: Colors.black,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 30.0,
+                  height: MediaQuery.of(context).size.height * 0.1,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 18.0),
@@ -89,11 +95,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             padding: EdgeInsets.symmetric(
                                 vertical: 8.0, horizontal: 5.0),
                             decoration: BoxDecoration(
-
-                                color: myFocusNode1.hasFocus?Color(0xffF9FAFB):Colors.white,
-                                borderRadius: BorderRadius.circular(15.0)
-                            ),
-
+                                color: myFocusNode1.hasFocus
+                                    ? Color(0xffF9FAFB)
+                                    : Colors.white,
+                                borderRadius: BorderRadius.circular(15.0)),
                             child: TextFormField(
                               onTap: () {
                                 setState(() {
@@ -137,7 +142,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   splashRadius: 0.0,
                                 ),
                               ),
-
                               SizedBox(
                                 width: 12.0,
                               ),
@@ -165,11 +169,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(23.0))),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => OwnerDetails()));
+                              onPressed: () async {
+                                await getAllOwnerList().then((value) {
+                                  if (value.isNotEmpty) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => OwnerList(
+                                                  data: value,
+                                                )));
+                                  }
+                                });
                               },
                               child: Text(
                                 'Login',
@@ -184,6 +194,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           Align(
                             alignment: Alignment.centerRight,
                             child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => PasswordRecovery()));
+                              },
                               child: Text('Forgot Password?'),
                             ),
                           )
@@ -251,23 +267,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: 50.0,
+                  height: MediaQuery.of(context).size.height * 0.13,
                 ),
                 Align(
                   alignment: FractionalOffset.bottomCenter,
                   child: Center(
-                    child: RichText(
-                      text: TextSpan(
-                          text: 'Already have an account?',
-                          style: TextStyle(color: Colors.black, fontSize: 15.0),
-                          children: [
-                            TextSpan(
-                                text: '   Sign In',
-                                style: TextStyle(
-                                  color: Color(0xFF02458A),
-                                  fontWeight: FontWeight.bold,
-                                ))
-                          ]),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => RegisterScreen()));
+                      },
+                      child: RichText(
+                        text: TextSpan(
+                            text: 'Don\'t have an account?',
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 15.0),
+                            children: [
+                              TextSpan(
+                                  text: '   Sign Up',
+                                  style: TextStyle(
+                                    color: Color(0xFF02458A),
+                                    fontWeight: FontWeight.bold,
+                                  ))
+                            ]),
+                      ),
                     ),
                   ),
                 ),

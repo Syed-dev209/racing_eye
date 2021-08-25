@@ -149,7 +149,7 @@ class _OwnerDataTableState extends State<OwnerDataTable>
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
               height: 40.0,
               width: double.maxFinite,
               decoration: BoxDecoration(
@@ -191,8 +191,6 @@ class _OwnerDataTableState extends State<OwnerDataTable>
 }
 
 class OwnerFormDataTable extends StatefulWidget {
-
-
   @override
   _OwnerFormDataTableState createState() => _OwnerFormDataTableState();
 }
@@ -203,7 +201,7 @@ class _OwnerFormDataTableState extends State<OwnerFormDataTable> {
   List<OwnerFormDataItems> generateList() {
     return List.generate(10, (index) {
       return OwnerFormDataItems(
-        index: index,
+          index: index,
           date: '18/7/21',
           crs: 'DON',
           pos: '5/9',
@@ -226,66 +224,69 @@ class _OwnerFormDataTableState extends State<OwnerFormDataTable> {
       width: MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
         child: DataTable(
-          headingRowColor: MaterialStateColor.resolveWith((states) =>  Color(0xffF3F3F3),) ,
-          headingRowHeight: 43.0,
-          dataRowHeight: 43.0,
-          dividerThickness: 0.0,
-          columnSpacing: 25.0,
+            headingRowColor: MaterialStateColor.resolveWith(
+              (states) => Color(0xffF3F3F3),
+            ),
+            headingRowHeight: 43.0,
+            dataRowHeight: 43.0,
+            dividerThickness: 0.0,
+            columnSpacing: 25.0,
             columns: [
-          DataColumn(
-            label: Text(
-              'Date',
-              style: TextStyle(
-                color: Color(0xFF02458A),
+              DataColumn(
+                label: Text(
+                  'Date',
+                  style: TextStyle(
+                    color: Color(0xFF02458A),
+                  ),
+                ),
               ),
-            ),
-          ),
-          DataColumn(
-            label: Text(
-              'CRS',
-              style: TextStyle(
-                color: Color(0xFF02458A),
+              DataColumn(
+                label: Text(
+                  'CRS',
+                  style: TextStyle(
+                    color: Color(0xFF02458A),
+                  ),
+                ),
               ),
-            ),
-          ),
-          DataColumn(
-            label: Text(
-              'POS',
-              style: TextStyle(
-                color: Color(0xFF02458A),
+              DataColumn(
+                label: Text(
+                  'POS',
+                  style: TextStyle(
+                    color: Color(0xFF02458A),
+                  ),
+                ),
               ),
-            ),
-          ),
-          DataColumn(
-            label: Text(
-              'Horse',
-              style: TextStyle(
-                color: Color(0xFF02458A),
+              DataColumn(
+                label: Text(
+                  'Horse',
+                  style: TextStyle(
+                    color: Color(0xFF02458A),
+                  ),
+                ),
               ),
-            ),
-          ),
-          DataColumn(
-            label: Text(
-              'SP',
-              style: TextStyle(
-                color: Color(0xFF02458A),
+              DataColumn(
+                label: Text(
+                  'SP',
+                  style: TextStyle(
+                    color: Color(0xFF02458A),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ],
-            rows: list!.map((e){
+            ],
+            rows: list!.map((e) {
               return DataRow(
-                color: MaterialStateColor.resolveWith((states)=> e.index % 2!=0? Color(0xffF3F3F3) : Colors.white ,),
+                  color: MaterialStateColor.resolveWith(
+                    (states) =>
+                        e.index % 2 != 0 ? Color(0xffF3F3F3) : Colors.white,
+                  ),
                   cells: [
                     DataCell(Text(e.date)),
                     DataCell(Text(e.crs)),
                     DataCell(Text(e.pos)),
                     DataCell(Text(e.horse)),
                     DataCell(Text(e.sp)),
-                  ]
-              );
-            }).toList()
-        ),
+                  ]);
+            }).toList()),
       ),
     );
   }
