@@ -27,11 +27,23 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['statistical_summary'] != null) {
+      print("Stats summary is not null------------------------------");
       statisticalSummary = [];
       json['statistical_summary'].forEach((v) {
         statisticalSummary!.add(new StatisticalSummary.fromJson(v));
       });
+    } else {
+      print("Stats summary is null------------------------------");
+      statisticalSummary = [];
+      statisticalSummary!.add(StatisticalSummary(
+          seasonStartDate: DateTime.now().toString(),
+          place1stNumber: 0,
+          racesNumber: 0,
+          winPercent: 0,
+          totalPrize: 0.0,
+          stake: 0.0));
     }
+
     // seasonInfo = json['season_info'] != null
     //     ? new SeasonInfo.fromJson(json['season_info'])
     //     : null;
@@ -40,8 +52,11 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.statisticalSummary != null) {
+      print("Stats summary is not null------------------------------");
       data['statistical_summary'] =
           this.statisticalSummary!.map((v) => v.toJson()).toList();
+    } else {
+      print("Stats summary is null------------------------------");
     }
     // if (this.seasonInfo != null) {
     //   data['season_info'] = this.seasonInfo.toJson();
@@ -51,6 +66,7 @@ class Data {
 }
 
 class StatisticalSummary {
+  int index = 0;
   int? bestRpPostmark;
   int? horseUid;
   String? horseName;
@@ -73,24 +89,24 @@ class StatisticalSummary {
 
   StatisticalSummary(
       {this.bestRpPostmark,
-        this.horseUid,
-        this.horseName,
-        this.racePlaced,
-        this.seasonStartDate,
-        this.seasonEndDate,
-        this.racesNumber,
-        this.place1stNumber,
-        this.place2ndNumber,
-        this.place3rdNumber,
-        this.place4thNumber,
-        this.winPrize,
-        this.totalPrize,
-        this.euroWinPrize,
-        this.euroTotalPrize,
-        this.netWinPrizeMoney,
-        this.netTotalPrizeMoney,
-        this.stake,
-        this.winPercent});
+      this.horseUid,
+      this.horseName,
+      this.racePlaced,
+      this.seasonStartDate,
+      this.seasonEndDate,
+      this.racesNumber,
+      this.place1stNumber,
+      this.place2ndNumber,
+      this.place3rdNumber,
+      this.place4thNumber,
+      this.winPrize,
+      this.totalPrize,
+      this.euroWinPrize,
+      this.euroTotalPrize,
+      this.netWinPrizeMoney,
+      this.netTotalPrizeMoney,
+      this.stake,
+      this.winPercent});
 
   StatisticalSummary.fromJson(Map<String, dynamic> json) {
     bestRpPostmark = json['best_rp_postmark'];
@@ -138,4 +154,3 @@ class StatisticalSummary {
     return data;
   }
 }
-

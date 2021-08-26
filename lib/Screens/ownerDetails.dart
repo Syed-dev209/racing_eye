@@ -5,10 +5,12 @@ import 'package:flutter_custom_tab_bar/indicator/standard_indicator.dart';
 import 'package:flutter_custom_tab_bar/library.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Models/OwnerModels/OwnerFormDataTableModel.dart';
+import 'package:racing_eye/Models/OwnerModels/bigRaceWins.dart';
 import 'package:racing_eye/Models/OwnerModels/horseModel.dart';
 import 'package:racing_eye/Models/OwnerModels/ownerData.dart';
 import 'package:racing_eye/Models/OwnerModels/ownerEntriesModel.dart';
 import 'package:racing_eye/Models/OwnerModels/ownerLast14Days.dart';
+import 'package:racing_eye/Models/OwnerModels/statsSummary.dart';
 import 'package:racing_eye/Screens/Components/OwnerComponents/ownerTables.dart';
 import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
 import 'package:racing_eye/Screens/Components/imageplaceHolder.dart';
@@ -101,11 +103,17 @@ class _OwnerDetailsState extends State<OwnerDetails> {
               //     )
               //   ]),
               // ),
-              OwnerCard(ownerData: widget.ownerData,bgColorWhite: false,),
+              OwnerCard(
+                ownerData: widget.ownerData,
+                bgColorWhite: false,
+              ),
               SizedBox(
                 height: 15.0,
               ),
-              Expanded(child: OwnerDataTable(ownersData: widget.ownerData,))
+              Expanded(
+                  child: OwnerDataTable(
+                ownersData: widget.ownerData,
+              ))
             ],
           ),
         ),
@@ -134,34 +142,72 @@ class _OwnerDataTableState extends State<OwnerDataTable>
       text: " Horses",
     ),
     Tab(
-      text: " Results",
+      text: " Stats",
     ),
   ];
   TabController? controller;
-  List<Last14Days> formList=[];
-  List<Entries> entriesList=[];
-  List<Horses> horseList=[];
+  List<Last14Days> formList = [];
+  List<Entries>? entriesList = [];
+  List<Horses> horseList = [];
+  List<StatisticalSummary>? statsList = [];
+  List<BigRaceWin>? raceList = [];
 
-  generateLists()async{
-    await getOwnerLast14DaysData(widget.ownersData.uid!).then((value) async{
-      if(value!=null){
+  generateLists() async {
+    await getOwnerLast14DaysData(widget.ownersData.uid!).then((value) async {
+      if (value != null) {
         setState(() {
           formList = value.data!.last14Days!;
+          for (int i = 0; i < formList.length; i++) {
+            formList[i].index = i;
+          }
         });
-          await getOwnerEntries(widget.ownersData.uid!).then((value)async{
-            if(value!=null){
-              setState(() {
-                entriesList = value.data!.entries!;
-              });
-                await getOwnerHorses(widget.ownersData.uid!).then((value) {
-                  if(value!=null){
+        await getOwnerEntries(widget.ownersData.uid!).then((value) async {
+          if (value != null) {
+            setState(() {
+              entriesList = value.data!.entries;
+              for (int i = 0; i < entriesList!.length; i++) {
+                entriesList![i].index = i;
+              }
+            });
+            await getOwnerHorses(widget.ownersData.uid!).then((value) async {
+              if (value != null) {
+                setState(() {
+                  horseList = value.data!.horses!;
+                  for (int i = 0; i < horseList.length; i++) {
+                    horseList[i].index = i;
+                  }
+                });
+                await getOwnerStatsSummary(widget.ownersData.uid!)
+                    .then((value) async {
+                  if (value != null) {
+                    print(value);
                     setState(() {
-                      horseList = value.data!.horses!;
+                      statsList = value.data!.statisticalSummary;
+                      print(statsList);
+                      if (statsList != null) {
+                        for (int i = 0; i < statsList!.length; i++) {
+                          statsList![i].index = i;
+                        }
+                      }
+                    });
+                    await getOwnerBigRaceWins(widget.ownersData.uid!)
+                        .then((value) {
+                      if (value != null) {
+                        setState(() {
+                          raceList = value.data!.bigRaceWins!;
+                          print("Race Lis $raceList}");
+                          for (int i = 0; i < raceList!.length; i++) {
+                            raceList![i].index = i;
+                          }
+                        });
+                      }
                     });
                   }
                 });
-            }
-          });
+              }
+            });
+          }
+        });
       }
     });
   }
@@ -216,10 +262,27 @@ class _OwnerDataTableState extends State<OwnerDataTable>
             child: TabBarView(
               controller: controller,
               children: [
-                OwnerDataTables(dataTable: FormDataTable(ownerId: widget.ownersData.uid!,list: formList,)),
-                OwnerDataTables(dataTable: EntriesDataTable(ownerId: widget.ownersData.uid!,list: entriesList,)),
-                OwnerDataTables(dataTable: HorsesDataTable(ownerId: widget.ownersData.uid!,list: horseList,)),
-                Text('results'),
+                OwnerDataTables(
+                    dataTable: FormDataTable(
+                  ownerId: widget.ownersData.uid!,
+                  list: formList,
+                )),
+                OwnerDataTables(
+                    dataTable: EntriesDataTable(
+                  ownerId: widget.ownersData.uid!,
+                  list: entriesList,
+                )),
+                OwnerDataTables(
+                    dataTable: HorsesDataTable(
+                  ownerId: widget.ownersData.uid!,
+                  list: horseList,
+                )),
+                OwnerDataTables(
+                  dataTable: StatsDataTable(
+                    statsList: statsList,
+                    raceLists: raceList,
+                  ),
+                ),
               ],
             ),
           )
@@ -228,13 +291,3 @@ class _OwnerDataTableState extends State<OwnerDataTable>
     );
   }
 }
-
-
-
-
-
-
-
-
-
-

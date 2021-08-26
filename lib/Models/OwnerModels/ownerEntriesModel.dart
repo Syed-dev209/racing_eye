@@ -1,5 +1,3 @@
-
-
 class OwnerEntries {
   Data? data;
   int? status;
@@ -22,9 +20,9 @@ class OwnerEntries {
 }
 
 class Data {
-  List<Entries>? entries;
+  List<Entries>? entries = [];
 
-  Data({this.entries});
+  Data({required this.entries});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['entries'] != null) {
@@ -45,6 +43,7 @@ class Data {
 }
 
 class Entries {
+  int index = 0;
   int? raceInstanceUid;
   int? horseUid;
   String? horseName;
@@ -61,18 +60,18 @@ class Entries {
 
   Entries(
       {this.raceInstanceUid,
-        this.horseUid,
-        this.horseName,
-        this.raceDatetime,
-        this.courseName,
-        this.courseStyleName,
-        this.courseUid,
-        this.courseTypeCode,
-        this.diffusionCourseName,
-        this.courseKey,
-        this.raceInstanceTitle,
-        this.raceStatusCode,
-        this.runningConditions});
+      this.horseUid,
+      this.horseName,
+      this.raceDatetime,
+      this.courseName,
+      this.courseStyleName,
+      this.courseUid,
+      this.courseTypeCode,
+      this.diffusionCourseName,
+      this.courseKey,
+      this.raceInstanceTitle,
+      this.raceStatusCode,
+      this.runningConditions});
 
   Entries.fromJson(Map<String, dynamic> json) {
     raceInstanceUid = json['race_instance_uid'];

@@ -50,6 +50,7 @@ class Data {
 }
 
 class Horses {
+  int index = 0;
   int? racesNumber;
   int? place1stNumber;
   double? winPrize;
@@ -66,23 +67,22 @@ class Horses {
   int? horseUid;
   String? horseName;
 
-
   Horses(
       {this.racesNumber,
-        this.place1stNumber,
-        this.winPrize,
-        this.totalPrize,
-        this.euroWinPrize,
-        this.euroTotalPrize,
-        this.netWinPrizeMoney,
-        this.netTotalPrizeMoney,
-        this.stake,
-        this.rpr,
-        this.trainerUid,
-        this.trainerName,
-        this.trainerPtpTypeCode,
-        this.horseUid,
-        this.horseName});
+      this.place1stNumber,
+      this.winPrize,
+      this.totalPrize,
+      this.euroWinPrize,
+      this.euroTotalPrize,
+      this.netWinPrizeMoney,
+      this.netTotalPrizeMoney,
+      this.stake,
+      this.rpr,
+      this.trainerUid,
+      this.trainerName,
+      this.trainerPtpTypeCode,
+      this.horseUid,
+      this.horseName});
 
   Horses.fromJson(Map<String, dynamic> json) {
     racesNumber = json['races_number'];
@@ -92,8 +92,8 @@ class Horses {
     euroWinPrize = json['euro_win_prize'];
     euroTotalPrize = json['euro_total_prize'];
     netWinPrizeMoney = double.parse(json['net_win_prize_money'].toString());
-    netTotalPrizeMoney = double.parse( json['net_total_prize_money'].toString());
-    stake = double.parse( json['stake'].toString());
+    netTotalPrizeMoney = double.parse(json['net_total_prize_money'].toString());
+    stake = double.parse(json['stake'].toString());
     rpr = json['rpr'];
     trainerUid = json['trainer_uid'];
     trainerName = json['trainer_name'];

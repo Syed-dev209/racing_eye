@@ -20,15 +20,15 @@ class BigRaceWinsModel {
 }
 
 class Data {
-  List<BigRaceWinsModel>? bigRaceWins;
+  List<BigRaceWin>? bigRaceWins;
 
   Data({this.bigRaceWins});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['big_race_wins'] != null) {
-      bigRaceWins =  [];
+      bigRaceWins = [];
       json['big_race_wins'].forEach((v) {
-        bigRaceWins!.add(new BigRaceWinsModel.fromJson(v));
+        bigRaceWins!.add(new BigRaceWin.fromJson(v));
       });
     }
   }
@@ -43,6 +43,7 @@ class Data {
 }
 
 class BigRaceWin {
+  int index = 0;
   String? raceDate;
   String? rpAbbrev3;
   String? country;
@@ -72,41 +73,42 @@ class BigRaceWin {
 
   BigRaceWin(
       {this.raceDate,
-        this.rpAbbrev3,
-        this.country,
-        this.distanceYard,
-        this.distanceFurlongRounded,
-        this.raceInstanceUid,
-        this.raceInstanceTitle,
-        this.prizeSterling,
-        this.prizeEuro,
-        this.daysDiff,
-        this.raceOutcomeCode,
-        this.raceOutcomePosition,
-        this.disqDesc,
-        this.horseStyleName,
-        this.horseUid,
-        this.trainerPtpTypeCode,
-        this.trainerStyleName,
-        this.trainerUid,
-        this.raceTypeCode,
-        this.raceGroupDesc,
-        this.raceGroupCode,
-        this.courseUid,
-        this.courseTypeCode,
-        this.courseName,
-        this.courseStyleName,
-        this.trainerShortName});
+      this.rpAbbrev3,
+      this.country,
+      this.distanceYard,
+      this.distanceFurlongRounded,
+      this.raceInstanceUid,
+      this.raceInstanceTitle,
+      this.prizeSterling,
+      this.prizeEuro,
+      this.daysDiff,
+      this.raceOutcomeCode,
+      this.raceOutcomePosition,
+      this.disqDesc,
+      this.horseStyleName,
+      this.horseUid,
+      this.trainerPtpTypeCode,
+      this.trainerStyleName,
+      this.trainerUid,
+      this.raceTypeCode,
+      this.raceGroupDesc,
+      this.raceGroupCode,
+      this.courseUid,
+      this.courseTypeCode,
+      this.courseName,
+      this.courseStyleName,
+      this.trainerShortName});
 
   BigRaceWin.fromJson(Map<String, dynamic> json) {
     raceDate = json['race_date'];
     rpAbbrev3 = json['rp_abbrev_3'];
     country = json['country'];
     distanceYard = json['distance_yard'];
-    distanceFurlongRounded = json['distance_furlong_rounded'];
+    distanceFurlongRounded =
+        double.parse(json['distance_furlong_rounded'].toString());
     raceInstanceUid = json['race_instance_uid'];
     raceInstanceTitle = json['race_instance_title'];
-    prizeSterling = json['prize_sterling'];
+    prizeSterling = double.parse(json['prize_sterling'].toString());
     prizeEuro = json['prize_euro'];
     daysDiff = json['days_diff'];
     raceOutcomeCode = json['race_outcome_code'];
@@ -158,4 +160,3 @@ class BigRaceWin {
     return data;
   }
 }
-

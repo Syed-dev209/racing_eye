@@ -17,16 +17,6 @@ class _OwnerListState extends State<OwnerList> {
     // TODO: implement initState
     super.initState();
     ownersList = widget.data!;
-    // ownersList.add(Owners(
-    //     id: 1,
-    //     uid: 221,
-    //     ownerName: "Ilhan",
-    //     ptpTypeCode: "f",
-    //     silk: "f",
-    //     styleName: "g",
-    //     silkImagePath: "h",
-    //     createdAt: "ew",
-    //     updatedAt: "f"));
   }
 
   @override
@@ -53,9 +43,9 @@ class _OwnerListState extends State<OwnerList> {
                         return Padding(
                           padding: EdgeInsets.only(bottom: 15.0),
                           child: OwnerCard(
-                              bgColorWhite: true,
+                            bgColorWhite: true,
                             ownerData: ownersList[index],
-                              ),
+                          ),
                         );
                       }))
             ],

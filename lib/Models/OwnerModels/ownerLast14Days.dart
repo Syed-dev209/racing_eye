@@ -43,6 +43,7 @@ class Data {
 }
 
 class Last14Days {
+  int index = 0;
   int? raceInstanceUid;
   String? raceDatetime;
   int? courseUid;
@@ -88,47 +89,47 @@ class Last14Days {
 
   Last14Days(
       {this.raceInstanceUid,
-        this.raceDatetime,
-        this.courseUid,
-        this.courseTypeCode,
-        this.raceInstanceTitle,
-        this.raceTypeCode,
-        this.courseRpAbbrev3,
-        this.courseRpAbbrev4,
-        this.courseCode,
-        this.goingTypeServicesDesc,
-        this.raceDescription,
-        this.prizeSterling,
-        this.prizeEuro,
-        this.noOfRunners,
-        this.distanceYard,
-        this.distanceToWinner,
-        this.horseUid,
-        this.horseStyleName,
-        this.weightCarriedLbs,
-        this.rpBettingMovements,
-        this.rpCloseUpComment,
-        this.horseHeadGear,
-        this.oddsDesc,
-        this.trainerUid,
-        this.trainerStyleName,
-        this.trainerPtpTypeCode,
-        this.rpPostmark,
-        this.rpPrePostmark,
-        //this.videoDetail,
-        this.raceClass,
-        this.rpAgesAllowedDesc,
-        this.raceGroupCode,
-        this.raceGroupDesc,
-        this.distanceFurlong,
-        this.winningDistance,
-        this.courseName,
-        this.courseStyleName,
-        this.rpPostmarkDifference,
-        this.firstTimeHeadgear,
-        this.raceOutcomeCode,
-        this.trainerShortName,
-        this.oddsValue});
+      this.raceDatetime,
+      this.courseUid,
+      this.courseTypeCode,
+      this.raceInstanceTitle,
+      this.raceTypeCode,
+      this.courseRpAbbrev3,
+      this.courseRpAbbrev4,
+      this.courseCode,
+      this.goingTypeServicesDesc,
+      this.raceDescription,
+      this.prizeSterling,
+      this.prizeEuro,
+      this.noOfRunners,
+      this.distanceYard,
+      this.distanceToWinner,
+      this.horseUid,
+      this.horseStyleName,
+      this.weightCarriedLbs,
+      this.rpBettingMovements,
+      this.rpCloseUpComment,
+      this.horseHeadGear,
+      this.oddsDesc,
+      this.trainerUid,
+      this.trainerStyleName,
+      this.trainerPtpTypeCode,
+      this.rpPostmark,
+      this.rpPrePostmark,
+      //this.videoDetail,
+      this.raceClass,
+      this.rpAgesAllowedDesc,
+      this.raceGroupCode,
+      this.raceGroupDesc,
+      this.distanceFurlong,
+      this.winningDistance,
+      this.courseName,
+      this.courseStyleName,
+      this.rpPostmarkDifference,
+      this.firstTimeHeadgear,
+      this.raceOutcomeCode,
+      this.trainerShortName,
+      this.oddsValue});
 
   Last14Days.fromJson(Map<String, dynamic> json) {
     raceInstanceUid = json['race_instance_uid'];
@@ -169,7 +170,7 @@ class Last14Days {
     rpAgesAllowedDesc = json['rp_ages_allowed_desc'];
     raceGroupCode = json['race_group_code'];
     raceGroupDesc = json['race_group_desc'];
-    distanceFurlong = double.parse( json['distance_furlong'].toString());
+    distanceFurlong = double.parse(json['distance_furlong'].toString());
     winningDistance = json['winning_distance'];
     courseName = json['course_name'];
     courseStyleName = json['course_style_name'];
