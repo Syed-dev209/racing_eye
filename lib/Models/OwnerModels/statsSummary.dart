@@ -41,6 +41,7 @@ class Data {
           racesNumber: 0,
           winPercent: 0,
           totalPrize: 0.0,
+          netTotalPrizeMoney: 0.0,
           stake: 0.0));
     }
 

@@ -16,6 +16,8 @@ import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
 import 'package:racing_eye/Screens/Components/imageplaceHolder.dart';
 import 'package:racing_eye/Screens/Components/OwnerComponents/ownerCard.dart';
 
+
+String netAmount="0.00";
 class OwnerDetails extends StatefulWidget {
   OwnersData ownerData;
   OwnerDetails({required this.ownerData});
@@ -25,6 +27,13 @@ class OwnerDetails extends StatefulWidget {
 }
 
 class _OwnerDetailsState extends State<OwnerDetails> {
+
+  updateNetAmount(String newAmm){
+    setState(() {
+      netAmount=newAmm;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,78 +51,21 @@ class _OwnerDetailsState extends State<OwnerDetails> {
               SizedBox(
                 height: 15.0,
               ),
-              // Container(
-              //   padding: EdgeInsets.only(
-              //       left: 25.0, right: 10.0, top: 15.0, bottom: 15.0),
-              //   height: 90.0,
-              //   width: double.maxFinite,
-              //   decoration: BoxDecoration(
-              //       color: Color(0xff02468D),
-              //       borderRadius: BorderRadius.circular(20.0)),
-              //   child: Row(children: [
-              //     ImagePlaceHolder(
-              //       imagePath: "https://www.rp-assets.com/png_silks/${widget.ownerData.silkImagePath}.png",
-              //     ),
-              //     SizedBox(
-              //       width: 15.0,
-              //     ),
-              //     Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //       children: [
-              //         SizedBox(
-              //           height: 2.0,
-              //         ),
-              //         Text(
-              //           widget.ownerData.ownerName!,
-              //           style: TextStyle(color: Colors.white, fontSize: 18.0),
-              //         ),
-              //         Row(
-              //           mainAxisAlignment: MainAxisAlignment.start,
-              //           children: [
-              //             Image.asset(
-              //               'images/cup.png',
-              //             ),
-              //             SizedBox(
-              //               width: 8.0,
-              //             ),
-              //             Text(
-              //               'AED 0.00',
-              //               style: TextStyle(
-              //                   color: Color(0xff6790BB), fontSize: 15.0),
-              //             )
-              //           ],
-              //         ),
-              //         SizedBox(
-              //           height: 2.0,
-              //         )
-              //       ],
-              //     ),
-              //     SizedBox(
-              //       width: 53.0,
-              //     ),
-              //     Align(
-              //       alignment: Alignment.topRight,
-              //       child: CircleAvatar(
-              //         radius: 17.0,
-              //         backgroundColor: Colors.white,
-              //         backgroundImage: NetworkImage(
-              //             'https://www.publicdomainpictures.net/pictures/350000/velka/uae-flag.jpg'),
-              //       ),
-              //     )
-              //   ]),
-              // ),
               OwnerCard(
                 ownerData: widget.ownerData,
                 bgColorWhite: false,
+                netAmount: netAmount,
               ),
               SizedBox(
                 height: 15.0,
               ),
               Expanded(
                   child: OwnerDataTable(
+                    refreshAmount: updateNetAmount,
                 ownersData: widget.ownerData,
-              ))
+
+              )
+              )
             ],
           ),
         ),
@@ -124,7 +76,8 @@ class _OwnerDetailsState extends State<OwnerDetails> {
 
 class OwnerDataTable extends StatefulWidget {
   OwnersData ownersData;
-  OwnerDataTable({required this.ownersData});
+  Function refreshAmount;
+  OwnerDataTable({required this.ownersData, required this.refreshAmount});
   @override
   _OwnerDataTableState createState() => _OwnerDataTableState();
 }
@@ -187,6 +140,7 @@ class _OwnerDataTableState extends State<OwnerDataTable>
                       if (statsList != null) {
                         for (int i = 0; i < statsList!.length; i++) {
                           statsList![i].index = i;
+                          widget.refreshAmount(statsList![i].netTotalPrizeMoney.toString());
                         }
                       }
                     });
@@ -291,3 +245,4 @@ class _OwnerDataTableState extends State<OwnerDataTable>
     );
   }
 }
+const monthList=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];

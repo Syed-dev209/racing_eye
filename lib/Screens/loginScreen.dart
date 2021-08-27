@@ -181,17 +181,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                         final progress =
                                             ProgressHUD.of(context);
                                         progress!.showWithText("Loading...");
-                                        await getAllOwnerList().then((value) {
-                                          if (value.isNotEmpty) {
-                                            progress.dismiss();
+
+
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (_) => OwnerList(
-                                                          data: value,
+
                                                         )));
-                                          }
-                                        });
+
                                       },
                                       child: Text(
                                         'Login',

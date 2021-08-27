@@ -1,22 +1,22 @@
 class OwnerEntries {
-  Data? data;
+  Data? data=Data(entries: []);
   int? status;
 
-  OwnerEntries({this.data, this.status});
+  OwnerEntries({required this.data, this.status});
 
   OwnerEntries.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Data.fromJson(json['data']) : Data(entries: [
+      Entries(
+          raceDatetime: DateTime.now().toString(),
+          horseName: "N/A",
+          raceInstanceTitle: "N/A",
+          courseStyleName: "N/A"
+      )
+    ]);
     status = json['status'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    data['status'] = this.status;
-    return data;
-  }
+
 }
 
 class Data {
@@ -30,6 +30,14 @@ class Data {
       json['entries'].forEach((v) {
         entries!.add(new Entries.fromJson(v));
       });
+    }
+    else{
+      entries!.add(Entries(
+        raceDatetime: DateTime.now().toString(),
+        horseName: "N/A",
+        raceInstanceTitle: "N/A",
+        courseStyleName: "N/A"
+      ));
     }
   }
 

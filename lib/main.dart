@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:racing_eye/Screens/loginScreen.dart';
+import 'package:racing_eye/Screens/ownerDetails.dart';
+import 'package:racing_eye/Screens/ownerList.dart';
 import 'package:racing_eye/Screens/password_recovery.dart';
 import 'package:racing_eye/Screens/register_screen.dart';
+
+import 'Models/OwnerModels/ownerData.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +34,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: myColor,
       ),
-      home: LoginScreen(),
+      home: OwnerList(),
     );
   }
 }
+// OwnerDetails(ownerData: OwnersData(
+// id: 1,
+// uid: 302438,
+// ownerName: "SHADWELL ESTATE COMPANY LTD",
+// ptpTypeCode: "N",
+// silk: " ",
+// styleName: "Shadwell Estate Company Ltd",
+// silkImagePath: "8/3/4/302438",
+// createdAt: "2021-08-24 12:23:00",
+// updatedAt: "2021-08-24 12:23:00"
+// ),)

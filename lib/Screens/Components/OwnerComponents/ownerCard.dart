@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:racing_eye/Models/OwnerModels/ownerData.dart';
 import 'package:racing_eye/Screens/Components/imageplaceHolder.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
@@ -6,10 +7,11 @@ import 'package:racing_eye/Screens/ownerDetails.dart';
 class OwnerCard extends StatelessWidget {
   OwnersData? ownerData;
   bool bgColorWhite;
+  String? netAmount="0.00";
   OwnerCard(
       {required this.ownerData,
-      this.bgColorWhite = false});
-
+      this.bgColorWhite = false, this.netAmount});
+  final formatCurrency = NumberFormat.simpleCurrency(name: "GBP");
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -51,7 +53,7 @@ class OwnerCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Row(
+                bgColorWhite?Text(''): Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Image.asset(
@@ -61,7 +63,7 @@ class OwnerCard extends StatelessWidget {
                       width: 8.0,
                     ),
                     Text(
-                      'AED 0.00',
+                      'AED ${formatCurrency.format(double.parse(netAmount??"0.00")).substring(1)}',
                       style: TextStyle(
                           color:
                               bgColorWhite ? Colors.black26 : Color(0xff6790BB),
