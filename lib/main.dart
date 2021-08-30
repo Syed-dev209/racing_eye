@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:racing_eye/Screens/dashboardBase.dart';
 import 'package:racing_eye/Screens/loginScreen.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
 import 'package:racing_eye/Screens/ownerList.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: myColor,
       ),
-      home: OwnerList(),
+      home: DashboardBase(),
     );
   }
 }
@@ -48,4 +49,5 @@ class MyApp extends StatelessWidget {
 // silkImagePath: "8/3/4/302438",
 // createdAt: "2021-08-24 12:23:00",
 // updatedAt: "2021-08-24 12:23:00"
-// ),)
+// ),
+// )

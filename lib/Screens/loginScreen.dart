@@ -182,14 +182,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ProgressHUD.of(context);
                                         progress!.showWithText("Loading...");
 
-
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (_) => OwnerList(
-
-                                                        )));
-
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) => OwnerList()));
                                       },
                                       child: Text(
                                         'Login',
