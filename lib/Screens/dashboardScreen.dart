@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:racing_eye/Screens/dashboardBase.dart';
+import 'package:racing_eye/Screens/horseRacesScreen.dart';
 import 'package:racing_eye/Screens/horsesList.dart';
 import 'package:racing_eye/Screens/ownerList.dart';
 
@@ -116,7 +117,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         DashboardContentCard(
                           title: "Card/Results",
                           imagePath: "images/resultsCard.png",
-                          goToPage: DashboardBase(),
+                          goToPage: HorseRaceScreen(),
                         )
                       ],
                     ),
