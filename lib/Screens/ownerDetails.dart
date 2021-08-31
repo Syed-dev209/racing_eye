@@ -4,20 +4,19 @@ import 'package:flutter_custom_tab_bar/custom_tab_bar.dart';
 import 'package:flutter_custom_tab_bar/indicator/standard_indicator.dart';
 import 'package:flutter_custom_tab_bar/library.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
-import 'package:racing_eye/Models/OwnerModels/OwnerFormDataTableModel.dart';
-import 'package:racing_eye/Models/OwnerModels/bigRaceWins.dart';
-import 'package:racing_eye/Models/OwnerModels/horseModel.dart';
-import 'package:racing_eye/Models/OwnerModels/ownerData.dart';
-import 'package:racing_eye/Models/OwnerModels/ownerEntriesModel.dart';
-import 'package:racing_eye/Models/OwnerModels/ownerLast14Days.dart';
-import 'package:racing_eye/Models/OwnerModels/statsSummary.dart';
+import 'package:racing_eye/Models/OwnerModel/bigRaceWins.dart';
+import 'package:racing_eye/Models/OwnerModel/horseModel.dart';
+import 'package:racing_eye/Models/OwnerModel/ownerData.dart';
+import 'package:racing_eye/Models/OwnerModel/ownerEntriesModel.dart';
+import 'package:racing_eye/Models/OwnerModel/ownerLast14Days.dart';
+import 'package:racing_eye/Models/OwnerModel/statsSummary.dart';
 import 'package:racing_eye/Screens/Components/OwnerComponents/ownerTables.dart';
 import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
 import 'package:racing_eye/Screens/Components/imageplaceHolder.dart';
 import 'package:racing_eye/Screens/Components/OwnerComponents/ownerCard.dart';
 
+String netAmount = "0.00";
 
-String netAmount="0.00";
 class OwnerDetails extends StatefulWidget {
   OwnersData ownerData;
   OwnerDetails({required this.ownerData});
@@ -27,10 +26,9 @@ class OwnerDetails extends StatefulWidget {
 }
 
 class _OwnerDetailsState extends State<OwnerDetails> {
-
-  updateNetAmount(String newAmm){
+  updateNetAmount(String newAmm) {
     setState(() {
-      netAmount=newAmm;
+      netAmount = newAmm;
     });
   }
 
@@ -61,11 +59,9 @@ class _OwnerDetailsState extends State<OwnerDetails> {
               ),
               Expanded(
                   child: OwnerDataTable(
-                    refreshAmount: updateNetAmount,
+                refreshAmount: updateNetAmount,
                 ownersData: widget.ownerData,
-
-              )
-              )
+              ))
             ],
           ),
         ),
@@ -140,7 +136,8 @@ class _OwnerDataTableState extends State<OwnerDataTable>
                       if (statsList != null) {
                         for (int i = 0; i < statsList!.length; i++) {
                           statsList![i].index = i;
-                          widget.refreshAmount(statsList![i].netTotalPrizeMoney.toString());
+                          widget.refreshAmount(
+                              statsList![i].netTotalPrizeMoney.toString());
                         }
                       }
                     });
@@ -245,4 +242,18 @@ class _OwnerDataTableState extends State<OwnerDataTable>
     );
   }
 }
-const monthList=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+const monthList = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:racing_eye/Models/horsesDetailModel.dart';
 import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
 import 'package:racing_eye/Screens/Components/imageplaceHolder.dart';
+import 'package:racing_eye/main.dart';
 
 import 'Components/horsecard.dart';
 
@@ -30,11 +33,27 @@ class _HorsesListState extends State<HorsesList> {
                 height: 45.0,
               ),
               Expanded(
-                child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return HorseCard();
-                    }),
+                child: Consumer<HorseDetailProvider>(
+                  builder: (context, data, _) {
+                    print("Data length= ${data.dataModel.length}");
+                    return data.dataModel.isNotEmpty
+                        ? ListView.builder(
+                            itemCount: data.dataModel.length,
+                            itemBuilder: (context, index) {
+                              return HorseCard(
+                                  horseModel: data.dataModel[index]);
+                            })
+                        : Center(
+                            child: Text(
+                              ' No horses available',
+                              style: TextStyle(
+                                  color: myColor.withOpacity(0.5),
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          );
+                  },
+                ),
               )
             ],
           ),

@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:racing_eye/Models/OwnerModels/bigRaceWins.dart';
-import 'package:racing_eye/Models/OwnerModels/horseModel.dart';
-import 'package:racing_eye/Models/OwnerModels/ownerData.dart';
 import 'package:http/http.dart' as http;
-import 'package:racing_eye/Models/OwnerModels/ownerEntriesModel.dart';
-import 'package:racing_eye/Models/OwnerModels/ownerLast14Days.dart';
-import 'package:racing_eye/Models/OwnerModels/statsSummary.dart';
+import 'package:racing_eye/Models/OwnerModel/bigRaceWins.dart';
+import 'package:racing_eye/Models/OwnerModel/horseModel.dart';
+import 'package:racing_eye/Models/OwnerModel/ownerData.dart';
+import 'package:racing_eye/Models/OwnerModel/ownerEntriesModel.dart';
+import 'package:racing_eye/Models/OwnerModel/ownerLast14Days.dart';
+import 'package:racing_eye/Models/OwnerModel/statsSummary.dart';
 
 const String apiKey = "SYE0PzpfZy2nGQpeKo88TtYaIZUNeERt";
 

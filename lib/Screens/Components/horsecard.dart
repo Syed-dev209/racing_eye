@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:racing_eye/Models/horsesDetailModel.dart';
 import 'package:racing_eye/Screens/Components/imageplaceHolder.dart';
 
 class HorseCard extends StatelessWidget {
+  HorsesDetailModel horseModel;
+  HorseCard({required this.horseModel});
+
   @override
   Widget build(BuildContext context) {
+    DateTime parseData = DateTime.parse(horseModel.horseDateOfBirth!);
+    DateTime now = DateTime.now();
+    final age = now.year - parseData.year;
     return Padding(
       padding: EdgeInsets.only(bottom: 15.0),
       child: Container(
@@ -15,7 +22,7 @@ class HorseCard extends StatelessWidget {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           ImagePlaceHolder(
             imagePath:
-                "https://www.publicdomainpictures.net/pictures/350000/velka/uae-flag.jpg",
+                "https://www.rp-assets.com/png_silks/${horseModel.silkImagePath}.png",
           ),
           SizedBox(
             width: 4.0,
@@ -30,11 +37,11 @@ class HorseCard extends StatelessWidget {
                   height: 1.0,
                 ),
                 Text(
-                  '4 years old, CH C',
+                  '$age years old, ${horseModel.horseColourCode} ${horseModel.horseSexCode}',
                   style: TextStyle(color: Color(0xff1b5898)),
                 ),
                 Text(
-                  "Name of horse",
+                  horseModel.horseName!,
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 20.0,
@@ -51,9 +58,11 @@ class HorseCard extends StatelessWidget {
                     SizedBox(
                       width: 8.0,
                     ),
-                    Text(
-                      'Al Ajban stables',
-                      style: TextStyle(color: Colors.black26, fontSize: 16.0),
+                    Expanded(
+                      child: Text(
+                        horseModel.ownerName!,
+                        style: TextStyle(color: Colors.black26, fontSize: 16.0),
+                      ),
                     )
                   ],
                 ),

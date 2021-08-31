@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
-import 'package:racing_eye/Models/OwnerModels/OwnerFormDataTableModel.dart';
-import 'package:racing_eye/Models/OwnerModels/bigRaceWins.dart';
-import 'package:racing_eye/Models/OwnerModels/horseModel.dart';
-import 'package:racing_eye/Models/OwnerModels/ownerEntriesModel.dart';
-import 'package:racing_eye/Models/OwnerModels/ownerLast14Days.dart';
-import 'package:racing_eye/Models/OwnerModels/statsSummary.dart';
+import 'package:racing_eye/Models/OwnerModel/bigRaceWins.dart';
+import 'package:racing_eye/Models/OwnerModel/horseModel.dart';
+import 'package:racing_eye/Models/OwnerModel/ownerEntriesModel.dart';
+import 'package:racing_eye/Models/OwnerModel/ownerLast14Days.dart';
+import 'package:racing_eye/Models/OwnerModel/statsSummary.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
 import 'package:intl/intl.dart';
+
 class OwnerDataTables extends StatefulWidget {
   Widget dataTable;
 
@@ -35,7 +35,9 @@ class _OwnerDataTablesState extends State<OwnerDataTables> {
     );
   }
 }
+
 final formatCurrency = NumberFormat.simpleCurrency(name: "GBP");
+
 class FormDataTable extends StatefulWidget {
   int ownerId;
   List<Last14Days> list = [];
@@ -128,7 +130,7 @@ class _FormDataTableState extends State<FormDataTable> {
                           i = i + 1;
                         }
                         DateTime date = DateTime.parse(e.raceDatetime!);
-                        String month = monthList[date.month-1] ;
+                        String month = monthList[date.month - 1];
                         return DataRow(
                             color: MaterialStateColor.resolveWith(
                               (states) => e.index % 2 != 0
@@ -164,7 +166,6 @@ class _FormDataTableState extends State<FormDataTable> {
           );
   }
 }
-
 
 //////////////////////////////////////////////////////////////////
 class EntriesDataTable extends StatefulWidget {
@@ -244,7 +245,7 @@ class _EntriesDataTableState extends State<EntriesDataTable> {
                           i = i + 1;
                         }
                         DateTime date = DateTime.parse(e.raceDatetime!);
-                        String month = monthList[date.month-1] ;
+                        String month = monthList[date.month - 1];
                         return DataRow(
                             color: MaterialStateColor.resolveWith(
                               (states) => e.index % 2 != 0
@@ -252,8 +253,10 @@ class _EntriesDataTableState extends State<EntriesDataTable> {
                                   : Colors.white,
                             ),
                             cells: [
-                              DataCell(Text("${date.day}$month${date.year}",
-                          textAlign: TextAlign.center,)),
+                              DataCell(Text(
+                                "${date.day}$month${date.year}",
+                                textAlign: TextAlign.center,
+                              )),
                               DataCell(Text(e.horseName!)),
                               DataCell(Text(
                                 e.raceInstanceTitle!,
@@ -382,7 +385,8 @@ class _HorsesDataTableState extends State<HorsesDataTable> {
                           DataCell(Text(e.horseName!)),
                           DataCell(Text(e.place1stNumber!.toString())),
                           DataCell(Text(e.racesNumber!.toString())),
-                          DataCell(Text("${formatCurrency.format(e.netTotalPrizeMoney!)}")),
+                          DataCell(Text(
+                              "${formatCurrency.format(e.netTotalPrizeMoney!)}")),
                           //DataCell(Text(e.sp)),
                         ]);
                   }).toList()
@@ -433,241 +437,250 @@ class _StatsDataTableState extends State<StatsDataTable> {
 
   @override
   Widget build(BuildContext context) {
-    return
-         widget.raceLists!.isNotEmpty
-           ?
-        Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Stats',
-          style: TextStyle(
-              color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(
-          height: 15.0,
-        ),
-        DataTable(
-            headingRowColor: MaterialStateColor.resolveWith(
-              (states) => Color(0xffF3F3F3),
-            ),
-            headingRowHeight: 43.0,
-            dataRowHeight: 43.0,
-            dividerThickness: 0.0,
-            columnSpacing: 10.0,
-            horizontalMargin: 0.0,
-            columns: [
-              DataColumn(
-                label: Text(
-                  'Year',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Wins',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Runs',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  '%',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'T.Earnings',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Stake',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
-                  ),
-                ),
-              ),
-            ],
-            rows: widget.statsList!.isNotEmpty
-                ? widget.statsList!.map((e) {
-              DateTime date = DateTime.parse(e.seasonStartDate!);
-              String month = monthList[date.month-1] ;
-                    return DataRow(
-                        color: MaterialStateColor.resolveWith(
-                          (states) => e.index % 2 != 0
-                              ? Color(0xffF3F3F3)
-                              : Colors.white,
-                        ),
-                        cells: [
-                          DataCell(
-                            Text(e.seasonStartDate != null
-                                ? "${date.day}$month${date.year}"
-                                : "No data"),
-                          ),
-                          DataCell(Text(e.place1stNumber != null
-                              ? e.place1stNumber!.toString()
-                              : "No data")),
-                          DataCell(Text(e.racesNumber != null
-                              ? e.racesNumber!.toString()
-                              : "No data")),
-                          DataCell(Text(e.winPercent != null
-                              ? e.winPercent!.toString()
-                              : "No data")),
-                          DataCell(Text(e.totalPrize != null
-                              ? formatCurrency.format(e.totalPrize!)
-                              : "No data")),
-                          DataCell(Text(e.stake != null
-                              ? e.stake!.toString()
-                              : "No data")),
-                          //DataCell(Text(e.sp)),
-                        ]);
-                  }).toList()
-                : [
-                    DataRow(
-                        color: MaterialStateColor.resolveWith(
-                          (states) =>
-                              i % 2 != 0 ? Color(0xffF3F3F3) : Colors.white,
-                        ),
-                        cells: [
-                          DataCell(Text("No data")),
-                          DataCell(Text("No data")),
-                          DataCell(Text("No data")),
-                          DataCell(Text("No data")),
-                          DataCell(Text("No data")),
-                          DataCell(Text("No data")),
-                          //DataCell(Text(e.sp)),
-                        ])
-                  ]),
-        SizedBox(
-          height: 25.0,
-        ),
-        Text(
-          'Big Race Wins',
-          style: TextStyle(
-              color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(
-          height: 15.0,
-        ),
-        DataTable(
-            headingRowColor: MaterialStateColor.resolveWith(
-              (states) => Color(0xffF3F3F3),
-            ),
-            headingRowHeight: 43.0,
-            dataRowHeight: 43.0,
-            dividerThickness: 0.0,
-            columnSpacing: 5.0,
-            horizontalMargin: 1.0,
-            columns: [
-              DataColumn(
-                label: Text(
-                  'Date',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Race Name',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
-                  ),
-                ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Horse',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
-                  ),
-                ),
-              ),
-              // DataColumn(
-              //   label: Text(
-              //     'Trainers',
-              //     style: TextStyle(
-              //       color: Color(0xFF02458A),
-              //     ),
-              //   ),
-              // ),
-              DataColumn(
-                label: Text(
-                  'Winnings',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
-                  ),
-                ),
-              ),
-            ],
-            rows: widget.raceLists!.isNotEmpty
-                ? widget.raceLists!.map((e) {
-              DateTime date = DateTime.parse(e.raceDate!);
-              String month = monthList[date.month-1] ;
-                    i = i + 1;
-                    return DataRow(
-                        color: MaterialStateColor.resolveWith(
-                          (states) => e.index % 2 != 0
-                              ? Color(0xffF3F3F3)
-                              : Colors.white,
-                        ),
-                        cells: [
-                          DataCell(Text("${date.day}$month${date.year}")),
-                          DataCell(Text(e.raceInstanceTitle!.toString(),softWrap: false,overflow: TextOverflow.fade,)),
-                          DataCell(Text(e.horseStyleName!.toString())),
-                         // DataCell(Text(e.trainerStyleName!.toString())),
-                          DataCell(Text(e.prizeSterling!.toString())),
-                          //DataCell(Text(e.sp)),
-                        ]);
-                  }).toList()
-                : [
-                    DataRow(
-                        color: MaterialStateColor.resolveWith(
-                          (states) =>
-                              i % 2 != 0 ? Color(0xffF3F3F3) : Colors.white,
-                        ),
-                        cells: [
-                          DataCell(Text("No Data")),
-                          DataCell(Text("No Data")),
-                          DataCell(Text("No Data")),
-                          DataCell(Text("No Data")),
-                          DataCell(Text("No Data")),
-                          //DataCell(Text(e.sp)),
-                        ])
-                  ]),
-      ],
-    ): Container(
-        height: MediaQuery.of(context).size.height * 0.5,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return widget.raceLists!.isNotEmpty
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircularProgressIndicator(),
-              SizedBox(
-                height: 20.0,
+              Text(
+                'Stats',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold),
               ),
-              Text('Loading...')
+              SizedBox(
+                height: 15.0,
+              ),
+              DataTable(
+                  headingRowColor: MaterialStateColor.resolveWith(
+                    (states) => Color(0xffF3F3F3),
+                  ),
+                  headingRowHeight: 43.0,
+                  dataRowHeight: 43.0,
+                  dividerThickness: 0.0,
+                  columnSpacing: 10.0,
+                  horizontalMargin: 0.0,
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        'Year',
+                        style: TextStyle(
+                          color: Color(0xFF02458A),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'Wins',
+                        style: TextStyle(
+                          color: Color(0xFF02458A),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'Runs',
+                        style: TextStyle(
+                          color: Color(0xFF02458A),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        '%',
+                        style: TextStyle(
+                          color: Color(0xFF02458A),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'T.Earnings',
+                        style: TextStyle(
+                          color: Color(0xFF02458A),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'Stake',
+                        style: TextStyle(
+                          color: Color(0xFF02458A),
+                        ),
+                      ),
+                    ),
+                  ],
+                  rows: widget.statsList!.isNotEmpty
+                      ? widget.statsList!.map((e) {
+                          DateTime date = DateTime.parse(e.seasonStartDate!);
+                          String month = monthList[date.month - 1];
+                          return DataRow(
+                              color: MaterialStateColor.resolveWith(
+                                (states) => e.index % 2 != 0
+                                    ? Color(0xffF3F3F3)
+                                    : Colors.white,
+                              ),
+                              cells: [
+                                DataCell(
+                                  Text(e.seasonStartDate != null
+                                      ? "${date.day}$month${date.year}"
+                                      : "No data"),
+                                ),
+                                DataCell(Text(e.place1stNumber != null
+                                    ? e.place1stNumber!.toString()
+                                    : "No data")),
+                                DataCell(Text(e.racesNumber != null
+                                    ? e.racesNumber!.toString()
+                                    : "No data")),
+                                DataCell(Text(e.winPercent != null
+                                    ? e.winPercent!.toString()
+                                    : "No data")),
+                                DataCell(Text(e.totalPrize != null
+                                    ? formatCurrency.format(e.totalPrize!)
+                                    : "No data")),
+                                DataCell(Text(e.stake != null
+                                    ? e.stake!.toString()
+                                    : "No data")),
+                                //DataCell(Text(e.sp)),
+                              ]);
+                        }).toList()
+                      : [
+                          DataRow(
+                              color: MaterialStateColor.resolveWith(
+                                (states) => i % 2 != 0
+                                    ? Color(0xffF3F3F3)
+                                    : Colors.white,
+                              ),
+                              cells: [
+                                DataCell(Text("No data")),
+                                DataCell(Text("No data")),
+                                DataCell(Text("No data")),
+                                DataCell(Text("No data")),
+                                DataCell(Text("No data")),
+                                DataCell(Text("No data")),
+                                //DataCell(Text(e.sp)),
+                              ])
+                        ]),
+              SizedBox(
+                height: 25.0,
+              ),
+              Text(
+                'Big Race Wins',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+              DataTable(
+                  headingRowColor: MaterialStateColor.resolveWith(
+                    (states) => Color(0xffF3F3F3),
+                  ),
+                  headingRowHeight: 43.0,
+                  dataRowHeight: 43.0,
+                  dividerThickness: 0.0,
+                  columnSpacing: 5.0,
+                  horizontalMargin: 1.0,
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        'Date',
+                        style: TextStyle(
+                          color: Color(0xFF02458A),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'Race Name',
+                        style: TextStyle(
+                          color: Color(0xFF02458A),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'Horse',
+                        style: TextStyle(
+                          color: Color(0xFF02458A),
+                        ),
+                      ),
+                    ),
+                    // DataColumn(
+                    //   label: Text(
+                    //     'Trainers',
+                    //     style: TextStyle(
+                    //       color: Color(0xFF02458A),
+                    //     ),
+                    //   ),
+                    // ),
+                    DataColumn(
+                      label: Text(
+                        'Winnings',
+                        style: TextStyle(
+                          color: Color(0xFF02458A),
+                        ),
+                      ),
+                    ),
+                  ],
+                  rows: widget.raceLists!.isNotEmpty
+                      ? widget.raceLists!.map((e) {
+                          DateTime date = DateTime.parse(e.raceDate!);
+                          String month = monthList[date.month - 1];
+                          i = i + 1;
+                          return DataRow(
+                              color: MaterialStateColor.resolveWith(
+                                (states) => e.index % 2 != 0
+                                    ? Color(0xffF3F3F3)
+                                    : Colors.white,
+                              ),
+                              cells: [
+                                DataCell(Text("${date.day}$month${date.year}")),
+                                DataCell(Text(
+                                  e.raceInstanceTitle!.toString(),
+                                  softWrap: false,
+                                  overflow: TextOverflow.fade,
+                                )),
+                                DataCell(Text(e.horseStyleName!.toString())),
+                                // DataCell(Text(e.trainerStyleName!.toString())),
+                                DataCell(Text(e.prizeSterling!.toString())),
+                                //DataCell(Text(e.sp)),
+                              ]);
+                        }).toList()
+                      : [
+                          DataRow(
+                              color: MaterialStateColor.resolveWith(
+                                (states) => i % 2 != 0
+                                    ? Color(0xffF3F3F3)
+                                    : Colors.white,
+                              ),
+                              cells: [
+                                DataCell(Text("No Data")),
+                                DataCell(Text("No Data")),
+                                DataCell(Text("No Data")),
+                                DataCell(Text("No Data")),
+                                DataCell(Text("No Data")),
+                                //DataCell(Text(e.sp)),
+                              ])
+                        ]),
             ],
-          ),
-        ),
-      );
+          )
+        : Container(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text('Loading...')
+                ],
+              ),
+            ),
+          );
   }
 }
