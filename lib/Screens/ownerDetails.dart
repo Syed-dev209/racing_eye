@@ -129,10 +129,9 @@ class _OwnerDataTableState extends State<OwnerDataTable>
                 await getOwnerStatsSummary(widget.ownersData.uid!)
                     .then((value) async {
                   if (value != null) {
-                    print(value);
                     setState(() {
                       statsList = value.data!.statisticalSummary;
-                      print(statsList);
+
                       if (statsList != null) {
                         for (int i = 0; i < statsList!.length; i++) {
                           statsList![i].index = i;
@@ -146,7 +145,6 @@ class _OwnerDataTableState extends State<OwnerDataTable>
                       if (value != null) {
                         setState(() {
                           raceList = value.data!.bigRaceWins!;
-                          print("Race Lis $raceList}");
                           for (int i = 0; i < raceList!.length; i++) {
                             raceList![i].index = i;
                           }

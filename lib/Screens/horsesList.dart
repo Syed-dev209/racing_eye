@@ -35,7 +35,6 @@ class _HorsesListState extends State<HorsesList> {
               Expanded(
                 child: Consumer<HorseDetailProvider>(
                   builder: (context, data, _) {
-                    print("Data length= ${data.dataModel.length}");
                     return data.dataModel.isNotEmpty
                         ? ListView.builder(
                             itemCount: data.dataModel.length,

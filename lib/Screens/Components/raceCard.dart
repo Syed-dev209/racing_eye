@@ -3,24 +3,32 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:blur/blur.dart';
+import 'package:racing_eye/Models/raceDetailsModel.dart';
+import 'package:racing_eye/Screens/ownerDetails.dart';
 import '../../main.dart';
 
 class RacesCard extends StatelessWidget {
-  const RacesCard({Key? key}) : super(key: key);
+  RaceDetailsModel dataModel;
+  bool showTime = false;
+  RacesCard({required this.dataModel, this.showTime = false});
 
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime = DateTime.parse(dataModel.raceDatetime!);
+    String date = dateTime.day.toString();
+    String month = monthList[dateTime.month - 1];
+    String time = "${dateTime.hour}:${dateTime.minute}";
     return Padding(
       padding: EdgeInsets.only(bottom: 15.0),
       child: Container(
-        height: 240.0,
+        height: 247.0,
         width: double.maxFinite,
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(20.0)),
         child: Stack(
           children: [
             Container(
-              height: 240.0,
+              height: 247.0,
               width: double.maxFinite,
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
@@ -33,8 +41,8 @@ class RacesCard extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20.0),
                           topRight: Radius.circular(20.0)),
-                      child: Image.asset(
-                        "images/noRaces.png",
+                      child: Image.network(
+                        "https://www.rp-assets.com/course-photos/GB-52-f.jpg",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -47,25 +55,30 @@ class RacesCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Sharjah',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0),
-                            ),
-                            SizedBox(
-                              height: 8.0,
-                            ),
-                            Text(
-                              "Sponsored by :- N/A",
-                              style: TextStyle(
-                                  color: Color(0xff666666), fontSize: 13.0),
-                            )
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                dataModel.raceInstanceTitle!,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0),
+                                overflow: TextOverflow.fade,
+                                softWrap: false,
+                                maxLines: 2,
+                              ),
+                              SizedBox(
+                                height: 8.0,
+                              ),
+                              Text(
+                                "Sponsored by :- ${dataModel.courseStyleName}",
+                                style: TextStyle(
+                                    color: Color(0xff666666), fontSize: 13.0),
+                              )
+                            ],
+                          ),
                         ),
                         Image.asset('images/arrowDown.png')
                       ],
@@ -94,14 +107,14 @@ class RacesCard extends StatelessWidget {
                         height: 3.0,
                       ),
                       Text(
-                        '29',
+                        date,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 22.0,
                             fontWeight: FontWeight.w500),
                       ),
                       Text(
-                        'Oct',
+                        month,
                         style: TextStyle(
                             color: myColor.shade50,
                             fontWeight: FontWeight.w500,
@@ -115,44 +128,47 @@ class RacesCard extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(right: 10.0, top: 10.0),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  height: 30.0,
-                  width: 70.0,
-                  padding: EdgeInsets.symmetric(horizontal: 4.0),
-                  decoration: new BoxDecoration(
-                      color: Colors.black45,
-                      borderRadius: BorderRadius.circular(20.0)),
-                ).blurred(
-                  blur: 15,
-                  borderRadius: BorderRadius.circular(20.0),
-                  overlay: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizedBox(
-                        width: 1.0,
+            showTime
+                ? Padding(
+                    padding: EdgeInsets.only(right: 10.0, top: 10.0),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        height: 30.0,
+                        width: 70.0,
+                        padding: EdgeInsets.symmetric(horizontal: 4.0),
+                        decoration: new BoxDecoration(
+                            color: Colors.black45,
+                            borderRadius: BorderRadius.circular(20.0)),
+                      ).blurred(
+                        blur: 15,
+                        borderRadius: BorderRadius.circular(20.0),
+                        overlay: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            SizedBox(
+                              width: 1.0,
+                            ),
+                            Icon(
+                              Icons.access_time_outlined,
+                              color: Colors.white,
+                              size: 18.0,
+                            ),
+                            Text(
+                              time,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 1.0,
+                            )
+                          ],
+                        ),
                       ),
-                      Icon(
-                        Icons.access_time_outlined,
-                        color: Colors.white,
-                        size: 18.0,
-                      ),
-                      Text(
-                        '19:00',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 1.0,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            )
+                    ),
+                  )
+                : Text('')
           ],
         ),
       ),

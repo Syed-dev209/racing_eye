@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class OwnersData {
   int? id;
   int? uid;
@@ -44,5 +46,13 @@ class OwnersData {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;
+  }
+}
+
+class OwnerDataProvider extends ChangeNotifier {
+  List<OwnersData> ownerList = [];
+  addOwner(OwnersData data) {
+    ownerList.add(data);
+    notifyListeners();
   }
 }

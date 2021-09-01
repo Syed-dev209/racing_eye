@@ -139,7 +139,7 @@ class _FormDataTableState extends State<FormDataTable> {
                             ),
                             cells: [
                               DataCell(Text(
-                                "${date.day}$month${date.year}",
+                                "${date.day}$month${date.year.toString().substring(2)}",
                                 textAlign: TextAlign.center,
                               )),
                               DataCell(Text(e.courseRpAbbrev3!)),
@@ -254,7 +254,7 @@ class _EntriesDataTableState extends State<EntriesDataTable> {
                             ),
                             cells: [
                               DataCell(Text(
-                                "${date.day}$month${date.year}",
+                                "${date.day}$month${date.year.toString().substring(2)}",
                                 textAlign: TextAlign.center,
                               )),
                               DataCell(Text(e.horseName!)),
@@ -458,8 +458,8 @@ class _StatsDataTableState extends State<StatsDataTable> {
                   headingRowHeight: 43.0,
                   dataRowHeight: 43.0,
                   dividerThickness: 0.0,
-                  columnSpacing: 10.0,
-                  horizontalMargin: 0.0,
+                  //columnSpacing: 10.0,
+                  //horizontalMargin: 0.0,
                   columns: [
                     DataColumn(
                       label: Text(
@@ -637,7 +637,8 @@ class _StatsDataTableState extends State<StatsDataTable> {
                                     : Colors.white,
                               ),
                               cells: [
-                                DataCell(Text("${date.day}$month${date.year}")),
+                                DataCell(Text(
+                                    "${date.day}$month${date.year.toString().substring(2)}")),
                                 DataCell(Text(
                                   e.raceInstanceTitle!.toString(),
                                   softWrap: false,

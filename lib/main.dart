@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:racing_eye/Models/OwnerModel/ownerData.dart';
 import 'package:racing_eye/Models/horsesDetailModel.dart';
+import 'package:racing_eye/Models/ownerSearchStatsModel.dart';
+import 'package:racing_eye/Models/raceDetailsModel.dart';
 import 'package:racing_eye/Models/statsModel.dart';
 import 'package:racing_eye/Screens/dashboardBase.dart';
 import 'package:racing_eye/Screens/loginScreen.dart';
@@ -35,6 +38,11 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => StatsProvider()),
         ChangeNotifierProvider(create: (_) => HorseDetailProvider()),
+        ChangeNotifierProvider(create: (_) => OwnerDataProvider()),
+        ChangeNotifierProvider(create: (_) => OwnerSearchStatsProvider()),
+        ChangeNotifierProvider(create: (_) => AvailableRaceProvider()),
+        ChangeNotifierProvider(create: (_) => UpcomingRaceProvider()),
+        ChangeNotifierProvider(create: (_) => CompletedRaceProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

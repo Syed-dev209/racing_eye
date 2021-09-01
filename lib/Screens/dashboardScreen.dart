@@ -6,6 +6,7 @@ import 'package:racing_eye/Screens/dashboardBase.dart';
 import 'package:racing_eye/Screens/horseRacesScreen.dart';
 import 'package:racing_eye/Screens/horsesList.dart';
 import 'package:racing_eye/Screens/ownerList.dart';
+import 'package:racing_eye/Screens/searchScreen.dart';
 
 import 'Components/Dashboard/dashboardContentCard.dart';
 import 'Components/Dashboard/dashboardStatsCard.dart';
@@ -134,7 +135,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           DashboardContentCard(
                             title: "Statistics",
                             imagePath: "images/statistics.png",
-                            goToPage: DashboardBase(),
+                            goToPage: SearchScreen(),
                           ),
                           SizedBox(
                             width: 15.0,

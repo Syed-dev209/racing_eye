@@ -27,13 +27,11 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['statistical_summary'] != null) {
-      print("Stats summary is not null------------------------------");
       statisticalSummary = [];
       json['statistical_summary'].forEach((v) {
         statisticalSummary!.add(new StatisticalSummary.fromJson(v));
       });
     } else {
-      print("Stats summary is null------------------------------");
       statisticalSummary = [];
       statisticalSummary!.add(StatisticalSummary(
           seasonStartDate: DateTime.now().toString(),
@@ -53,12 +51,9 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.statisticalSummary != null) {
-      print("Stats summary is not null------------------------------");
       data['statistical_summary'] =
           this.statisticalSummary!.map((v) => v.toJson()).toList();
-    } else {
-      print("Stats summary is null------------------------------");
-    }
+    } else {}
     // if (this.seasonInfo != null) {
     //   data['season_info'] = this.seasonInfo.toJson();
     // }

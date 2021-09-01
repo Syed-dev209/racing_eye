@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:racing_eye/Controller/allHorsesController.dart';
+import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Controller/statsController.dart';
 import 'package:racing_eye/Screens/dashboardBase.dart';
 import 'package:racing_eye/main.dart';
@@ -12,9 +13,11 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   loadData() async {
     await getStatus(context).then((value) async {
-      await getAllHorsesData(context).then((value) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => DashboardBase()));
+      await getAllHorsesData(context).then((value) async {
+        await getAllOwnerList(context).then((value) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => DashboardBase()));
+        });
       });
     });
   }
@@ -40,7 +43,10 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('images/eyeLogo2.png'),
+                Image.asset(
+                  'images/eyeLogo2.png',
+                  height: 90.0,
+                ),
                 SizedBox(
                   height: 100.0,
                 ),

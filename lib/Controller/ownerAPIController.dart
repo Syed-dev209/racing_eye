@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:racing_eye/Models/OwnerModel/bigRaceWins.dart';
 import 'package:racing_eye/Models/OwnerModel/horseModel.dart';
 import 'package:racing_eye/Models/OwnerModel/ownerData.dart';
@@ -10,19 +11,16 @@ import 'package:racing_eye/Models/OwnerModel/statsSummary.dart';
 
 const String apiKey = "SYE0PzpfZy2nGQpeKo88TtYaIZUNeERt";
 
-Future<List<OwnersData>> getAllOwnerList() async {
-  List<OwnersData> ownerList = [];
+Future getAllOwnerList(context) async {
   String url = "https://re.victoriayachts.ae/owners";
   var response = await http.get(Uri.parse(url), headers: {"Api-key": apiKey});
   if (response.statusCode == 200) {
     var decodedData = jsonDecode(response.body);
     for (var data in decodedData) {
-      ownerList.add(OwnersData.fromJson(data));
+      Provider.of<OwnerDataProvider>(context, listen: false)
+          .addOwner(OwnersData.fromJson(data));
     }
-  } else {
-    print("response failed");
-  }
-  return ownerList;
+  } else {}
 }
 
 Future<OwnerEntries?> getOwnerEntries(int ownerId) async {
@@ -37,7 +35,6 @@ Future<OwnerEntries?> getOwnerEntries(int ownerId) async {
       return null;
     }
   } catch (e) {
-    print("Error in getting entries:- $e");
     return null;
   }
 }
@@ -54,7 +51,6 @@ Future<OwnerLast14Days?> getOwnerLast14DaysData(int ownerId) async {
       return null;
     }
   } catch (e) {
-    print(e);
     return null;
   }
 }
@@ -83,7 +79,7 @@ Future<BigRaceWinsModel?> getOwnerBigRaceWins(int ownerId) async {
   var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
   if (response.statusCode == 200) {
     var decodedData = jsonDecode(response.body);
-    print(decodedData);
+
     return BigRaceWinsModel.fromJson(decodedData);
   } else {
     return null;
