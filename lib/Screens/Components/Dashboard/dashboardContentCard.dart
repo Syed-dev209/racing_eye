@@ -22,7 +22,12 @@ class DashboardContentCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Expanded(flex: 3, child: Image.asset(imagePath)),
+                Expanded(
+                  flex: 3,
+                  child: Image.asset(
+                    imagePath,
+                  ),
+                ),
                 Expanded(
                   child: Text(
                     title,

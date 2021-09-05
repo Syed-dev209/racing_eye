@@ -2,7 +2,7 @@
     package="com.racing.racing_eye">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="racing_eye"
+        android:label="Racing Eye"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

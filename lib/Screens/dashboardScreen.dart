@@ -55,7 +55,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     Expanded(
                         child: DashboardStatsCard(
-                      title: "Wins",
+                      title: "Win",
                       value: data.data!.wins!,
                     )),
                     Expanded(
@@ -112,7 +112,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         children: [
                           DashboardContentCard(
                             title: "Owners",
-                            imagePath: "images/live.png",
+                            imagePath: "images/owners.png",
                             goToPage: OwnerList(),
                           ),
                           SizedBox(
@@ -142,7 +142,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           DashboardContentCard(
                             title: "Horses",
-                            imagePath: "images/search.png",
+                            imagePath: "images/horses.png",
                             goToPage: HorsesList(),
                           )
                         ],
