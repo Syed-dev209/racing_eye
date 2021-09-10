@@ -1,17 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:racing_eye/Controller/raceDetailsController.dart';
+import 'package:racing_eye/Models/raceDescModel.dart';
 import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
 
 import 'Components/raceDetailInfoCard.dart';
 import 'Components/raceDetailsCard.dart';
 
 class RaceDetailsScreen extends StatefulWidget {
-  const RaceDetailsScreen({Key? key}) : super(key: key);
+  String raceId;
+  RaceDetailsScreen({required this.raceId});
 
   @override
   _RaceDetailsScreenState createState() => _RaceDetailsScreenState();
 }
 
 class _RaceDetailsScreenState extends State<RaceDetailsScreen> {
+  bool loaded = false;
+  getRaceData(context) async {
+    await getRaceDescription(context: context, raceId: widget.raceId);
+    await getRaceRunner(context, widget.raceId);
+    setState(() {
+      loaded = true;
+    });
+  }
+
+  @override
+  void initState() {
+    // ignore: todo
+    // TODO: implement initState
+    super.initState();
+    getRaceData(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,20 +53,36 @@ class _RaceDetailsScreenState extends State<RaceDetailsScreen> {
               SizedBox(
                 height: 25,
               ),
-              RaceDetailsInfoCard(),
-              SizedBox(
-                height: 15.0,
-              ),
-              Expanded(
-                child: ListView.builder(
-                    itemCount: 5,
-                    itemBuilder: (context, i) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: 15.0),
-                        child: RaceDetailsCard(),
-                      );
-                    }),
-              )
+              loaded
+                  ? Expanded(
+                      child: Column(
+                        children: [
+                          RaceDetailsInfoCard(
+                            data: Provider.of<RaceResultsProvider>(context,
+                                    listen: false)
+                                .raceData!,
+                          ),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Expanded(child: Consumer<RaceResultsProvider>(
+                              builder: (context, data, child) {
+                            return ListView.builder(
+                                itemCount: 5,
+                                itemBuilder: (context, i) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(bottom: 15.0),
+                                    child: RaceDetailsCard(),
+                                  );
+                                });
+                          }))
+                        ],
+                      ),
+                    )
+                  : Container(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      width: double.maxFinite,
+                      child: Center(child: CircularProgressIndicator())),
             ],
           ),
         ),

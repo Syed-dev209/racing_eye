@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:racing_eye/Models/raceDescModel.dart';
+import 'package:racing_eye/Screens/ownerDetails.dart';
 
 import '../../main.dart';
 
 class RaceDetailsInfoCard extends StatefulWidget {
-  const RaceDetailsInfoCard({Key? key}) : super(key: key);
+  RaceResultsModel data;
+  RaceDetailsInfoCard({required this.data});
 
   @override
   _RaceDetailsInfoCardState createState() => _RaceDetailsInfoCardState();
 }
 
 class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
+  DateTime? dateTime;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dateTime = DateTime.parse(widget.data.data!.raceCard!.raceDatetime!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,12 +36,19 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Sharjah",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 19.0,
-                    fontWeight: FontWeight.bold),
+              Expanded(
+                child: Text(
+                  widget.data.data!.raceCard!.raceInstanceTitle!,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 19.0,
+                      fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.clip,
+                  softWrap: false,
+                ),
+              ),
+              SizedBox(
+                width: 8,
               ),
               Container(
                 child: Row(
@@ -42,7 +61,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                       width: 5.0,
                     ),
                     Text(
-                      "19:00",
+                      "${dateTime!.hour}:${dateTime!.minute}",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     )
@@ -62,7 +81,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                     Image.asset("images/calenderWhite.png"),
                     SizedBox(width: 5),
                     Text(
-                      "09 March",
+                      "${dateTime!.day} ${monthList[dateTime!.month - 1]}",
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Color(0xff9AB5D1)),
@@ -74,7 +93,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                 width: 15.0,
               ),
               Text(
-                "Sponsored By: N/A",
+                "Course: ${widget.data.data!.raceCard!.courseStyleName}",
                 style: TextStyle(color: Color(0xff9AB5D1)),
               )
             ],
@@ -96,7 +115,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                       width: 3.0,
                     ),
                     Text(
-                      "3+ years old",
+                      "${widget.data.data!.raceCard!.rpAgesAllowedDesc!.substring(0, 1)} years old",
                       style: TextStyle(color: Color(0xff9AB5D1)),
                     )
                   ],
@@ -117,7 +136,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                       width: 3.0,
                     ),
                     Text(
-                      "3m 1f",
+                      "${widget.data.data!.raceCard!.distanceFurlongRounded}f",
                       style: TextStyle(color: Color(0xff9AB5D1)),
                     )
                   ],
@@ -139,9 +158,21 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              prizeRow("1", "AED 8000"),
-              prizeRow("1", "AED 8000"),
-              prizeRow("1", "AED 8000"),
+              prizeRow(
+                  widget.data.data!.raceCard!.prizes![0]!.positionNo!
+                      .toString(),
+                  widget.data.data!.raceCard!.prizes![0]!.prizeSterling
+                      .toString()),
+              prizeRow(
+                  widget.data.data!.raceCard!.prizes![1]!.positionNo!
+                      .toString(),
+                  widget.data.data!.raceCard!.prizes![1]!.prizeSterling
+                      .toString()),
+              prizeRow(
+                  widget.data.data!.raceCard!.prizes![2]!.positionNo!
+                      .toString(),
+                  widget.data.data!.raceCard!.prizes![2]!.prizeSterling
+                      .toString()),
             ],
           ),
           SizedBox(
@@ -150,9 +181,13 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              prizeRow("1", "AED 8000"),
-              prizeRow("1", "AED 8000"),
-              prizeRow("1", "AED 8000"),
+              prizeRow(
+                  widget.data.data!.raceCard!.prizes![3]!.positionNo!
+                      .toString(),
+                  widget.data.data!.raceCard!.prizes![3]!.prizeSterling
+                      .toString()),
+              // prizeRow("1", "AED 8000"),
+              // prizeRow("1", "AED 8000"),
             ],
           ),
         ],

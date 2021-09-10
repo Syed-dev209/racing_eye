@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+// import 'package:racing_eye/Models/raceDescModel.dart';
+import 'package:racing_eye/Models/raceRunnersModel.dart';
 
 import '../../main.dart';
 
 class RaceDetailsCard extends StatefulWidget {
-  const RaceDetailsCard({Key? key}) : super(key: key);
+  // RaceRunnersModel data;
+  // RaceDetailsCard({required this.data});
 
   @override
   _RaceDetailsCardState createState() => _RaceDetailsCardState();

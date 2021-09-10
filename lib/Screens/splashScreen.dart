@@ -24,6 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     loadData();
@@ -51,23 +52,24 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: 100.0,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircularProgressIndicator(
                       strokeWidth: 3,
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
-                    SizedBox(
-                      width: 30.0,
-                    ),
-                    Expanded(
-                      child: Text(
-                        "Please wait while we setup things for you...",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20.0),
-                      ),
-                    )
+                    // SizedBox(
+                    //   width: 30.0,
+                    // ),
+                    // Expanded(
+                    //   child: Text(
+                    //     "Please wait while we setup things for you...",
+                    //     style: TextStyle(
+                    //         color: Colors.white,
+                    //         fontWeight: FontWeight.w500,
+                    //         fontSize: 20.0),
+                    //   ),
+                    // )
                   ],
                 )
               ],

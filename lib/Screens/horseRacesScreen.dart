@@ -6,8 +6,8 @@ import 'package:racing_eye/Screens/Components/Races/availableRaces.dart';
 import 'package:racing_eye/Screens/Components/Races/completedRaces.dart';
 import 'package:racing_eye/Screens/Components/Races/upcomingRaces.dart';
 import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
-import 'package:racing_eye/Screens/Components/raceCard.dart';
-import 'package:racing_eye/main.dart';
+// import 'package:racing_eye/Screens/Components/raceCard.dart';
+// import 'package:racing_eye/main.dart';
 
 class HorseRaceScreen extends StatefulWidget {
   const HorseRaceScreen({Key? key}) : super(key: key);
@@ -44,6 +44,7 @@ class _HorseRaceScreenState extends State<HorseRaceScreen>
 
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     getRaceDetails();

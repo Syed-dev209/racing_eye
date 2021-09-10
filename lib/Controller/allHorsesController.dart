@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
+import 'package:racing_eye/Models/horseProfileModel.dart';
 import 'package:racing_eye/Models/horsesDetailModel.dart';
 
 Future getAllHorsesData(context) async {
@@ -15,5 +16,16 @@ Future getAllHorsesData(context) async {
       Provider.of<HorseDetailProvider>(context, listen: false)
           .addHorse(HorsesDetailModel.fromJson(data));
     }
+  }
+}
+
+getHorseProfile(context, String horseId) async {
+  String url =
+      "https://re.victoriayachts.ae/api/?q=profile/horse/$horseId/overview";
+  var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
+  if (response.statusCode == 200) {
+    var decodedData = jsonDecode(response.body);
+    Provider.of<HorseProfileProvider>(context, listen: false)
+        .addProfile(HorseProfileModel.fromJson(decodedData));
   }
 }

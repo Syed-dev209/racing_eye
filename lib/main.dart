@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:racing_eye/Models/OwnerModel/ownerData.dart';
+import 'package:racing_eye/Models/horseProfileModel.dart';
 import 'package:racing_eye/Models/horsesDetailModel.dart';
 import 'package:racing_eye/Models/ownerSearchStatsModel.dart';
+import 'package:racing_eye/Models/raceDescModel.dart';
 import 'package:racing_eye/Models/raceDetailsModel.dart';
 import 'package:racing_eye/Models/statsModel.dart';
 import 'package:racing_eye/Screens/dashboardBase.dart';
@@ -44,7 +46,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => OwnerSearchStatsProvider()),
         ChangeNotifierProvider(create: (_) => AvailableRaceProvider()),
         ChangeNotifierProvider(create: (_) => UpcomingRaceProvider()),
-        ChangeNotifierProvider(create: (_) => CompletedRaceProvider())
+        ChangeNotifierProvider(create: (_) => CompletedRaceProvider()),
+        ChangeNotifierProvider(create: (_) => RaceResultsProvider()),
+        ChangeNotifierProvider(create: (_) => HorseProfileProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -52,7 +56,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: myColor,
         ),
-        home: RaceDetailsScreen(),
+        home: SplashScreen(),
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:racing_eye/Models/horseProfileModel.dart';
 import 'package:racing_eye/main.dart';
 
 class HorseDetailsCard extends StatefulWidget {
@@ -61,7 +63,7 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "4 Yeasrs old, CH C",
+                              "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.age!.substring(0, 1)} Yeasrs old, ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.horseSexCode} ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.horseColourCode}",
                               style: TextStyle(color: Colors.white),
                             ),
                             Container(
@@ -79,7 +81,12 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                           height: 3.0,
                         ),
                         Text(
-                          "Name of the horse",
+                          Provider.of<HorseProfileProvider>(context,
+                                  listen: false)
+                              .profile!
+                              .data!
+                              .profile!
+                              .horseName!,
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
@@ -90,6 +97,7 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
+                              width: 160.0,
                               child: Row(
                                 children: [
                                   Image.asset(
@@ -99,9 +107,14 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                                   SizedBox(
                                     width: 10.0,
                                   ),
-                                  Text(
-                                    "Al Ajban Stables",
-                                    style: TextStyle(color: Color(0xff6790bb)),
+                                  Expanded(
+                                    child: Text(
+                                      "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.ownerName}",
+                                      style:
+                                          TextStyle(color: Color(0xff6790bb)),
+                                      overflow: TextOverflow.fade,
+                                      softWrap: false,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -154,12 +167,30 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    dataRow(title: "Trainer:", name: "Richard Price"),
-                    dataRow(title: "Owner:", name: "Barry Veasy"),
-                    dataRow(title: "Sire:", name: "Kodaic"),
-                    dataRow(title: "Dam:", name: "Pearl Mountain"),
-                    dataRow(title: "Dam Sire:", name: "Pearl of love"),
-                    dataRow(title: "Sires Sire:", name: "Danehill"),
+                    dataRow(
+                        title: "Trainer:",
+                        name:
+                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.trainerName}"),
+                    dataRow(
+                        title: "Owner:",
+                        name:
+                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.ownerName}"),
+                    dataRow(
+                        title: "Sire:",
+                        name:
+                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.sireHorseName}"),
+                    dataRow(
+                        title: "Dam:",
+                        name:
+                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.damHorseName}"),
+                    dataRow(
+                        title: "Dam Sire:",
+                        name:
+                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.damSireHorseName}"),
+                    dataRow(
+                        title: "Sires Sire:",
+                        name:
+                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.siresSireName}"),
                   ],
                 ),
               ),
