@@ -38,6 +38,8 @@ class _OwnerDataTablesState extends State<OwnerDataTables> {
 
 final formatCurrency = NumberFormat.simpleCurrency(name: "GBP");
 
+// ignore: slash_for_doc_comments
+/***************Form Table**************************************** */
 class FormDataTable extends StatefulWidget {
   int ownerId;
   List<Last14Days> list = [];
@@ -167,7 +169,8 @@ class _FormDataTableState extends State<FormDataTable> {
   }
 }
 
-//////////////////////////////////////////////////////////////////
+// ignore: slash_for_doc_comments
+/***************Entries Table**************************************** */
 class EntriesDataTable extends StatefulWidget {
   int ownerId;
   List<Entries>? list;
@@ -305,7 +308,8 @@ class _EntriesDataTableState extends State<EntriesDataTable> {
 }
 
 ////////////////////////////////////////////////////////////////////
-
+// ignore: slash_for_doc_comments
+/***************Horse Table**************************************** */
 class HorsesDataTable extends StatefulWidget {
   int ownerId;
   List<Horses>? list;
@@ -330,80 +334,82 @@ class _HorsesDataTableState extends State<HorsesDataTable> {
     return
         // widget.list!.isNotEmpty
         //  ?
-        DataTable(
-            headingRowColor: MaterialStateColor.resolveWith(
-              (states) => Color(0xffF3F3F3),
-            ),
-            headingRowHeight: 43.0,
-            dataRowHeight: 43.0,
-            dividerThickness: 0.0,
-            columnSpacing: 20.0,
-            columns: [
-              DataColumn(
-                label: Text(
-                  'Horse',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
+          DataTable(
+              headingRowColor: MaterialStateColor.resolveWith(
+                (states) => Color(0xffF3F3F3),
+              ),
+              headingRowHeight: 43.0,
+              dataRowHeight: 43.0,
+              dividerThickness: 0.0,
+              columnSpacing: 20.0,
+              columns: [
+                DataColumn(
+                  label: Text(
+                    'Horse',
+                    style: TextStyle(
+                      color: Color(0xFF02458A),
+                    ),
                   ),
                 ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Wins',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
+                DataColumn(
+                  label: Text(
+                    'Wins',
+                    style: TextStyle(
+                      color: Color(0xFF02458A),
+                    ),
                   ),
                 ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Runs',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
+                DataColumn(
+                  label: Text(
+                    'Runs',
+                    style: TextStyle(
+                      color: Color(0xFF02458A),
+                    ),
                   ),
                 ),
-              ),
-              DataColumn(
-                label: Text(
-                  'T.Earnings',
-                  style: TextStyle(
-                    color: Color(0xFF02458A),
+                DataColumn(
+                  label: Text(
+                    'T.Earnings',
+                    style: TextStyle(
+                      color: Color(0xFF02458A),
+                    ),
                   ),
                 ),
-              ),
-            ],
-            rows: widget.list!.isNotEmpty
-                ? widget.list!.map((e) {
-                    i = i + 1;
-                    return DataRow(
-                        color: MaterialStateColor.resolveWith(
-                          (states) => e.index % 2 != 0
-                              ? Color(0xffF3F3F3)
-                              : Colors.white,
-                        ),
-                        cells: [
-                          DataCell(Text(e.horseName!)),
-                          DataCell(Text(e.place1stNumber!.toString())),
-                          DataCell(Text(e.racesNumber!.toString())),
-                          DataCell(Text(
-                              "${formatCurrency.format(e.netTotalPrizeMoney!)}")),
-                          //DataCell(Text(e.sp)),
-                        ]);
-                  }).toList()
-                : [
-                    DataRow(
-                        color: MaterialStateColor.resolveWith(
-                          (states) =>
-                              i % 2 != 0 ? Color(0xffF3F3F3) : Colors.white,
-                        ),
-                        cells: [
-                          DataCell(Text("No data")),
-                          DataCell(Text("No data")),
-                          DataCell(Text("No data")),
-                          DataCell(Text("No data")),
-                          //DataCell(Text(e.sp)),
-                        ])
-                  ]);
+              ],
+              rows: widget.list!.isNotEmpty
+                  ? widget.list!.map((e) {
+                      i = i + 1;
+                      return DataRow(
+                          color: MaterialStateColor.resolveWith(
+                            (states) => e.index % 2 != 0
+                                ? Color(0xffF3F3F3)
+                                : Colors.white,
+                          ),
+                          cells: [
+                            DataCell(Text(e.horseName!)),
+                            DataCell(Text(e.place1stNumber!.toString())),
+                            DataCell(Text(e.racesNumber!.toString())),
+                            DataCell(Text(
+                                "${formatCurrency.format(e.netTotalPrizeMoney!)}")),
+                            //DataCell(Text(e.sp)),
+                          ]);
+                    }).toList()
+                  : [
+                      DataRow(
+                          color: MaterialStateColor.resolveWith(
+                            (states) =>
+                                i % 2 != 0 ? Color(0xffF3F3F3) : Colors.white,
+                          ),
+                          cells: [
+                            DataCell(Text("No data")),
+                            DataCell(Text("No data")),
+                            DataCell(Text("No data")),
+                            DataCell(Text("No data")),
+                            //DataCell(Text(e.sp)),
+                          ])
+                    ]);
+      
+      
     // : Container(
     //     height: MediaQuery.of(context).size.height * 0.5,
     //     child: Center(
@@ -422,6 +428,13 @@ class _HorsesDataTableState extends State<HorsesDataTable> {
   }
 }
 
+
+
+
+
+
+// ignore: slash_for_doc_comments
+/***************Stats Table**************************************** */
 class StatsDataTable extends StatefulWidget {
   List<StatisticalSummary>? statsList;
   List<BigRaceWin>? raceLists;
@@ -646,7 +659,7 @@ class _StatsDataTableState extends State<StatsDataTable> {
                                 )),
                                 DataCell(Text(e.horseStyleName!.toString())),
                                 // DataCell(Text(e.trainerStyleName!.toString())),
-                                DataCell(Text(e.prizeSterling!.toString())),
+                                DataCell(Text(formatCurrency.format(e.prizeSterling!))),
                                 //DataCell(Text(e.sp)),
                               ]);
                         }).toList()
@@ -668,6 +681,7 @@ class _StatsDataTableState extends State<StatsDataTable> {
                         ]),
             ],
           )
+       
         : Container(
             height: MediaQuery.of(context).size.height * 0.5,
             child: Center(

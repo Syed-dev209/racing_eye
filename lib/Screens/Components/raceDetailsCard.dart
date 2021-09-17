@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 // import 'package:racing_eye/Models/raceDescModel.dart';
 import 'package:racing_eye/Models/raceRunnersModel.dart';
 
@@ -7,7 +9,9 @@ import '../../main.dart';
 class RaceDetailsCard extends StatefulWidget {
   // RaceRunnersModel data;
   // RaceDetailsCard({required this.data});
-
+  int index;
+  RaceRunnersModelDataRunnersModel runnerData;
+  RaceDetailsCard({required this.index, required this.runnerData});
   @override
   _RaceDetailsCardState createState() => _RaceDetailsCardState();
 }
@@ -32,12 +36,15 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                     height: 65.0,
                     width: 65.0,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3.0),
-                        image: DecorationImage(
-                            image: AssetImage(
-                              "images/pic.PNG",
-                            ),
-                            fit: BoxFit.fill)),
+                      borderRadius: BorderRadius.circular(3.0),
+                    ),
+                    child: SvgPicture.network(
+                      "https://images.racingpost.com/svg/${widget.runnerData.silkImagePath}.svg",
+                      fit: BoxFit.fill,
+                      placeholderBuilder: (f) {
+                        return Icon(Icons.error,color: Colors.redAccent,);
+                      },
+                    ),
                   ),
                   Align(
                     alignment: Alignment.topLeft,
@@ -46,7 +53,7 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                       backgroundColor: myColor.shade100,
                       child: Center(
                         child: Text(
-                          "1",
+                          widget.index.toString(),
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -62,26 +69,26 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          "Vanusta",
+                          widget.runnerData.horseName!,
                           style: TextStyle(
                               fontSize: 19.0, fontWeight: FontWeight.bold),
                         ),
-                        Container(
-                          height: 40.0,
-                          width: 40.0,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.0),
-                              image: DecorationImage(
-                                  image: AssetImage("images/uaeFlag.jpg"),
-                                  fit: BoxFit.cover)),
-                        )
+                        // Container(
+                        //   height: 40.0,
+                        //   width: 40.0,
+                        //   decoration: BoxDecoration(
+                        //       borderRadius: BorderRadius.circular(20.0),
+                        //       image: DecorationImage(
+                        //           image: AssetImage("images/uaeFlag.jpg"),
+                        //           fit: BoxFit.cover)),
+                        // )
                       ],
                     ),
                     Text(
-                      "4 Years old, CH C",
+                      "${widget.runnerData.horseAge} Years old, ${widget.runnerData.horseColourCode} ${widget.runnerData.horseSexCode}",
                       style: TextStyle(color: myColor.shade50),
                     )
                   ],
@@ -102,47 +109,63 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
           ),
           Row(
             children: [
-              Container(
+              Expanded(
+                //flex: 2,
                 child: Row(
                   children: [
                     Text(
                       "Trainer: ",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                          softWrap: false,
+                          overflow: TextOverflow.clip,
                     ),
                     SizedBox(
                       width: 3.0,
                     ),
-                    Text(
-                      "Garry harrison",
-                      style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500),
+                    Expanded(
+                      child: AutoSizeText(
+                        widget.runnerData.trainerStylename!,
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500),
+                            minFontSize: 12,
+                            softWrap: false,
+                            overflow: TextOverflow.clip,
+                      ),
                     )
                   ],
                 ),
               ),
-              SizedBox(
-                width: 35,
-              ),
-              Container(
+              // SizedBox(
+              //   width: 30,
+              // ),
+              Expanded(
                 child: Row(
                   children: [
                     Text(
                       "Jockey: ",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                         //minFontSize: 12,
+                          overflow: TextOverflow.clip,
+                          softWrap: false,
                     ),
                     SizedBox(
                       width: 3.0,
                     ),
-                    Text(
-                      "Rowen Scott",
-                      style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500),
+                    Expanded(
+                      child: AutoSizeText(
+                        widget.runnerData.jockeyName!,
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500),
+                            softWrap: false,
+                            overflow: TextOverflow.clip,
+                            minFontSize: 12,
+                      ),
                     )
                   ],
                 ),
@@ -152,7 +175,7 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
           SizedBox(
             height: 5,
           ),
-          Container(
+          Expanded(
             child: Row(
               children: [
                 Text(
@@ -162,12 +185,17 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                 SizedBox(
                   width: 3.0,
                 ),
-                Text(
-                  "Miss harry harrison",
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500),
+                Expanded(
+                  child: AutoSizeText(
+                    widget.runnerData.ownerName!,
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500),
+                        minFontSize: 12,
+                        softWrap: false,
+                        overflow: TextOverflow.clip,
+                  ),
                 )
               ],
             ),

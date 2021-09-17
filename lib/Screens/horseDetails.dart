@@ -7,6 +7,8 @@ import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
 import 'package:racing_eye/Screens/Components/horseDetailCard.dart';
 import 'package:racing_eye/main.dart';
 
+import 'Components/HorseComponents/horseDataTables.dart';
+
 class HorseDetails extends StatefulWidget {
   String horseId;
   HorseDetails({required this.horseId});
@@ -33,6 +35,11 @@ class _HorseDetailsState extends State<HorseDetails>
 
   getData() async {
     await getHorseProfile(context, widget.horseId);
+    await getHorseRecords(context, widget.horseId);
+    await getHorseFormData(context, widget.horseId);
+    await getHorseSalesData(context, widget.horseId);
+    await getHorseEntries(context, widget.horseId);
+
     setState(() {
       loaded = true;
     });
@@ -113,9 +120,15 @@ class _HorseDetailsState extends State<HorseDetails>
                             child: TabBarView(
                               controller: controller,
                               children: [
-                                Text("Form"),
-                                Text("Entries"),
-                                Text("Sales"),
+                                HorseDataTables(
+                                  dataTable: HorseFormDataTable(),
+                                ),
+                                HorseDataTables(
+                                  dataTable: HorseEntriesDataTable(),
+                                ),
+                                HorseDataTables(
+                                  dataTable: HorseSalesDataTable(),
+                                ),
                               ],
                             ),
                           )

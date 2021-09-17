@@ -10,6 +10,7 @@ class OwnersData {
   String? silkImagePath;
   String? createdAt;
   String? updatedAt;
+  String? countryFlag;
 
   OwnersData(
       {required this.id,
@@ -20,7 +21,9 @@ class OwnersData {
       required this.styleName,
       required this.silkImagePath,
       required this.createdAt,
-      required this.updatedAt});
+      required this.updatedAt,
+      required this.countryFlag
+      });
 
   OwnersData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -32,6 +35,7 @@ class OwnersData {
     silkImagePath = json['silk_image_path'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    countryFlag=json['country_flag'];
   }
 
   Map<String, dynamic> toJson() {

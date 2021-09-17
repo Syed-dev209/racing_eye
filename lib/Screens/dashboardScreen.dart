@@ -74,7 +74,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   children: [
                     Expanded(
                       child: DashboardStatsCard(
-                        title: "Wins",
+                        title: "Win%",
                         value: "${data.data!.percentWinsRuns!}%",
                       ),
                     ),
@@ -97,7 +97,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 height: 25.0,
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.48,
+                height: MediaQuery.of(context).size.height * 0.495,
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 25.0),
                 width: double.maxFinite,
                 decoration: BoxDecoration(

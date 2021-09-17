@@ -68,11 +68,11 @@ class _RaceDetailsScreenState extends State<RaceDetailsScreen> {
                           Expanded(child: Consumer<RaceResultsProvider>(
                               builder: (context, data, child) {
                             return ListView.builder(
-                                itemCount: 5,
+                                itemCount: data.runners!.data!.runners!.data.length,
                                 itemBuilder: (context, i) {
                                   return Padding(
                                     padding: EdgeInsets.only(bottom: 15.0),
-                                    child: RaceDetailsCard(),
+                                    child: RaceDetailsCard(index: i+1,runnerData:data.runners!.data!.runners!.data[i] ,),
                                   );
                                 });
                           }))

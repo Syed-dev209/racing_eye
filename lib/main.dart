@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:racing_eye/Models/OwnerModel/ownerData.dart';
+import 'package:racing_eye/Models/horseFormModel.dart';
 import 'package:racing_eye/Models/horseProfileModel.dart';
 import 'package:racing_eye/Models/horsesDetailModel.dart';
 import 'package:racing_eye/Models/ownerSearchStatsModel.dart';
@@ -16,6 +17,10 @@ import 'package:racing_eye/Screens/password_recovery.dart';
 import 'package:racing_eye/Screens/raceDetailsScreen.dart';
 import 'package:racing_eye/Screens/register_screen.dart';
 import 'package:racing_eye/Screens/splashScreen.dart';
+
+import 'Models/horseEntriesModel.dart';
+import 'Models/horseRecordsModel.dart';
+import 'Models/horseSalesModel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,6 +54,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CompletedRaceProvider()),
         ChangeNotifierProvider(create: (_) => RaceResultsProvider()),
         ChangeNotifierProvider(create: (_) => HorseProfileProvider()),
+        ChangeNotifierProvider(create: (_)=>HorseSalesProvider()),
+        ChangeNotifierProvider(create: (_)=>HorseEntriesProvider()),
+        ChangeNotifierProvider(create: (_)=>HorseRecordProvider()),
+        ChangeNotifierProvider(create: (_)=>HorseFormProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

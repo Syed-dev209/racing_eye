@@ -59,7 +59,7 @@ class RacesCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 22.0,
+                      height: 25.0,
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -75,7 +75,7 @@ class RacesCard extends StatelessWidget {
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18.0),
+                                      fontSize: 16.0),
                                   overflow: TextOverflow.fade,
                                   softWrap: false,
                                   maxLines: 2,
@@ -84,14 +84,14 @@ class RacesCard extends StatelessWidget {
                                   height: 8.0,
                                 ),
                                 Text(
-                                  "Sponsored by :- ${dataModel.courseStyleName}",
+                                  "Course :- ${dataModel.courseStyleName}",
                                   style: TextStyle(
                                       color: Color(0xff666666), fontSize: 13.0),
                                 )
                               ],
                             ),
                           ),
-                          Image.asset('images/arrowDown.png')
+                          Image.asset('images/arrowForward.png',height: 35,)
                         ],
                       ),
                     )
@@ -121,7 +121,7 @@ class RacesCard extends StatelessWidget {
                           date,
                           style: TextStyle(
                               color: Colors.black,
-                              fontSize: 22.0,
+                              fontSize: 19.0,
                               fontWeight: FontWeight.w500),
                         ),
                         Text(
@@ -129,7 +129,7 @@ class RacesCard extends StatelessWidget {
                           style: TextStyle(
                               color: myColor.shade50,
                               fontWeight: FontWeight.w500,
-                              fontSize: 20.0),
+                              fontSize: 17.0),
                         ),
                         SizedBox(
                           height: 3.0,

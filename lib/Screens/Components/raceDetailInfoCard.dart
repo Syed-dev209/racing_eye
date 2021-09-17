@@ -1,5 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:racing_eye/Models/raceDescModel.dart';
+import 'package:racing_eye/Screens/Components/OwnerComponents/ownerTables.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
 
 import '../../main.dart';
@@ -196,7 +198,9 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
   }
 
   Widget prizeRow(String index, String val) {
-    return Container(
+    val = formatCurrency.format(double.parse(val));
+    val = val.substring(0, val.length - 3);
+    return Expanded(
       child: Row(
         children: [
           Container(
@@ -207,7 +211,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                 borderRadius: BorderRadius.circular(6.0)),
             child: Center(
               child: Text(
-                "1",
+                index,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 17,
@@ -218,12 +222,19 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
           SizedBox(
             width: 5.0,
           ),
-          Text(
-            "AED 8000",
-            style: TextStyle(
+          Expanded(
+            child: AutoSizeText(
+              "$val",
+              style: TextStyle(
                 fontWeight: FontWeight.w500,
-                fontSize: 16.0,
-                color: Color(0xff9AB5D1)),
+                fontSize: 18.0,
+                color: Color(0xff9AB5D1),
+              ),
+              minFontSize: 13,
+              maxLines: 1,
+              softWrap: false,
+              overflow: TextOverflow.fade,
+            ),
           )
         ],
       ),

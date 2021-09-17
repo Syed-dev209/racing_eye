@@ -20,7 +20,7 @@ class SearchedCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 2.0, right: 2.0, bottom: 15.0),
       child: Container(
-        height: 212.0,
+        height: 214.0,
         width: double.maxFinite,
         padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 12.0),
         decoration: BoxDecoration(
@@ -30,10 +30,22 @@ class SearchedCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  radius: 27.0,
-                  backgroundImage: NetworkImage(
-                    "https://www.rp-assets.com/png_silks/${image.first.silkImagePath}.png",
+                // CircleAvatar(
+                //   radius: 27.0,
+                //   backgroundImage: NetworkImage(
+                //     "https://www.rp-assets.com/png_silks/${image.first.silkImagePath}.png",
+                //   ),
+                // ),
+                Container(
+                  height: 50.0,
+                  width: 50.0,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(30),
+                    image: DecorationImage(
+                      image: NetworkImage( "https://www.rp-assets.com/png_silks/${image.first.silkImagePath}.png",),
+                    fit: BoxFit.contain
+                    )
                   ),
                 ),
                 SizedBox(
@@ -46,7 +58,7 @@ class SearchedCard extends StatelessWidget {
                       Text(
                         data.ownerStyleName!,
                         style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 22.0),
+                            fontWeight: FontWeight.w500, fontSize: 19.0),
                       ),
                       SizedBox(
                         height: 8.0,

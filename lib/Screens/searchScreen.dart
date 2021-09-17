@@ -49,7 +49,9 @@ class _SearchScreenState extends State<SearchScreen> {
         styleName: " ",
         silkImagePath: " ",
         createdAt: " ",
-        updatedAt: " "));
+        updatedAt: " ",
+        countryFlag: " "
+        ));
     for (var data
         in Provider.of<OwnerDataProvider>(context, listen: false).ownerList) {
       ownerNames.add(data);

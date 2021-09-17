@@ -83,20 +83,20 @@ class HorseCard extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(right: 4.0, top: 4.0),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: CircleAvatar(
-                    radius: 24.0,
-                    backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage(
-                        "https://www.publicdomainpictures.net/pictures/350000/velka/uae-flag.jpg"),
-                  ),
-                ),
-              ),
-            )
+            // Expanded(
+            //   child: Padding(
+            //     padding: EdgeInsets.only(right: 4.0, top: 4.0),
+            //     child: Align(
+            //       alignment: Alignment.topRight,
+            //       child: CircleAvatar(
+            //         radius: 24.0,
+            //         backgroundColor: Colors.white,
+            //         backgroundImage: NetworkImage(
+            //             "https://www.publicdomainpictures.net/pictures/350000/velka/uae-flag.jpg"),
+            //       ),
+            //     ),
+            //   ),
+            // )
           ]),
         ),
       ),

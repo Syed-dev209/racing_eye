@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class DashboardStatsCard extends StatelessWidget {
@@ -15,23 +16,34 @@ class DashboardStatsCard extends StatelessWidget {
         height: 90.0,
         width: 120.0,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: ([
-              Text(
-                title,
-                style: TextStyle(
-                  color: Color(0xff8daccc),
+          child: Padding(
+            padding:EdgeInsets.symmetric(horizontal: 5.0,vertical: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: ([
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      color: Color(0xff8daccc),
+                    ),
+                  ),
                 ),
-              ),
-              Text(
-                value,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 21.0),
-              )
-            ]),
+                Expanded(
+                  child: AutoSizeText(
+                    value,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 21.0),
+                        softWrap: true,
+                        //overflow: TextOverflow.clip
+                        minFontSize: 15,
+                  ),
+                ),
+                 
+              ]),
+            ),
           ),
         ),
       ),

@@ -4,9 +4,9 @@ import 'package:racing_eye/main.dart';
 
 Widget dropDownAndroid(List data, String selectedValue, Function onChanged) {
   return DropdownButton(
-    elevation: 8,
+    elevation: 9,
     style: TextStyle(
-        fontWeight: FontWeight.w400, color: Colors.black, fontSize: 17.0),
+        fontWeight: FontWeight.w400, color: Colors.black, fontSize: 15.0),
     icon: Icon(
       Icons.keyboard_arrow_down_sharp,
       color: myColor.shade50,
@@ -32,9 +32,9 @@ Widget dropDownAndroid(List data, String selectedValue, Function onChanged) {
 Widget dropDownAndroidOwner(
     List<OwnersData> data, OwnersData selectedValue, Function onChanged) {
   return DropdownButton(
-    elevation: 8,
+    elevation: 9,
     style: TextStyle(
-        fontWeight: FontWeight.w400, color: Colors.black, fontSize: 17.0),
+        fontWeight: FontWeight.w400, color: Colors.black, fontSize: 15.0),
     icon: Icon(
       Icons.keyboard_arrow_down_sharp,
       color: myColor.shade50,

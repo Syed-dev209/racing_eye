@@ -71,7 +71,7 @@ class OwnerCard extends StatelessWidget {
                             width: 8.0,
                           ),
                           Text(
-                            'AED ${formatCurrency.format(double.parse(netAmount ?? "0.00")).substring(1)}',
+                            formatCurrency.format(double.parse(netAmount ?? "0.00")),
                             style: TextStyle(
                                 color: bgColorWhite
                                     ? Colors.black26
@@ -96,7 +96,7 @@ class OwnerCard extends StatelessWidget {
                 radius: 17.0,
                 backgroundColor: Colors.white,
                 backgroundImage: NetworkImage(
-                    "https://www.publicdomainpictures.net/pictures/350000/velka/uae-flag.jpg"),
+                    ownerData!.countryFlag!),
               ),
             ),
           )
