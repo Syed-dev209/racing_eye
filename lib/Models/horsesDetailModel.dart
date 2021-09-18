@@ -89,8 +89,15 @@ class HorsesDetailModel {
 
 class HorseDetailProvider extends ChangeNotifier {
   List<HorsesDetailModel> dataModel = [];
+
   addHorse(HorsesDetailModel data) {
     dataModel.add(data);
+    //dataModel2.add(data);
+    notifyListeners();
+  }
+
+  addHorseList(List<HorsesDetailModel> data) {
+    dataModel = data;
     notifyListeners();
   }
 }

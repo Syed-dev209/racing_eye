@@ -23,9 +23,10 @@ class _HorsesListState extends State<HorsesList> {
   List<OwnersData> ownerNames = [];
   OwnersData? ownerName;
   TextEditingController searchedItem = TextEditingController();
+  List<HorsesDetailModel> preservedHorseList = [];
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     ownerNames.add(OwnersData(
         id: 0,
@@ -43,6 +44,8 @@ class _HorsesListState extends State<HorsesList> {
       ownerNames.add(data);
     }
     ownerName = ownerNames.first;
+    preservedHorseList =
+        Provider.of<HorseDetailProvider>(context, listen: false).dataModel;
   }
 
   @override
@@ -65,87 +68,129 @@ class _HorsesListState extends State<HorsesList> {
               Expanded(
                 child: Consumer<HorseDetailProvider>(
                   builder: (context, data, _) {
-                    List<HorsesDetailModel> list = [];
-                    list.addAll(data.dataModel);
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: Container(
-                                height: 40,
-                                width: double.maxFinite,
-                                child: TextFormField(
-                                  controller: searchedItem,
-                                  onChanged: (val) {
-                                    if (searchedItem.text.isNotEmpty) {
-                                      print("=====> $val");
-                                      List<HorsesDetailModel> searchedList = [];
-                                      list.forEach((element) {
-                                        if (element.horseName!
-                                            .contains(searchedItem.text)) {
-                                          print("found");
-                                          searchedList.add(element);
-                                        }
-                                      });
-                                      setState(() {
-                                        data.dataModel.addAll(searchedList);
-                                      });
-                                    }
-                                  },
-                                  decoration: InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.only(bottom: 4, left: 15),
-                                      suffixIcon: Icon(
-                                        Icons.search,
-                                        color: myColor.shade100,
-                                        size: 18,
-                                      ),
-                                      labelText: "Horse Name",
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20))),
+                        Container(
+                          height: 40,
+                          width: double.maxFinite,
+                          child: TextFormField(
+                            controller: searchedItem,
+                            onChanged: (val) {
+                              if (val.isNotEmpty) {
+                                // print("=====> $val");
+                                List<HorsesDetailModel> searchedList = [];
+                                for (var i in data.dataModel) {
+                                  if (i.horseName!.contains(RegExp(
+                                      searchedItem.text,
+                                      caseSensitive: false))) {
+                                    // print("Current ${i.horseName}");
+                                    // print("found");
+                                    searchedList.add(i);
+                                  }
+                                }
+                                // print(searchedList.toString());
+                                data.addHorseList(searchedList);
+                              } else {
+                                // print("Value empty");
+                                // print(preservedHorseList);
+                                data.addHorseList(preservedHorseList);
+                              }
+                            },
+                            decoration: InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.only(bottom: 4, left: 15),
+                                suffixIcon: Icon(
+                                  Icons.search,
+                                  color: myColor.shade100,
+                                  size: 18,
                                 ),
-                              ),
-                            ),
-                            //  SizedBox(width: 8,),
-                            // Expanded(
-                            //   child: dropDownAndroid(ages, age, (val) {
-                            //     setState(() {
-                            //       age = val;
-                            //     });
-                            //   }),
-                            // ),
-                            // //SizedBox(width: 8,),
-                            // Expanded(
-                            //   //flex: 2,
-                            //   child: dropDownAndroidOwner(ownerNames, ownerName!, (val) {
-                            //     setState(() {
-                            //       age = val;
-                            //     });
-                            //   }),
-                            // ),
-                          ],
+                                labelText: "Horse Name",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20))),
+                          ),
                         ),
                         SizedBox(
-                          height: 22.5,
+                          height: 11,
                         ),
-                        list.isNotEmpty
+                        Text(
+                          "Filters",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 20),
+                        ),
+                        SizedBox(
+                          height: 10.5,
+                        ),
+                        Row(
+                          children: [
+                            ///**************Age Filter*******************///
+                            Expanded(
+                              child: dropDownAndroid(
+                                ages,
+                                age,
+                                (val) {
+                                  age = val;
+                                  if (age == ages.first) {
+                                    data.addHorseList(preservedHorseList);
+                                  } else {
+                                    List<HorsesDetailModel> searchedList = [];
+                                    for (var i in preservedHorseList) {
+                                      if (i.horseAge!.contains(
+                                          RegExp(val, caseSensitive: false))) {
+                                        searchedList.add(i);
+                                      }
+                                    }
+                                    data.addHorseList(searchedList);
+                                  }
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+
+                            ///**************Owner Filter*******************///
+                            Expanded(
+                              child: dropDownAndroidOwner(
+                                  ownerNames, ownerName!, (val) {
+                                ownerName = val;
+                                if (ownerName == ownerNames.first) {
+                                  data.addHorseList(preservedHorseList);
+                                } else {
+                                  List<HorsesDetailModel> searchedList = [];
+                                  for (var i in preservedHorseList) {
+                                    print(i.ownerName!.toLowerCase());
+                                    if (i.ownerName!.toLowerCase() ==
+                                        ownerName!.ownerName!.toLowerCase()) {
+                                      searchedList.add(i);
+                                    }
+                                  }
+                                  data.addHorseList(searchedList);
+                                }
+                              }),
+                            )
+                          ],
+                        ),
+                        data.dataModel.isNotEmpty
                             ? Expanded(
                                 child: ListView.builder(
-                                    itemCount: list.length,
+                                    itemCount: data.dataModel.length,
                                     itemBuilder: (context, index) {
-                                      return HorseCard(horseModel: list[index]);
+                                      return HorseCard(
+                                          horseModel: data.dataModel[index]);
                                     }),
                               )
-                            : Center(
-                                child: Text(
-                                  ' No horses available',
-                                  style: TextStyle(
-                                      color: myColor.withOpacity(0.5),
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold),
+                            : Container(
+                                height: 400,
+                                width: double.maxFinite,
+                                child: Center(
+                                  child: Text(
+                                    ' No horses available',
+                                    style: TextStyle(
+                                        color: myColor.withOpacity(0.5),
+                                        fontSize: 24.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
                       ],

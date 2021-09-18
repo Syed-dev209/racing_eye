@@ -17,6 +17,18 @@ class RaceDetailsCard extends StatefulWidget {
 }
 
 class _RaceDetailsCardState extends State<RaceDetailsCard> {
+  bool isOwner = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (widget.runnerData.ownerName!.toLowerCase() ==
+        "shadwell estate company ltd") {
+      isOwner = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +54,10 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                       "https://images.racingpost.com/svg/${widget.runnerData.silkImagePath}.svg",
                       fit: BoxFit.fill,
                       placeholderBuilder: (f) {
-                        return Icon(Icons.error,color: Colors.redAccent,);
+                        return Icon(
+                          Icons.error,
+                          color: Colors.redAccent,
+                        );
                       },
                     ),
                   ),
@@ -69,22 +84,41 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           widget.runnerData.horseName!,
                           style: TextStyle(
-                              fontSize: 19.0, fontWeight: FontWeight.bold),
+                              fontSize: isOwner ? 20 : 19.0,
+                              fontWeight: FontWeight.bold,
+                              shadows: isOwner
+                                  ? [
+                                      Shadow(
+                                        offset: Offset(1.5, 1.5),
+                                        blurRadius: 2.5,
+                                        color: Colors.black.withOpacity(0.6),
+                                      ),
+                                      // Shadow(
+                                      //   offset: Offset(10.0, 10.0),
+                                      //   blurRadius: 8.0,
+                                      //   color: Color.fromARGB(125, 0, 0, 255),
+                                      // ),
+                                    ]
+                                  : [
+                                      Shadow(
+                                        offset: Offset(0, 0),
+                                        blurRadius: .0,
+                                        //color: Color.fromARGB(255, 0, 0, 0),
+                                      ),
+                                    ]),
                         ),
-                        // Container(
-                        //   height: 40.0,
-                        //   width: 40.0,
-                        //   decoration: BoxDecoration(
-                        //       borderRadius: BorderRadius.circular(20.0),
-                        //       image: DecorationImage(
-                        //           image: AssetImage("images/uaeFlag.jpg"),
-                        //           fit: BoxFit.cover)),
-                        // )
+                        isOwner
+                            ? Icon(
+                                Icons.star,
+                                color: Colors.yellowAccent,
+                                size: 12,
+                              )
+                            : Text('')
                       ],
                     ),
                     Text(
@@ -117,8 +151,8 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                       "Trainer: ",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                          softWrap: false,
-                          overflow: TextOverflow.clip,
+                      softWrap: false,
+                      overflow: TextOverflow.clip,
                     ),
                     SizedBox(
                       width: 3.0,
@@ -130,9 +164,9 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                             color: Colors.grey,
                             fontSize: 15,
                             fontWeight: FontWeight.w500),
-                            minFontSize: 12,
-                            softWrap: false,
-                            overflow: TextOverflow.clip,
+                        minFontSize: 12,
+                        softWrap: false,
+                        overflow: TextOverflow.clip,
                       ),
                     )
                   ],
@@ -148,23 +182,23 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                       "Jockey: ",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                         //minFontSize: 12,
-                          overflow: TextOverflow.clip,
-                          softWrap: false,
+                      //minFontSize: 12,
+                      overflow: TextOverflow.clip,
+                      softWrap: false,
                     ),
                     SizedBox(
                       width: 3.0,
                     ),
                     Expanded(
                       child: AutoSizeText(
-                        widget.runnerData.jockeyName!,
+                        widget.runnerData.jockeyName ?? "N/A",
                         style: TextStyle(
                             color: Colors.grey,
                             fontSize: 15,
                             fontWeight: FontWeight.w500),
-                            softWrap: false,
-                            overflow: TextOverflow.clip,
-                            minFontSize: 12,
+                        softWrap: false,
+                        overflow: TextOverflow.clip,
+                        minFontSize: 12,
                       ),
                     )
                   ],
@@ -192,9 +226,9 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                         color: Colors.grey,
                         fontSize: 15,
                         fontWeight: FontWeight.w500),
-                        minFontSize: 12,
-                        softWrap: false,
-                        overflow: TextOverflow.clip,
+                    minFontSize: 12,
+                    softWrap: false,
+                    overflow: TextOverflow.clip,
                   ),
                 )
               ],
