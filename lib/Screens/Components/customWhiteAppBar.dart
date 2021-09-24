@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomWhiteAppBar extends StatelessWidget {
   final String headerText;
@@ -14,7 +15,7 @@ class CustomWhiteAppBar extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Image.asset('images/backWhite.png')),
+            child: SvgPicture.asset('images/SVGS/backButton.svg')),
         Text(
           headerText,
           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.0),
@@ -25,11 +26,12 @@ class CustomWhiteAppBar extends StatelessWidget {
                 width: 50.0,
                 child: Row(
                   children: [
-                    Expanded(child: Image.asset('images/Favorite.png')),
+                    Expanded(child: SvgPicture.asset('images/Favorite.png')),
                     SizedBox(
                       width: 8.0,
                     ),
-                    Expanded(child: Image.asset('images/searchBlue.png'))
+                    Expanded(
+                        child: SvgPicture.asset('images/SVGS/searchIcon.svg'))
                   ],
                 ),
               )

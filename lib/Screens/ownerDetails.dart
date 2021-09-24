@@ -44,7 +44,7 @@ class _OwnerDetailsState extends State<OwnerDetails> {
           child: Column(
             children: [
               CustomWhiteAppBar(
-                headerText: 'Owner Details',
+                headerText: 'Branch Details',
               ),
               SizedBox(
                 height: 15.0,

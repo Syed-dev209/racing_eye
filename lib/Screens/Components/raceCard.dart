@@ -19,6 +19,11 @@ class RacesCard extends StatelessWidget {
     String date = dateTime.day.toString();
     String month = monthList[dateTime.month - 1];
     String time = "${dateTime.hour}:${dateTime.minute}";
+    String image = "GB-52-F";
+    if (dataModel.courseImage != null) {
+      image = dataModel.courseImage!;
+    }
+
     return GestureDetector(
       onTap: () {
         print(dataModel.raceInstanceUid);
@@ -53,8 +58,18 @@ class RacesCard extends StatelessWidget {
                             topLeft: Radius.circular(20.0),
                             topRight: Radius.circular(20.0)),
                         child: Image.network(
-                          "https://www.rp-assets.com/course-photos/GB-52-f.jpg",
+                          "https://www.rp-assets.com/course-photos/${image.substring(0, image.length - 1)}f.jpg",
                           fit: BoxFit.cover,
+                          errorBuilder: (
+                            e,
+                            r,
+                            t,
+                          ) {
+                            return Icon(
+                              Icons.error_outline,
+                              color: Colors.red,
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -62,7 +77,7 @@ class RacesCard extends StatelessWidget {
                       height: 25.0,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                      padding: EdgeInsets.symmetric(horizontal: 15.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -87,11 +102,22 @@ class RacesCard extends StatelessWidget {
                                   "Course :- ${dataModel.courseStyleName}",
                                   style: TextStyle(
                                       color: Color(0xff666666), fontSize: 13.0),
-                                )
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  "Horse :- ${dataModel.horseName}",
+                                  style: TextStyle(
+                                      color: Color(0xff666666), fontSize: 13.0),
+                                ),
                               ],
                             ),
                           ),
-                          Image.asset('images/arrowForward.png',height: 35,)
+                          Image.asset(
+                            'images/arrowForward.png',
+                            height: 35,
+                          )
                         ],
                       ),
                     )

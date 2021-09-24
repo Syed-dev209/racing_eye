@@ -111,7 +111,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: Row(
                         children: [
                           DashboardContentCard(
-                            title: "Owners",
+                            title: "Branches",
                             imagePath: "images/owners.png",
                             goToPage: OwnerList(),
                           ),

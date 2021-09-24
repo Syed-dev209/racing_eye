@@ -31,7 +31,7 @@ class _HorsesListState extends State<HorsesList> {
     ownerNames.add(OwnersData(
         id: 0,
         uid: 0,
-        ownerName: "Owners",
+        ownerName: "Branches",
         ptpTypeCode: " ",
         silk: " ",
         styleName: " ",

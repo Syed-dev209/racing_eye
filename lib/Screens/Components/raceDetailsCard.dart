@@ -45,14 +45,15 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
               Stack(
                 children: [
                   Container(
-                    height: 65.0,
-                    width: 65.0,
+                    height: 50.0,
+                    width: 55.0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(3.0),
                     ),
                     child: SvgPicture.network(
                       "https://images.racingpost.com/svg/${widget.runnerData.silkImagePath}.svg",
                       fit: BoxFit.fill,
+                      height: 40,
                       placeholderBuilder: (f) {
                         return Icon(
                           Icons.error,

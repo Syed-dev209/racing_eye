@@ -35,22 +35,23 @@ class RaceDetailsModel {
   String? createdAt;
   String? updatedAt;
   String? ownerName;
+  String? courseImage;
 
-  RaceDetailsModel({
-    this.id,
-    this.raceInstanceUid,
-    this.horseUid,
-    this.horseName,
-    this.raceDatetime,
-    this.courseName,
-    this.courseStyleName,
-    this.raceStatusCode,
-    this.ownerId,
-    this.raceInstanceTitle,
-    this.createdAt,
-    this.updatedAt,
-    this.ownerName,
-  });
+  RaceDetailsModel(
+      {this.id,
+      this.raceInstanceUid,
+      this.horseUid,
+      this.horseName,
+      this.raceDatetime,
+      this.courseName,
+      this.courseStyleName,
+      this.raceStatusCode,
+      this.ownerId,
+      this.raceInstanceTitle,
+      this.createdAt,
+      this.updatedAt,
+      this.ownerName,
+      this.courseImage});
   RaceDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json["id"]?.toInt();
     raceInstanceUid = json["race_instance_uid"]?.toString();
@@ -65,6 +66,7 @@ class RaceDetailsModel {
     createdAt = json["created_at"]?.toString();
     updatedAt = json["updated_at"]?.toString();
     ownerName = json["ownerName"]?.toString();
+    courseImage = json["course_image"]?.toString();
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();

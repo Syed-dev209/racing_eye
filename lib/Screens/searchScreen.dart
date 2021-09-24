@@ -50,8 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
         silkImagePath: " ",
         createdAt: " ",
         updatedAt: " ",
-        countryFlag: " "
-        ));
+        countryFlag: " "));
     for (var data
         in Provider.of<OwnerDataProvider>(context, listen: false).ownerList) {
       ownerNames.add(data);
@@ -90,9 +89,29 @@ class _SearchScreenState extends State<SearchScreen> {
                             fontSize: 15.0,
                             fontWeight: FontWeight.w500),
                       ),
-                      dropDownAndroid(years, startYear, (val) {
+                      dropDownAndroid(years, startYear, (val) async {
                         setState(() {
                           startYear = val;
+                          loaded = false;
+                        });
+                        if (ownerName!.ownerName == "All") {
+                          Provider.of<OwnerSearchStatsProvider>(context,
+                                  listen: false)
+                              .clearList();
+                          for (var i in Provider.of<OwnerDataProvider>(context,
+                                  listen: false)
+                              .ownerList) {
+                            await getOwnerStats(i.uid!, startYear, context);
+                          }
+                        } else {
+                          Provider.of<OwnerSearchStatsProvider>(context,
+                                  listen: false)
+                              .clearList();
+                          await getOwnerStats(
+                              ownerName!.uid!, startYear, context);
+                        }
+                        setState(() {
+                          loaded = true;
                         });
                       }),
                     ],
@@ -111,9 +130,29 @@ class _SearchScreenState extends State<SearchScreen> {
                             fontSize: 15.0,
                             fontWeight: FontWeight.w500),
                       ),
-                      dropDownAndroid(years, endYear, (val) {
+                      dropDownAndroid(years, endYear, (val) async {
                         setState(() {
                           endYear = val;
+                          loaded = false;
+                        });
+                        if (ownerName!.ownerName == "All") {
+                          Provider.of<OwnerSearchStatsProvider>(context,
+                                  listen: false)
+                              .clearList();
+                          for (var i in Provider.of<OwnerDataProvider>(context,
+                                  listen: false)
+                              .ownerList) {
+                            await getOwnerStats(i.uid!, startYear, context);
+                          }
+                        } else {
+                          Provider.of<OwnerSearchStatsProvider>(context,
+                                  listen: false)
+                              .clearList();
+                          await getOwnerStats(
+                              ownerName!.uid!, startYear, context);
+                        }
+                        setState(() {
+                          loaded = true;
                         });
                       }),
                     ],
@@ -124,7 +163,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 height: 30.0,
               ),
               Text(
-                'Owners',
+                'Branches',
                 style: TextStyle(
                     color: Color(0xffBBC3CE),
                     fontSize: 15.0,

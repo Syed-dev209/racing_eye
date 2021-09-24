@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:racing_eye/Screens/dashboardScreen.dart';
 import 'package:racing_eye/Screens/searchScreen.dart';
 
@@ -31,24 +32,31 @@ class _DashboardBaseState extends State<DashboardBase> {
         selectedItemColor: Color(0xFF02458A),
         items: [
           BottomNavigationBarItem(
-              icon: Image.asset(
-                selectedIndex == 0 ? "images/dashAc.png" : "images/dashNac.png",
-                height: 20.0,
-              ),
+              icon: SvgPicture.asset(
+                selectedIndex == 0
+                    ? "images/SVGS/dashboardActive.svg"
+                    : "images/SVGS/dashboardInac.svg",
+                height: 20,
+              )
+              // Image.asset(
+              //   selectedIndex == 0 ? "images/dashAc.png" : "images/dashNac.png",
+              //   height: 20.0,
+              // )
+              ,
               label: 'Dashboard'),
           BottomNavigationBarItem(
-              icon: Image.asset(
+              icon: SvgPicture.asset(
                 selectedIndex == 1
-                    ? 'images/racingAc.png'
-                    : 'images/racingNac.png',
+                    ? 'images/SVGS/racingActive.svg'
+                    : 'images/SVGS/racingInac.svg',
                 height: 20.0,
               ),
               label: 'Search'),
           BottomNavigationBarItem(
-              icon: Image.asset(
+              icon: SvgPicture.asset(
                 selectedIndex == 2
-                    ? 'images/resultsAc.png'
-                    : 'images/resultsNac.png',
+                    ? 'images/SVGS/resultActivwe.svg'
+                    : 'images/SVGS/resultInac.svg',
                 height: 20.0,
               ),
               label: 'Results'),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:racing_eye/Models/raceDetailsModel.dart';
 import 'package:racing_eye/Screens/Components/datePicker.dart';
@@ -75,7 +76,7 @@ class _CompletedRacesState extends State<CompletedRaces> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Image.asset('images/calender.png'),
+                      SvgPicture.asset('images/SVGS/Calender.svg'),
                       Text(
                         "${monthList[dateTime.month - 1]} ${dateTime.year.toString()}",
                         style: TextStyle(fontSize: 14.0),

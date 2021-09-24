@@ -172,7 +172,7 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                         name:
                             "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.trainerName}"),
                     dataRow(
-                        title: "Owner:",
+                        title: "Branch:",
                         name:
                             "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.ownerName}"),
                     dataRow(
