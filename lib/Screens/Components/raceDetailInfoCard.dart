@@ -16,16 +16,24 @@ class RaceDetailsInfoCard extends StatefulWidget {
 
 class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
   DateTime? dateTime;
+  bool emptyList = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     dateTime = DateTime.parse(widget.data.data!.raceCard!.raceDatetime!);
+    if (widget.data.data!.raceCard!.prizes!.isEmpty) {
+      setState(() {
+        emptyList = true;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    print(widget.data.data!.raceCard!.prizes!);
+
     return Container(
       height: 200.0,
       width: double.maxFinite,
@@ -34,47 +42,53 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Text(
-                  widget.data.data!.raceCard!.raceInstanceTitle!,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 19.0,
-                      fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.clip,
-                  softWrap: false,
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: AutoSizeText(
+                    widget.data.data!.raceCard!.raceInstanceTitle!,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold),
+                    overflow: TextOverflow.clip,
+                    softWrap: true,
+                    maxLines: 2,
+                    minFontSize: 14,
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Container(
-                child: Row(
-                  children: [
-                    Image.asset(
-                      "images/timeCircle.png",
-                      height: 15,
-                    ),
-                    SizedBox(
-                      width: 5.0,
-                    ),
-                    Text(
-                      "${dateTime!.hour}:${dateTime!.minute}",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    )
-                  ],
+                SizedBox(
+                  width: 8,
                 ),
-              )
-            ],
+                Container(
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        "images/timeCircle.png",
+                        height: 15,
+                      ),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Text(
+                        "${dateTime!.hour}:${dateTime!.minute}",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
-          SizedBox(
-            height: 10.0,
-          ),
+          // SizedBox(
+          //   height: 10.0,
+          // ),
           Row(
             children: [
               Container(
@@ -100,9 +114,9 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
               )
             ],
           ),
-          SizedBox(
-            height: 10.0,
-          ),
+          // SizedBox(
+          //   height: 10.0,
+          // ),
           Row(
             children: [
               Container(
@@ -124,7 +138,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                 ),
               ),
               SizedBox(
-                width: 18.0,
+                width: 15.0,
               ),
               Container(
                 child: Row(
@@ -147,7 +161,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
             ],
           ),
           SizedBox(
-            height: 15,
+            height: 10,
           ),
           Text(
             "Prizes: ",
@@ -161,20 +175,32 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               prizeRow(
-                  widget.data.data!.raceCard!.prizes![0]!.positionNo!
-                      .toString(),
-                  widget.data.data!.raceCard!.prizes![0]!.prizeSterling
-                      .toString()),
+                  !emptyList
+                      ? widget.data.data!.raceCard!.prizes![0]!.positionNo!
+                          .toString()
+                      : "1",
+                  !emptyList
+                      ? widget.data.data!.raceCard!.prizes![0]!.prizeSterling
+                          .toString()
+                      : "0.00"),
               prizeRow(
-                  widget.data.data!.raceCard!.prizes![1]!.positionNo!
-                      .toString(),
-                  widget.data.data!.raceCard!.prizes![1]!.prizeSterling
-                      .toString()),
+                  !emptyList
+                      ? widget.data.data!.raceCard!.prizes![1]!.positionNo!
+                          .toString()
+                      : "2",
+                  !emptyList
+                      ? widget.data.data!.raceCard!.prizes![1]!.prizeSterling
+                          .toString()
+                      : "0.00"),
               prizeRow(
-                  widget.data.data!.raceCard!.prizes![2]!.positionNo!
-                      .toString(),
-                  widget.data.data!.raceCard!.prizes![2]!.prizeSterling
-                      .toString()),
+                  !emptyList
+                      ? widget.data.data!.raceCard!.prizes![2]!.positionNo!
+                          .toString()
+                      : "3",
+                  !emptyList
+                      ? widget.data.data!.raceCard!.prizes![2]!.prizeSterling
+                          .toString()
+                      : "0.00"),
             ],
           ),
           SizedBox(
@@ -184,10 +210,14 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               prizeRow(
-                  widget.data.data!.raceCard!.prizes![3]!.positionNo!
-                      .toString(),
-                  widget.data.data!.raceCard!.prizes![3]!.prizeSterling
-                      .toString()),
+                  !emptyList
+                      ? widget.data.data!.raceCard!.prizes![3]!.positionNo!
+                          .toString()
+                      : "4",
+                  !emptyList
+                      ? widget.data.data!.raceCard!.prizes![3]!.prizeSterling
+                          .toString()
+                      : "0.00"),
               // prizeRow("1", "AED 8000"),
               // prizeRow("1", "AED 8000"),
             ],

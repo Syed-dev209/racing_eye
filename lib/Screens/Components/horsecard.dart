@@ -32,7 +32,7 @@ class HorseCard extends StatelessWidget {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             ImagePlaceHolder(
               imagePath:
-                  "https://www.rp-assets.com/png_silks/${horseModel.silkImagePath}.png",
+                  "https://www.rp-assets.com/svg/${horseModel.silkImagePath}.svg",
             ),
             SizedBox(
               width: 4.0,

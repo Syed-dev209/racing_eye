@@ -190,6 +190,7 @@ class _OwnerDataTableState extends State<OwnerDataTable>
                   color: Color(0xffD8E2EE),
                   borderRadius: BorderRadius.circular(20.0)),
               child: TabBar(
+                //physics: NeverScrollableScrollPhysics(),
                 tabs: tabs,
                 controller: controller,
                 unselectedLabelColor: Color(0xFF02458A),
@@ -209,6 +210,7 @@ class _OwnerDataTableState extends State<OwnerDataTable>
               )),
           Expanded(
             child: TabBarView(
+              physics: NeverScrollableScrollPhysics(),
               controller: controller,
               children: [
                 OwnerDataTables(

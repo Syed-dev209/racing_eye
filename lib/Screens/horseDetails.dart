@@ -118,6 +118,7 @@ class _HorseDetailsState extends State<HorseDetails>
                               )),
                           Expanded(
                             child: TabBarView(
+                              physics: NeverScrollableScrollPhysics(),
                               controller: controller,
                               children: [
                                 HorseDataTables(

@@ -33,7 +33,7 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-      height: 150.0,
+      height: 140.0,
       width: double.maxFinite,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(15)),
@@ -45,7 +45,7 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
               Stack(
                 children: [
                   Container(
-                    height: 50.0,
+                    height: 40.0,
                     width: 55.0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(3.0),
@@ -65,7 +65,7 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: CircleAvatar(
-                      radius: 13.0,
+                      radius: 11.0,
                       backgroundColor: myColor.shade100,
                       child: Center(
                         child: Text(
@@ -83,6 +83,7 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -31,16 +31,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
           return Column(
             children: [
               SizedBox(
-                height: 50.0,
+                height: 10.0,
               ),
               Center(
                 child: Image.asset(
-                  'images/eyeLogo2.png',
-                  height: 30.0,
+                  'images/appIcon.png',
+                  height: 100,
                 ),
               ),
               SizedBox(
-                height: 30.0,
+                height: 10.0,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.0),

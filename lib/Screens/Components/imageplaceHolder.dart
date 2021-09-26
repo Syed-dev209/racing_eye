@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ImagePlaceHolder extends StatelessWidget {
   String imagePath;
@@ -10,14 +11,18 @@ class ImagePlaceHolder extends StatelessWidget {
     return Container(
         height: 64.0,
         width: 60.0,
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12.0),
         ),
-        child: Image.network(
+        child: SvgPicture.network(
           imagePath,
-          errorBuilder: (context, exception, stackTree) {
-            return Icon(Icons.error_outline,color: Colors.red,);
+          placeholderBuilder: (context) {
+            return Icon(
+              Icons.error_outline,
+              color: Colors.red,
+            );
           },
         )
         // FadeInImage(

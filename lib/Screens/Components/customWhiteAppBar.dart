@@ -26,7 +26,7 @@ class CustomWhiteAppBar extends StatelessWidget {
                 width: 50.0,
                 child: Row(
                   children: [
-                    Expanded(child: SvgPicture.asset('images/Favorite.png')),
+                    Expanded(child: Image.asset('images/Favorite.png')),
                     SizedBox(
                       width: 8.0,
                     ),

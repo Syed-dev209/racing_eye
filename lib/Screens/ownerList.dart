@@ -32,7 +32,7 @@ class _OwnerListState extends State<OwnerList> {
           child: Column(
             children: [
               CustomWhiteAppBar(
-                headerText: 'Owners',
+                headerText: 'Branches',
                 showTrailing: false,
               ),
               SizedBox(

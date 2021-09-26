@@ -34,7 +34,7 @@ class OwnerCard extends StatelessWidget {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           ImagePlaceHolder(
             imagePath:
-                "https://www.rp-assets.com/png_silks/${ownerData!.silkImagePath}.png",
+                "https://www.rp-assets.com/svg/${ownerData!.silkImagePath}.svg",
           ),
           SizedBox(
             width: 4.0,
@@ -71,7 +71,8 @@ class OwnerCard extends StatelessWidget {
                             width: 8.0,
                           ),
                           Text(
-                            formatCurrency.format(double.parse(netAmount ?? "0.00")),
+                            formatCurrency
+                                .format(double.parse(netAmount ?? "0.00")),
                             style: TextStyle(
                                 color: bgColorWhite
                                     ? Colors.black26
@@ -95,8 +96,7 @@ class OwnerCard extends StatelessWidget {
               child: CircleAvatar(
                 radius: 17.0,
                 backgroundColor: Colors.white,
-                backgroundImage: NetworkImage(
-                    ownerData!.countryFlag!),
+                backgroundImage: NetworkImage(ownerData!.countryFlag!),
               ),
             ),
           )

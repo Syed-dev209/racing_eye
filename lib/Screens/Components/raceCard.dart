@@ -58,7 +58,7 @@ class RacesCard extends StatelessWidget {
                             topLeft: Radius.circular(20.0),
                             topRight: Radius.circular(20.0)),
                         child: Image.network(
-                          "https://www.rp-assets.com/course-photos/${image.substring(0, image.length - 1)}f.jpg",
+                          image,
                           fit: BoxFit.cover,
                           errorBuilder: (
                             e,
@@ -127,18 +127,18 @@ class RacesCard extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 105.0, left: 10.0),
                 child: Card(
-                  elevation: 3.0,
+                  elevation: 2.0,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0)),
                   child: Container(
-                    height: 65.0,
+                    height: 60.0,
                     width: 55.0,
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10.0)),
                     child: Center(
                         child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
                           height: 3.0,

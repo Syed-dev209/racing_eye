@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:racing_eye/Screens/dashboardScreen.dart';
+import 'package:racing_eye/Screens/horseRacesScreen.dart';
 import 'package:racing_eye/Screens/searchScreen.dart';
 
 class DashboardBase extends StatefulWidget {
@@ -83,6 +84,8 @@ class _DashboardBaseState extends State<DashboardBase> {
               pageSelector = DashboardScreen();
             } else if (index == 1) {
               pageSelector = SearchScreen();
+            } else {
+              pageSelector = HorseRaceScreen();
             }
             selectedIndex = index;
           });
