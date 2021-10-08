@@ -96,7 +96,13 @@ class OwnerCard extends StatelessWidget {
               child: CircleAvatar(
                 radius: 17.0,
                 backgroundColor: Colors.white,
-                backgroundImage: NetworkImage(ownerData!.countryFlag!),
+                backgroundImage: NetworkImage(
+                  ownerData!.countryFlag ??
+                      "https://img.flaticon.com/icons/png/512/323/323301.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF",
+                ),
+                onBackgroundImageError: (e, r) {
+                  Icon(Icons.error);
+                },
               ),
             ),
           )

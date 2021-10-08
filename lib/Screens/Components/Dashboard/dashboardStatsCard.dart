@@ -17,7 +17,7 @@ class DashboardStatsCard extends StatelessWidget {
         width: 120.0,
         child: Center(
           child: Padding(
-            padding:EdgeInsets.symmetric(horizontal: 5.0,vertical: 20),
+            padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 18),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: ([
@@ -36,12 +36,11 @@ class DashboardStatsCard extends StatelessWidget {
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 21.0),
-                        softWrap: true,
-                        //overflow: TextOverflow.clip
-                        minFontSize: 15,
+                    softWrap: true,
+                    //overflow: TextOverflow.clip
+                    minFontSize: 15,
                   ),
                 ),
-                 
               ]),
             ),
           ),

@@ -264,7 +264,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   }).toList(),
                                   onChanged: (String? string) =>
                                       setState(() => selectedItem = string!),
-                                  style: Theme.of(context).textTheme.title,
                                 ),
                               ),
                             ),
