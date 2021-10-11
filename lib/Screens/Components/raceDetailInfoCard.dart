@@ -17,6 +17,7 @@ class RaceDetailsInfoCard extends StatefulWidget {
 class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
   DateTime? dateTime;
   bool emptyList = false;
+  bool noData = false;
 
   @override
   void initState() {

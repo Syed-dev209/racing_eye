@@ -208,7 +208,7 @@ class _EntriesDataTableState extends State<EntriesDataTable> {
                 headingRowHeight: 43.0,
                 dataRowHeight: 43.0,
                 dividerThickness: 0.0,
-                columnSpacing: 5.0,
+                //columnSpacing: 5.0,
                 horizontalMargin: 0,
                 showCheckboxColumn: false,
                 columns: [
