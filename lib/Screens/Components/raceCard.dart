@@ -18,7 +18,7 @@ class RacesCard extends StatelessWidget {
     DateTime dateTime = DateTime.parse(dataModel.raceDatetime!);
     String date = dateTime.day.toString();
     String month = monthList[dateTime.month - 1];
-    String time = "${dateTime.hour}:${dateTime.minute}";
+    String time = "${dateTime.hour}:${dateTime.minute} ";
     String image = "GB-52-F";
     if (dataModel.courseImage != null) {
       image = dataModel.courseImage!;
@@ -165,47 +165,49 @@ class RacesCard extends StatelessWidget {
                   ),
                 ),
               ),
-              showTime
-                  ? Padding(
-                      padding: EdgeInsets.only(right: 10.0, top: 10.0),
-                      child: Align(
-                        alignment: Alignment.topRight,
-                        child: Container(
-                          height: 30.0,
-                          width: 70.0,
-                          padding: EdgeInsets.symmetric(horizontal: 4.0),
-                          decoration: new BoxDecoration(
-                              color: Colors.black45,
-                              borderRadius: BorderRadius.circular(20.0)),
-                        ).blurred(
-                          blur: 15,
-                          borderRadius: BorderRadius.circular(20.0),
-                          overlay: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SizedBox(
-                                width: 1.0,
-                              ),
-                              Icon(
-                                Icons.access_time_outlined,
-                                color: Colors.white,
-                                size: 18.0,
-                              ),
-                              Text(
-                                time,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                width: 1.0,
-                              )
-                            ],
-                          ),
+              // showTime
+              //     ?
+              Padding(
+                padding: EdgeInsets.only(right: 10.0, top: 10.0),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Container(
+                    height: 30.0,
+                    width: 70.0,
+                    padding: EdgeInsets.symmetric(horizontal: 4.0),
+                    decoration: new BoxDecoration(
+                        //color: Colors.black45,
+                        borderRadius: BorderRadius.circular(20.0)),
+                  ).blurred(
+                    blur: 1,
+                    borderRadius: BorderRadius.circular(20.0),
+                    blurColor: Colors.black,
+                    colorOpacity: 0.7,
+                    overlay: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(
+                          width: 1.0,
                         ),
-                      ),
-                    )
-                  : Text('')
+                        Icon(
+                          Icons.access_time_outlined,
+                          color: Colors.white,
+                          size: 18.0,
+                        ),
+                        Text(
+                          time,
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: 1.0,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+              // : Text('')
             ],
           ),
         ),
