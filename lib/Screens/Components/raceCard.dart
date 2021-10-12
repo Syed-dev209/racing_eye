@@ -18,7 +18,9 @@ class RacesCard extends StatelessWidget {
     DateTime dateTime = DateTime.parse(dataModel.raceDatetime!);
     String date = dateTime.day.toString();
     String month = monthList[dateTime.month - 1];
-    String time = "${dateTime.hour}:${dateTime.minute} ";
+    String minute = dateTime.minute.toString();
+    String time =
+        "${dateTime.hour}:${minute.length == 2 ? minute : "0$minute"} ";
     String image = "GB-52-F";
     if (dataModel.courseImage != null) {
       image = dataModel.courseImage!;
