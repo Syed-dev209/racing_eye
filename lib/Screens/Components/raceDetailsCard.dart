@@ -117,8 +117,8 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                         isOwner
                             ? Icon(
                                 Icons.star,
-                                color: Colors.yellowAccent,
-                                size: 12,
+                                color: myColor.shade50,
+                                size: 18,
                               )
                             : Text('')
                       ],

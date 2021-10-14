@@ -3,6 +3,7 @@ import 'package:racing_eye/Controller/allHorsesController.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Controller/statsController.dart';
 import 'package:racing_eye/Screens/dashboardBase.dart';
+import 'package:racing_eye/Screens/loginScreen.dart';
 import 'package:racing_eye/main.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
       await getAllHorsesData(context).then((value) async {
         await getAllOwnerList(context).then((value) {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => DashboardBase()));
+              context, MaterialPageRoute(builder: (_) => LoginScreen()));
         });
       });
     });
