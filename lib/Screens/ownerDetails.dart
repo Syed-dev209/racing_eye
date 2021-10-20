@@ -33,6 +33,13 @@ class _OwnerDetailsState extends State<OwnerDetails> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    netAmount = "0.00";
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -95,17 +102,18 @@ class _OwnerDataTableState extends State<OwnerDataTable>
     ),
   ];
   TabController? controller;
-  List<Last14Days> formList = [];
-  List<Entries>? entriesList = [];
-  List<Horses> horseList = [];
-  List<StatisticalSummary>? statsList = [];
-  List<BigRaceWin>? raceList = [];
+  List<OwnerLast14Days> formList = [];
+  List<OwnerEntries>? entriesList = [];
+  List<HorseModel> horseList = [];
+  List<StatsSummary>? statsList = [];
+  List<BigRaceWinsModel>? raceList = [];
 
   generateLists() async {
     await getOwnerLast14DaysData(widget.ownersData.uid!).then((value) async {
+      print(value);
       if (value != null) {
         setState(() {
-          formList = value.data!.last14Days!;
+          formList.addAll(value);
           for (int i = 0; i < formList.length; i++) {
             formList[i].index = i;
           }
@@ -113,7 +121,7 @@ class _OwnerDataTableState extends State<OwnerDataTable>
         await getOwnerEntries(widget.ownersData.uid!).then((value) async {
           if (value != null) {
             setState(() {
-              entriesList = value.data!.entries;
+              entriesList!.addAll(value);
               for (int i = 0; i < entriesList!.length; i++) {
                 entriesList![i].index = i;
               }
@@ -121,7 +129,7 @@ class _OwnerDataTableState extends State<OwnerDataTable>
             await getOwnerHorses(widget.ownersData.uid!).then((value) async {
               if (value != null) {
                 setState(() {
-                  horseList = value.data!.horses!;
+                  horseList.addAll(value);
                   for (int i = 0; i < horseList.length; i++) {
                     horseList[i].index = i;
                   }
@@ -130,13 +138,13 @@ class _OwnerDataTableState extends State<OwnerDataTable>
                     .then((value) async {
                   if (value != null) {
                     setState(() {
-                      statsList = value.data!.statisticalSummary;
+                      statsList!.addAll(value);
 
                       if (statsList != null) {
                         for (int i = 0; i < statsList!.length; i++) {
-                          statsList![i].index = i;
-                          widget.refreshAmount(
-                              statsList![i].netTotalPrizeMoney.toString());
+                          // statsList![i].index = i;
+                          widget
+                              .refreshAmount(statsList![i].earnings.toString());
                         }
                       }
                     });
@@ -144,7 +152,7 @@ class _OwnerDataTableState extends State<OwnerDataTable>
                         .then((value) {
                       if (value != null) {
                         setState(() {
-                          raceList = value.data!.bigRaceWins!;
+                          raceList!.addAll(value);
                           for (int i = 0; i < raceList!.length; i++) {
                             raceList![i].index = i;
                           }

@@ -10,7 +10,7 @@ class RaceDetailsCard extends StatefulWidget {
   // RaceRunnersModel data;
   // RaceDetailsCard({required this.data});
   int index;
-  RaceRunnersModelDataRunnersModel runnerData;
+  RaceRunnersModel runnerData;
   RaceDetailsCard({required this.index, required this.runnerData});
   @override
   _RaceDetailsCardState createState() => _RaceDetailsCardState();

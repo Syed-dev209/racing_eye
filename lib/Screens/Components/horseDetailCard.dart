@@ -63,7 +63,7 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.age!.substring(0, 1)} Yeasrs old, ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.horseSexCode} ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.horseColourCode}",
+                              "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.age!.substring(0, 1)} Yeasrs old, ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseSexCode} ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseColourCode}",
                               style: TextStyle(color: Colors.white),
                             ),
                             Container(
@@ -83,8 +83,6 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                         Text(
                           Provider.of<HorseProfileProvider>(context,
                                   listen: false)
-                              .profile!
-                              .data!
                               .profile!
                               .horseName!,
                           style: TextStyle(
@@ -109,7 +107,7 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.ownerName}",
+                                      "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.ownerName}",
                                       style:
                                           TextStyle(color: Color(0xff6790bb)),
                                       overflow: TextOverflow.fade,
@@ -170,27 +168,27 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                     dataRow(
                         title: "Trainer:",
                         name:
-                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.trainerName}"),
+                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.trainerName}"),
                     dataRow(
                         title: "Branch:",
                         name:
-                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.ownerName}"),
+                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.ownerName}"),
                     dataRow(
                         title: "Sire:",
                         name:
-                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.sireHorseName}"),
+                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.sireHorseName}"), //sireHorse name
                     dataRow(
                         title: "Dam:",
                         name:
-                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.damHorseName}"),
+                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.damHorseName}"), //damhorse name
                     dataRow(
                         title: "Dam Sire:",
                         name:
-                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.damSireHorseName}"),
+                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.damSireHorseName}"), //damsireshorse name
                     dataRow(
                         title: "Sires Sire:",
                         name:
-                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.data!.profile!.siresSireName}"),
+                            "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.siresSireName}"), //sire sires
                   ],
                 ),
               ),

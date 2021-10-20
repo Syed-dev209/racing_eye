@@ -8,22 +8,15 @@ import 'package:racing_eye/Models/ownerSearchStatsModel.dart';
 import 'package:racing_eye/Models/raceDescModel.dart';
 import 'package:racing_eye/Models/raceDetailsModel.dart';
 import 'package:racing_eye/Models/statsModel.dart';
-import 'package:racing_eye/Screens/dashboardBase.dart';
-import 'package:racing_eye/Screens/horseDetails.dart';
-import 'package:racing_eye/Screens/loginScreen.dart';
-import 'package:racing_eye/Screens/ownerDetails.dart';
-import 'package:racing_eye/Screens/ownerList.dart';
-import 'package:racing_eye/Screens/password_recovery.dart';
-import 'package:racing_eye/Screens/raceDetailsScreen.dart';
-import 'package:racing_eye/Screens/register_screen.dart';
 import 'package:racing_eye/Screens/splashScreen.dart';
-
+import 'package:get_storage/get_storage.dart';
 import 'Models/horseEntriesModel.dart';
 import 'Models/horseRecordsModel.dart';
 import 'Models/horseSalesModel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   runApp(MyApp());
 }
 

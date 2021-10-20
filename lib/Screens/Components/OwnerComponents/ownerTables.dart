@@ -10,6 +10,7 @@ import 'package:racing_eye/Screens/horseDetails.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
 import 'package:intl/intl.dart';
 import 'package:racing_eye/Screens/raceDetailsScreen.dart';
+import 'package:racing_eye/main.dart';
 
 class OwnerDataTables extends StatefulWidget {
   Widget dataTable;
@@ -45,7 +46,7 @@ final formatCurrency = NumberFormat.simpleCurrency(name: "GBP");
 /***************Form Table**************************************** */
 class FormDataTable extends StatefulWidget {
   int ownerId;
-  List<Last14Days> list = [];
+  List<OwnerLast14Days> list = [];
 
   FormDataTable({required this.ownerId, required this.list});
 
@@ -140,7 +141,7 @@ class _FormDataTableState extends State<FormDataTable> {
                           String month = monthList[date.month - 1];
                           return DataRow(
                               color: MaterialStateColor.resolveWith(
-                                (states) => e.index % 2 != 0
+                                (states) => e.index! % 2 != 0
                                     ? Color(0xffF3F3F3)
                                     : Colors.white,
                               ),
@@ -149,7 +150,7 @@ class _FormDataTableState extends State<FormDataTable> {
                                   "${date.day}$month${date.year.toString().substring(2)}",
                                   textAlign: TextAlign.center,
                                 )),
-                                DataCell(Text(e.courseRpAbbrev3!)),
+                                DataCell(Text(e.courseRpAbbrev_3.toString())),
                                 DataCell(Text("${e.raceOutcomeCode!}")),
                                 DataCell(Text(e.horseStyleName!)),
                                 DataCell(Text(e.oddsDesc!)),
@@ -179,7 +180,7 @@ class _FormDataTableState extends State<FormDataTable> {
 /***************Entries Table**************************************** */
 class EntriesDataTable extends StatefulWidget {
   int ownerId;
-  List<Entries>? list;
+  List<OwnerEntries>? list;
 
   EntriesDataTable({required this.ownerId, required this.list});
 
@@ -268,7 +269,7 @@ class _EntriesDataTableState extends State<EntriesDataTable> {
                               }
                             },
                             color: MaterialStateColor.resolveWith(
-                              (states) => e.index % 2 != 0
+                              (states) => e.index! % 2 != 0
                                   ? Color(0xffF3F3F3)
                                   : Colors.white,
                             ),
@@ -282,7 +283,7 @@ class _EntriesDataTableState extends State<EntriesDataTable> {
                                 constraints: BoxConstraints(
                                     maxWidth: 140, minWidth: 100),
                                 child: Text(
-                                  e.raceInstanceTitle!,
+                                  e.raceInstanceTitle.toString(),
                                   overflow: TextOverflow.fade,
                                   softWrap: false,
                                 ),
@@ -316,11 +317,16 @@ class _EntriesDataTableState extends State<EntriesDataTable> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(),
                   SizedBox(
                     height: 20.0,
                   ),
-                  Text('Loading...')
+                  Text(
+                    'No Entries were found',
+                    style: TextStyle(
+                        color: myColor.shade50.withOpacity(0.5),
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold),
+                  )
                 ],
               ),
             ),
@@ -333,7 +339,7 @@ class _EntriesDataTableState extends State<EntriesDataTable> {
 /***************Horse Table**************************************** */
 class HorsesDataTable extends StatefulWidget {
   int ownerId;
-  List<Horses>? list;
+  List<HorseModel>? list;
 
   HorsesDataTable({required this.ownerId, required this.list});
 
@@ -408,19 +414,21 @@ class _HorsesDataTableState extends State<HorsesDataTable> {
                         Navigator.push(
                             context,
                             CupertinoPageRoute(
-                                builder: (_) => HorseDetails(
-                                    horseId: e.horseUid.toString())));
+                                builder: (_) =>
+                                    HorseDetails(horseId: e.uid.toString())));
                       },
                       color: MaterialStateColor.resolveWith(
-                        (states) =>
-                            e.index % 2 != 0 ? Color(0xffF3F3F3) : Colors.white,
+                        (states) => e.index! % 2 != 0
+                            ? Color(0xffF3F3F3)
+                            : Colors.white,
                       ),
                       cells: [
                         DataCell(Text(e.horseName!)),
-                        DataCell(Text(e.place1stNumber!.toString())),
-                        DataCell(Text(e.racesNumber!.toString())),
                         DataCell(Text(
-                            "${formatCurrency.format(e.netTotalPrizeMoney!)}")),
+                            e.place_1stNumber.toString())), //place 1st number
+                        DataCell(Text(e.racesNumber ?? "N/A")), //races number
+                        DataCell(Text(
+                            "${formatCurrency.format(10.5)}")), //net total prize
                         //DataCell(Text(e.sp)),
                       ]);
                 }).toList()
@@ -461,8 +469,8 @@ class _HorsesDataTableState extends State<HorsesDataTable> {
 // ignore: slash_for_doc_comments
 /***************Stats Table**************************************** */
 class StatsDataTable extends StatefulWidget {
-  List<StatisticalSummary>? statsList;
-  List<BigRaceWin>? raceLists;
+  List<StatsSummary>? statsList;
+  List<BigRaceWinsModel>? raceLists;
 
   StatsDataTable({required this.raceLists, required this.statsList});
 
@@ -550,31 +558,30 @@ class _StatsDataTableState extends State<StatsDataTable> {
                   ],
                   rows: widget.statsList!.isNotEmpty
                       ? widget.statsList!.map((e) {
-                          DateTime date = DateTime.parse(e.seasonStartDate!);
-                          String month = monthList[date.month - 1];
+                          //DateTime date = DateTime.parse(e.seasonStartDate!);
+                          //  String month = monthList[date.month - 1];
                           return DataRow(
-                              color: MaterialStateColor.resolveWith(
-                                (states) => e.index % 2 != 0
-                                    ? Color(0xffF3F3F3)
-                                    : Colors.white,
-                              ),
+                              // color: MaterialStateColor.resolveWith(
+                              //   (states) => e.index % 2 != 0
+                              //       ? Color(0xffF3F3F3)
+                              //       : Colors.white,
+                              // ),
                               cells: [
                                 DataCell(
-                                  Text(e.seasonStartDate != null
-                                      ? "${date.day}$month${date.year}"
-                                      : "No data"),
+                                  Text(e.year ?? "No data"),
                                 ),
-                                DataCell(Text(e.place1stNumber != null
-                                    ? e.place1stNumber!.toString()
+                                DataCell(Text(e.wins != null
+                                    ? e.wins!.toString()
                                     : "No data")),
-                                DataCell(Text(e.racesNumber != null
-                                    ? e.racesNumber!.toString()
+                                DataCell(Text(e.runs != null
+                                    ? e.runs!.toString()
                                     : "No data")),
-                                DataCell(Text(e.winPercent != null
-                                    ? e.winPercent!.toString()
+                                DataCell(Text(e.percentWinsRuns != null
+                                    ? e.percentWinsRuns!.toString()
                                     : "No data")),
-                                DataCell(Text(e.totalPrize != null
-                                    ? formatCurrency.format(e.totalPrize!)
+                                DataCell(Text(e.earnings != null
+                                    ? formatCurrency
+                                        .format(double.parse(e.earnings!))
                                     : "No data")),
                                 DataCell(Text(e.stake != null
                                     ? e.stake!.toString()
@@ -668,7 +675,7 @@ class _StatsDataTableState extends State<StatsDataTable> {
                     ],
                     rows: widget.raceLists!.isNotEmpty
                         ? widget.raceLists!.map((e) {
-                            DateTime date = DateTime.parse(e.raceDate!);
+                            DateTime date = DateTime.parse(e.raceDatetime!);
                             String month = monthList[date.month - 1];
                             i = i + 1;
                             return DataRow(
@@ -681,7 +688,7 @@ class _StatsDataTableState extends State<StatsDataTable> {
                                                   .toString())));
                                 },
                                 color: MaterialStateColor.resolveWith(
-                                  (states) => e.index % 2 != 0
+                                  (states) => e.index! % 2 != 0
                                       ? Color(0xffF3F3F3)
                                       : Colors.white,
                                 ),
@@ -698,8 +705,8 @@ class _StatsDataTableState extends State<StatsDataTable> {
                                   )),
                                   DataCell(Text(e.horseStyleName!.toString())),
                                   // DataCell(Text(e.trainerStyleName!.toString())),
-                                  DataCell(Text(
-                                      formatCurrency.format(e.prizeSterling!))),
+                                  DataCell(Text(formatCurrency
+                                      .format(double.parse(e.prizeSterling!)))),
                                   //DataCell(Text(e.sp)),
                                 ]);
                           }).toList()

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:racing_eye/Controller/authController.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Screens/dashboardBase.dart';
@@ -214,6 +215,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                             .then((value) {
                                           progress.dismiss();
                                           if (value == "1") {
+                                            final box = GetStorage();
+                                            box.write("login", true);
                                             Navigator.pushReplacement(
                                                 context,
                                                 CupertinoPageRoute(

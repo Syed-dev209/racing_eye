@@ -9,6 +9,7 @@ import 'package:racing_eye/Models/horseSalesModel.dart';
 import 'package:racing_eye/Screens/Components/OwnerComponents/ownerTables.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
 import 'package:racing_eye/Screens/raceDetailsScreen.dart';
+import 'package:racing_eye/main.dart';
 
 class HorseDataTables extends StatefulWidget {
   Widget dataTable;
@@ -107,21 +108,11 @@ class _HorseFormDataTableState extends State<HorseFormDataTable> {
                         [
                       DataRow(cells: [
                         DataCell(Text("Rules Race")),
-                        DataCell(Text(data.recordsModel!.data!.lifetimeRecords!
-                            .rulesRaces!.wins
-                            .toString())),
-                        DataCell(Text(formatCurrency.format(data
-                            .recordsModel!
-                            .data!
-                            .lifetimeRecords!
-                            .rulesRaces!
-                            .netTotalPrize))),
-                        DataCell(Text(data
-                            .recordsModel!.data!.lifetimeRecords!.rulesRaces!.or
-                            .toString())),
-                        DataCell(Text(data.recordsModel!.data!.lifetimeRecords!
-                            .rulesRaces!.bestTs
-                            .toString())),
+                        DataCell(Text(data.rulesRace!.wins.toString())),
+                        DataCell(Text(formatCurrency.format(
+                            double.parse(data.rulesRace!.netTotalPrize!)))),
+                        DataCell(Text(data.rulesRace!.or.toString())),
+                        DataCell(Text(data.rulesRace!.bestTs.toString())),
 
                         //DataCell(Text(e.sp)),
                       ]),
@@ -131,21 +122,11 @@ class _HorseFormDataTableState extends State<HorseFormDataTable> {
                           ),
                           cells: [
                             DataCell(Text("Flat Turf")),
-                            DataCell(Text(data.recordsModel!.data!
-                                .lifetimeRecords!.flatTurf!.wins
-                                .toString())),
-                            DataCell(Text(formatCurrency.format(data
-                                .recordsModel!
-                                .data!
-                                .lifetimeRecords!
-                                .flatTurf!
-                                .netTotalPrize))),
-                            DataCell(Text(data.recordsModel!.data!
-                                .lifetimeRecords!.flatTurf!.or
-                                .toString())),
-                            DataCell(Text(data.recordsModel!.data!
-                                .lifetimeRecords!.flatTurf!.bestTs
-                                .toString())),
+                            DataCell(Text(data.flatTurf!.wins.toString())),
+                            DataCell(Text(formatCurrency.format(
+                                double.parse(data.flatTurf!.netTotalPrize!)))),
+                            DataCell(Text(data.flatTurf!.or.toString())),
+                            DataCell(Text(data.flatTurf!.bestTs.toString())),
                           ])
                     ]
                     //         :
@@ -245,17 +226,17 @@ class _HorseFormDataTableState extends State<HorseFormDataTable> {
                         ),
                       ),
                     ],
-                    rows: data.formModel!.form!.isNotEmpty
-                        ? data.formModel!.form!.map((e) {
-                            DateTime date = DateTime.parse(e!.raceDatetime!);
+                    rows: data.formModel.isNotEmpty
+                        ? data.formModel.map((e) {
+                            DateTime date = DateTime.parse(e.raceDatetime!);
                             String month = monthList[date.month - 1];
                             i = i + 1;
                             return DataRow(
-                                color: MaterialStateColor.resolveWith(
-                                  (states) => e.index! % 2 != 0
-                                      ? Color(0xffF3F3F3)
-                                      : Colors.white,
-                                ),
+                                // color: MaterialStateColor.resolveWith(
+                                //   (states) => e.! % 2 != 0
+                                //       ? Color(0xffF3F3F3)
+                                //       : Colors.white,
+                                // ),
                                 cells: [
                                   DataCell(Text(
                                       "${date.day}$month${date.year.toString().substring(2)}")),
@@ -346,10 +327,10 @@ class _HorseEntriesDataTableState extends State<HorseEntriesDataTable> {
                 ),
               ),
             ],
-            rows: data.dataModel!.data!.entries!.isNotEmpty
-                ? data.dataModel!.data!.entries!.map((e) {
+            rows: data.dataModel.isNotEmpty
+                ? data.dataModel.map((e) {
                     i = i + 1;
-                    DateTime date = DateTime.parse(e!.raceDatetime!);
+                    DateTime date = DateTime.parse(e.raceDatetime!);
                     String month = monthList[date.month - 1];
                     return DataRow(
                         onSelectChanged: (val) {
@@ -360,11 +341,11 @@ class _HorseEntriesDataTableState extends State<HorseEntriesDataTable> {
                                   builder: (_) => RaceDetailsScreen(
                                       raceId: e.raceInstanceUid.toString())));
                         },
-                        color: MaterialStateColor.resolveWith(
-                          (states) => e.index! % 2 != 0
-                              ? Color(0xffF3F3F3)
-                              : Colors.white,
-                        ),
+                        // color: MaterialStateColor.resolveWith(
+                        //   (states) => e.index! % 2 != 0
+                        //       ? Color(0xffF3F3F3)
+                        //       : Colors.white,
+                        // ),
                         cells: [
                           DataCell(Text(
                               "${date.day}$month${date.year.toString().substring(2)}")),
@@ -412,19 +393,32 @@ class _HorseSalesDataTableState extends State<HorseSalesDataTable> {
   Widget build(BuildContext context) {
     return Consumer<HorseSalesProvider>(
       builder: (context, data, _) {
-        return ListView.separated(
-            itemBuilder: (context, i) {
-              return dataBox(data.salesModel!.sales![i]!);
-            },
-            separatorBuilder: (context, i) => SizedBox(
-                  height: 10,
+        return data.salesModel.isNotEmpty
+            ? ListView.separated(
+                itemBuilder: (context, i) {
+                  return dataBox(data.salesModel[i]);
+                },
+                separatorBuilder: (context, i) => SizedBox(
+                      height: 10,
+                    ),
+                itemCount: data.salesModel.length)
+            : Center(
+                child: Text(
+                  "No sales data",
+                  style: TextStyle(
+                      color: myColor.shade50.withOpacity(0.6),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17),
                 ),
-            itemCount: data.salesModel!.sales!.length);
+              );
       },
     );
   }
 
-  Widget dataBox(HorseSalesModelSales modeldata) {
+  Widget dataBox(HorseSalesModel modeldata) {
+    print("${modeldata.price}");
+    double price =
+        double.parse(modeldata.price == "" ? "0.00" : modeldata.price!);
     return Container(
       width: double.maxFinite,
       height: 200,
@@ -449,7 +443,8 @@ class _HorseSalesDataTableState extends State<HorseSalesDataTable> {
             height: 1,
             color: Colors.black26,
           ),
-          dataRow("Price", formatCurrency.format(modeldata.price)),
+          dataRow("Price", formatCurrency.format(price)),
+          //modeldata.price.toString()),
           Container(
             width: double.maxFinite,
             height: 1,

@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:racing_eye/Controller/ownerAPIController.dart';
 
+//https://racingeye.ae/shadwell/quick-login?password={PASSWORD}
 Future loginWithPassword(context, String pass) async {
   try {
     var response = await http.post(
-      Uri.parse("https://re.victoriayachts.ae/quick-login"),
+      Uri.parse("https://racingeye.ae/shadwell/quick-login"),
       body: {"password": pass},
       // headers: {"Api-Key": apiKey}
     );

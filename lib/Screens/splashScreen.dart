@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:racing_eye/Controller/allHorsesController.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Controller/statsController.dart';
@@ -16,8 +18,15 @@ class _SplashScreenState extends State<SplashScreen> {
     await getStatus(context).then((value) async {
       await getAllHorsesData(context).then((value) async {
         await getAllOwnerList(context).then((value) {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => LoginScreen()));
+          final box = GetStorage();
+          bool check = box.read("login") ?? false;
+          if (check) {
+            Navigator.pushReplacement(
+                context, CupertinoPageRoute(builder: (_) => DashboardBase()));
+          } else {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (_) => LoginScreen()));
+          }
         });
       });
     });
