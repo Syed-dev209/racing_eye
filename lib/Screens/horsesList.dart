@@ -46,6 +46,9 @@ class _HorsesListState extends State<HorsesList> {
     ownerName = ownerNames.first;
     preservedHorseList =
         Provider.of<HorseDetailProvider>(context, listen: false).dataModel;
+    for (var i in preservedHorseList) {
+      print(i.horseAge);
+    }
   }
 
   @override
@@ -129,12 +132,18 @@ class _HorsesListState extends State<HorsesList> {
                                 ages,
                                 age,
                                 (val) {
-                                  age = val;
+                                  setState(() {
+                                    age = val;
+                                  });
+
                                   if (age == ages.first) {
                                     data.addHorseList(preservedHorseList);
                                   } else {
                                     List<HorsesDetailModel> searchedList = [];
                                     for (var i in preservedHorseList) {
+                                      print(val);
+
+                                      print(i.horseAge);
                                       if (i.horseAge!.contains(
                                           RegExp(val, caseSensitive: false))) {
                                         searchedList.add(i);

@@ -14,6 +14,7 @@ Widget dropDownAndroid(List data, String selectedValue, Function onChanged) {
     isExpanded: true,
     value: selectedValue,
     onChanged: (newValue) {
+      print(newValue);
       onChanged(newValue);
     },
     items: [

@@ -417,8 +417,9 @@ class _HorseSalesDataTableState extends State<HorseSalesDataTable> {
 
   Widget dataBox(HorseSalesModel modeldata) {
     print("${modeldata.price}");
-    double price =
-        double.parse(modeldata.price == "" ? "0.00" : modeldata.price!);
+    double price = double.parse(modeldata.price == "" || modeldata.price == null
+        ? "0.00"
+        : modeldata.price!);
     return Container(
       width: double.maxFinite,
       height: 200,
