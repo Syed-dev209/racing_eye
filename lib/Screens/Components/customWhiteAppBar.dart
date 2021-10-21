@@ -13,8 +13,10 @@ class CustomWhiteAppBar extends StatelessWidget {
       elevation: 0,
       backgroundColor: Colors.transparent,
       leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
+          onTap: () async {
+            bool check = await Navigator.maybePop(context);
+            print(check);
+            // Navigator.of(context, rootNavigator: true).pop();
           },
           child: SvgPicture.asset('images/SVGS/backButton.svg')),
       title: Text(

@@ -93,6 +93,10 @@ class AvailableRaceProvider extends ChangeNotifier {
     availRaces.add(data);
     notifyListeners();
   }
+
+  clearProvider() {
+    availRaces.clear();
+  }
 }
 
 class UpcomingRaceProvider extends ChangeNotifier {
@@ -100,6 +104,10 @@ class UpcomingRaceProvider extends ChangeNotifier {
   addRace(RaceDetailsModel data) {
     comingRaces.add(data);
     notifyListeners();
+  }
+
+  clearProvider() {
+    comingRaces.clear();
   }
 }
 
@@ -113,5 +121,9 @@ class CompletedRaceProvider extends ChangeNotifier {
   addList(List<RaceDetailsModel> list) {
     completeRaces = list;
     notifyListeners();
+  }
+
+  clearProvider() {
+    completeRaces.clear();
   }
 }

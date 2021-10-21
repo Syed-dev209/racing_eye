@@ -8,6 +8,8 @@ import 'package:racing_eye/Screens/dashboardBase.dart';
 import 'package:racing_eye/Screens/loginScreen.dart';
 import 'package:racing_eye/main.dart';
 
+import 'introRaceScreen.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -25,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 context, CupertinoPageRoute(builder: (_) => DashboardBase()));
           } else {
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (_) => LoginScreen()));
+                context, MaterialPageRoute(builder: (_) => IntroRaceScreen()));
           }
         });
       });

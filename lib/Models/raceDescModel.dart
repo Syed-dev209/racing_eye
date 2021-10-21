@@ -165,4 +165,10 @@ class RaceResultsProvider extends ChangeNotifier {
     runners.addAll(data);
     notifyListeners();
   }
+
+  clearProvider() {
+    raceData.clear();
+    runners.clear();
+    notifyListeners();
+  }
 }

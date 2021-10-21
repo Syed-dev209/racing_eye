@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:blur/blur.dart';
 import 'package:racing_eye/Models/raceDetailsModel.dart';
+import 'package:racing_eye/Screens/loginScreen.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
 import 'package:racing_eye/Screens/raceDetailsScreen.dart';
 import '../../main.dart';
@@ -11,7 +12,9 @@ import '../../main.dart';
 class RacesCard extends StatelessWidget {
   RaceDetailsModel dataModel;
   bool showTime = false;
-  RacesCard({required this.dataModel, this.showTime = false});
+  bool navigate = true;
+  RacesCard(
+      {required this.dataModel, this.showTime = false, this.navigate = true});
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +32,17 @@ class RacesCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         print(dataModel.raceInstanceUid);
-        Navigator.push(
-            context,
-            CupertinoPageRoute(
-                builder: (_) => RaceDetailsScreen(
-                      raceId: dataModel.raceInstanceUid.toString(),
-                    )));
+        if (navigate) {
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                  builder: (_) => RaceDetailsScreen(
+                        raceId: dataModel.raceInstanceUid.toString(),
+                      )));
+        } else {
+          Navigator.push(
+              context, CupertinoPageRoute(builder: (_) => LoginScreen()));
+        }
       },
       child: Padding(
         padding: EdgeInsets.only(bottom: 15.0),
@@ -108,11 +116,14 @@ class RacesCard extends StatelessWidget {
                                 SizedBox(
                                   height: 5,
                                 ),
-                                Text(
-                                  "Horse :- ${dataModel.horseName}",
-                                  style: TextStyle(
-                                      color: Color(0xff666666), fontSize: 13.0),
-                                ),
+                                navigate
+                                    ? Text(
+                                        "Horse :- ${dataModel.horseName}",
+                                        style: TextStyle(
+                                            color: Color(0xff666666),
+                                            fontSize: 13.0),
+                                      )
+                                    : Text(''),
                               ],
                             ),
                           ),

@@ -14,6 +14,7 @@ getAvailableRaces(context) async {
   var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
   if (response.statusCode == 200) {
     var decodedData = jsonDecode(response.body);
+    Provider.of<AvailableRaceProvider>(context, listen: false).clearProvider();
     for (var i in decodedData) {
       Provider.of<AvailableRaceProvider>(context, listen: false)
           .addRace(RaceDetailsModel.fromJson(i));
@@ -26,6 +27,7 @@ getUpcomingRaces(context) async {
   var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
   if (response.statusCode == 200) {
     var decodedData = jsonDecode(response.body);
+    Provider.of<UpcomingRaceProvider>(context, listen: false).clearProvider();
     for (var i in decodedData) {
       Provider.of<UpcomingRaceProvider>(context, listen: false)
           .addRace(RaceDetailsModel.fromJson(i));
@@ -38,6 +40,7 @@ getCompletedRaces(context) async {
   var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
   if (response.statusCode == 200) {
     var decodedData = jsonDecode(response.body);
+    Provider.of<CompletedRaceProvider>(context, listen: false).clearProvider();
     for (var i in decodedData) {
       Provider.of<CompletedRaceProvider>(context, listen: false)
           .addRace(RaceDetailsModel.fromJson(i));
@@ -63,6 +66,7 @@ getRaceDescription({context, required String raceId}) async {
       print(i);
       models.add(RaceResultsModel.fromJson(i));
     }
+    Provider.of<RaceResultsProvider>(context, listen: false).clearProvider();
     //print(models.length);
     Provider.of<RaceResultsProvider>(context, listen: false)
         .addRaceDetails(models);
