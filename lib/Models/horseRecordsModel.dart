@@ -63,12 +63,17 @@ class HorseRecordProvider extends ChangeNotifier {
   HorseRecordsModel? stakes;
 
   addHorserecods(List<dynamic> data) {
+    print(data.length);
     //recordsModel = data;
     if (data.isNotEmpty) {
       allWeather = HorseRecordsModel.fromJson(data[0]);
       rulesRace = HorseRecordsModel.fromJson(data[1]);
-      flatTurf = HorseRecordsModel.fromJson(data[2]);
-      stakes = HorseRecordsModel.fromJson(data[3]);
+      if (data.length > 2) {
+        flatTurf = HorseRecordsModel.fromJson(data[2] ?? null);
+        if (data.length > 3) {
+          stakes = HorseRecordsModel.fromJson(data[3] ?? null);
+        }
+      }
     }
     notifyListeners();
   }

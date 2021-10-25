@@ -51,102 +51,128 @@ class _HorseFormDataTableState extends State<HorseFormDataTable> {
             builder: (context, data, _) {
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: DataTable(
-                    headingRowColor: MaterialStateColor.resolveWith(
-                      (states) => Color(0xffF3F3F3),
-                    ),
-                    headingRowHeight: 43.0,
-                    dataRowHeight: 43.0,
-                    dividerThickness: 0.0,
-                    columnSpacing: 30,
-                    horizontalMargin: 1.0,
-                    columns: [
-                      DataColumn(
-                        label: Text(
-                          'LifeTime\nRecord',
-                          style: TextStyle(
-                            color: Color(0xFF02458A),
-                          ),
+                child: data != null
+                    ? DataTable(
+                        headingRowColor: MaterialStateColor.resolveWith(
+                          (states) => Color(0xffF3F3F3),
                         ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Runs\nWins',
-                          style: TextStyle(
-                            color: Color(0xFF02458A),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Prize',
-                          style: TextStyle(
-                            color: Color(0xFF02458A),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'OR',
-                          style: TextStyle(
-                            color: Color(0xFF02458A),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Best Ts',
-                          style: TextStyle(
-                            color: Color(0xFF02458A),
-                          ),
-                        ),
-                      ),
-                    ],
-                    rows:
-                        // data.profile.data.!.isNotEmpty
-                        // ?
-                        [
-                      DataRow(cells: [
-                        DataCell(Text("Rules Race")),
-                        DataCell(Text(data.rulesRace!.wins.toString())),
-                        DataCell(Text(formatCurrency.format(
-                            double.parse(data.rulesRace!.netTotalPrize!)))),
-                        DataCell(Text(data.rulesRace!.or.toString())),
-                        DataCell(Text(data.rulesRace!.bestTs.toString())),
+                        headingRowHeight: 43.0,
+                        dataRowHeight: 43.0,
+                        dividerThickness: 0.0,
+                        columnSpacing: 30,
+                        horizontalMargin: 1.0,
+                        columns: [
+                            DataColumn(
+                              label: Text(
+                                'LifeTime\nRecord',
+                                style: TextStyle(
+                                  color: Color(0xFF02458A),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                'Runs\nWins',
+                                style: TextStyle(
+                                  color: Color(0xFF02458A),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                'Prize',
+                                style: TextStyle(
+                                  color: Color(0xFF02458A),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                'OR',
+                                style: TextStyle(
+                                  color: Color(0xFF02458A),
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                'Best Ts',
+                                style: TextStyle(
+                                  color: Color(0xFF02458A),
+                                ),
+                              ),
+                            ),
+                          ],
+                        rows:
+                            // data.profile.data.!.isNotEmpty
+                            // ?
+                            [
+                            DataRow(cells: [
+                              DataCell(Text("Rules Race")),
+                              DataCell(data.rulesRace != null
+                                  ? Text("${data.rulesRace!.wins}")
+                                  : Text('N/A')),
+                              DataCell(data.rulesRace != null
+                                  ? Text(formatCurrency.format(double.parse(
+                                      "${data.rulesRace!.netTotalPrize!}")))
+                                  : Text('N/A')),
+                              DataCell(data.rulesRace != null
+                                  ? Text("${data.rulesRace!.or.toString()}")
+                                  : Text('N/A')),
+                              DataCell(data.rulesRace != null
+                                  ? Text("${data.rulesRace!.bestTs.toString()}")
+                                  : Text('N/A')),
 
-                        //DataCell(Text(e.sp)),
-                      ]),
-                      DataRow(
-                          color: MaterialStateColor.resolveWith(
-                            (states) => Color(0xffF3F3F3),
-                          ),
-                          cells: [
-                            DataCell(Text("Flat Turf")),
-                            DataCell(Text(data.flatTurf!.wins.toString())),
-                            DataCell(Text(formatCurrency.format(
-                                double.parse(data.flatTurf!.netTotalPrize!)))),
-                            DataCell(Text(data.flatTurf!.or.toString())),
-                            DataCell(Text(data.flatTurf!.bestTs.toString())),
-                          ])
-                    ]
-                    //         :
-                    //     [
-                    //   DataRow(
-                    //       color: MaterialStateColor.resolveWith(
-                    //         (states) =>
-                    //             i % 2 != 0 ? Color(0xffF3F3F3) : Colors.white,
-                    //       ),
-                    //       cells: [
-                    //         DataCell(Text("No data")),
-                    //         DataCell(Text("No data")),
-                    //         DataCell(Text("No data")),
-                    //         DataCell(Text("No data")),
-                    //         DataCell(Text("No data")),
+                              //DataCell(Text(e.sp)),
+                            ]),
+                            DataRow(
+                                color: MaterialStateColor.resolveWith(
+                                  (states) => Color(0xffF3F3F3),
+                                ),
+                                cells: [
+                                  DataCell(Text("Flat Turf")),
+                                  DataCell(data.flatTurf != null
+                                      ? Text(data.flatTurf!.wins.toString())
+                                      : Text('N/A')),
+                                  DataCell(data.flatTurf != null
+                                      ? Text(formatCurrency.format(double.parse(
+                                          data.flatTurf!.netTotalPrize!)))
+                                      : Text('N/A')),
+                                  DataCell(data.flatTurf != null
+                                      ? Text(data.flatTurf!.or.toString())
+                                      : Text('N/A')),
+                                  DataCell(data.flatTurf != null
+                                      ? Text(data.flatTurf!.bestTs.toString())
+                                      : Text('N/A')),
+                                ])
+                          ]
+                        //         :
+                        //     [
+                        //   DataRow(
+                        //       color: MaterialStateColor.resolveWith(
+                        //         (states) =>
+                        //             i % 2 != 0 ? Color(0xffF3F3F3) : Colors.white,
+                        //       ),
+                        //       cells: [
+                        //         DataCell(Text("No data")),
+                        //         DataCell(Text("No data")),
+                        //         DataCell(Text("No data")),
+                        //         DataCell(Text("No data")),
+                        //         DataCell(Text("No data")),
 
-                    //         //DataCell(Text(e.sp)),
-                    //       ])
-                    // ]
-                    ),
+                        //         //DataCell(Text(e.sp)),
+                        //       ])
+                        // ]
+                        )
+                    : Center(
+                        child: Text(
+                          "No data",
+                          style: TextStyle(
+                              color: myColor.shade50.withOpacity(0.6),
+                              fontSize: 19,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
               );
             },
           ),
@@ -457,7 +483,7 @@ class _HorseSalesDataTableState extends State<HorseSalesDataTable> {
             height: 1,
             color: Colors.black26,
           ),
-          dataRow("Buyer", modeldata.buyerDetail!),
+          dataRow("Buyer", modeldata.buyerDetail ?? "N/A"),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:racing_eye/Models/OwnerModel/ownerData.dart';
 import 'package:racing_eye/Models/horseFormModel.dart';
@@ -36,6 +37,8 @@ const MaterialColor myColor = const MaterialColor(0xFF02458A, <int, Color>{
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => StatsProvider()),
@@ -54,7 +57,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Racing Eye',
+        title: 'Shadwell',
         theme: ThemeData(
           primarySwatch: myColor,
         ),

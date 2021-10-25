@@ -4,6 +4,7 @@ import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:racing_eye/Controller/authController.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
+import 'package:racing_eye/Screens/aboutUsScreen.dart';
 import 'package:racing_eye/Screens/dashboardBase.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
 import 'package:racing_eye/Screens/ownerList.dart';
@@ -254,6 +255,24 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (_) => AboutUsScreen()));
+                          },
+                          child: Center(
+                            child: Text(
+                              "About us",
+                              style: TextStyle(
+                                  fontSize: 19, color: myColor.shade50),
+                            ),
+                          ),
+                        )
                         // SizedBox(
                         //   height: 50.0,
                         // ),

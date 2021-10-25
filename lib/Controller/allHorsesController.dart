@@ -25,7 +25,7 @@ Future getAllHorsesData(context) async {
   }
 }
 
-getHorseProfile(context, String horseId) async {
+Future getHorseProfile(context, String horseId) async {
   String url = "https://racingeye.ae/shadwell/horses/";
   final uri = Uri.parse(url);
   final newuri = uri.replace(queryParameters: {"horse_id": horseId});
@@ -45,7 +45,7 @@ getHorseProfile(context, String horseId) async {
   }
 }
 
-getHorseRecords(context, String horseId) async {
+Future getHorseRecords(context, String horseId) async {
   print(horseId);
   String url = "https://racingeye.ae/shadwell/horse/records/";
   final uri = Uri.parse(url);
@@ -62,7 +62,7 @@ getHorseRecords(context, String horseId) async {
   }
 }
 
-getHorseSalesData(context, String horseid) async {
+Future getHorseSalesData(context, String horseid) async {
   String url = "https://racingeye.ae/shadwell/horse/sales/";
   final uri = Uri.parse(url);
   final newuri = uri.replace(queryParameters: {"horse_id": horseid});
@@ -85,7 +85,7 @@ getHorseSalesData(context, String horseid) async {
   }
 }
 
-getHorseFormData(context, String horseId) async {
+Future getHorseFormData(context, String horseId) async {
   String url = "https://racingeye.ae/shadwell/horse/forms/";
   final uri = Uri.parse(url);
   final newuri = uri.replace(queryParameters: {"horse_id": horseId});
@@ -106,7 +106,7 @@ getHorseFormData(context, String horseId) async {
   }
 }
 
-getHorseEntries(context, String horseId) async {
+Future getHorseEntries(context, String horseId) async {
   String url = "https://racingeye.ae/shadwell/horse/entries/";
   final uri = Uri.parse(url);
   final newuri = uri.replace(queryParameters: {"horse_id": horseId});
