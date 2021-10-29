@@ -18,23 +18,25 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   List<String> years = [
     "Select",
-    "2015",
-    "2016",
-    "2017",
-    "2011",
-    "2018",
-    "2019",
-    "2020",
     "2021",
-    "2022",
-    "2023",
-    "2024"
   ];
   List<OwnersData> ownerNames = [];
   String startYear = "2021";
   String endYear = "2021";
   OwnersData? ownerName;
   bool loaded = true;
+
+  loadAllData() async {
+    loaded = false;
+    Provider.of<OwnerSearchStatsProvider>(context, listen: false).clearList();
+    for (var i
+        in Provider.of<OwnerDataProvider>(context, listen: false).ownerList) {
+      await getOwnerStats(i.uid!, startYear, context);
+    }
+    setState(() {
+      loaded = true;
+    });
+  }
 
   @override
   void initState() {
@@ -56,6 +58,8 @@ class _SearchScreenState extends State<SearchScreen> {
       ownerNames.add(data);
     }
     ownerName = ownerNames.first;
+
+    loadAllData();
   }
 
   @override

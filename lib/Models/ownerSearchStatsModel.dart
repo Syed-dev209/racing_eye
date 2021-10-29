@@ -75,6 +75,6 @@ class OwnerSearchStatsProvider extends ChangeNotifier {
 
   clearList() {
     dataList.clear();
-    notifyListeners();
+    // notifyListeners();
   }
 }

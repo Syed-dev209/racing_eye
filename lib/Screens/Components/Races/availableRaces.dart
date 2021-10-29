@@ -14,6 +14,7 @@ class AvailableRaces extends StatefulWidget {
 class _AvailableRacesState extends State<AvailableRaces> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Consumer<AvailableRaceProvider>(builder: (context, data, _) {
       return data.availRaces.isNotEmpty
           ? Padding(
@@ -30,14 +31,17 @@ class _AvailableRacesState extends State<AvailableRaces> {
               children: [
                 Container(
                   padding: EdgeInsets.only(bottom: 10.0),
+                  height: size.height * 0.23,
                   width: double.maxFinite,
                   color: Colors.white,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        "images/noRaces2.png",
-                        height: 140,
+                      Expanded(
+                        child: Image.asset(
+                          "images/noRaces2.png",
+                          height: 140,
+                        ),
                       ),
                       SizedBox(
                         height: 55.0,
@@ -54,7 +58,7 @@ class _AvailableRacesState extends State<AvailableRaces> {
                   height: 15.0,
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.45,
+                  height: MediaQuery.of(context).size.height * 0.4,
                   width: double.maxFinite,
                   color: Colors.white,
                   padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),

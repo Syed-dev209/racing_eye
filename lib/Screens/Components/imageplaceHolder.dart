@@ -19,10 +19,7 @@ class ImagePlaceHolder extends StatelessWidget {
         child: SvgPicture.network(
           imagePath,
           placeholderBuilder: (context) {
-            return Icon(
-              Icons.error_outline,
-              color: Colors.red,
-            );
+            return Image.asset("images/defaultShirt.PNG");
           },
         )
         // FadeInImage(

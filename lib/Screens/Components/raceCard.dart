@@ -109,7 +109,7 @@ class RacesCard extends StatelessWidget {
                                   height: 8.0,
                                 ),
                                 Text(
-                                  "Course :- ${dataModel.courseStyleName}",
+                                  "Course : ${dataModel.courseStyleName}",
                                   style: TextStyle(
                                       color: Color(0xff666666), fontSize: 13.0),
                                 ),
@@ -118,7 +118,7 @@ class RacesCard extends StatelessWidget {
                                 ),
                                 navigate
                                     ? Text(
-                                        "Horse :- ${dataModel.horseName}",
+                                        "Horse : ${dataModel.horseName}",
                                         style: TextStyle(
                                             color: Color(0xff666666),
                                             fontSize: 13.0),

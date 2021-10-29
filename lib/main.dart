@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:racing_eye/Models/OwnerModel/ownerData.dart';
 import 'package:racing_eye/Models/horseFormModel.dart';
@@ -14,10 +16,12 @@ import 'package:get_storage/get_storage.dart';
 import 'Models/horseEntriesModel.dart';
 import 'Models/horseRecordsModel.dart';
 import 'Models/horseSalesModel.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -38,7 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+        SystemUiOverlayStyle(statusBarColor: Colors.grey));
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => StatsProvider()),
@@ -55,13 +59,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => HorseRecordProvider()),
         ChangeNotifierProvider(create: (_) => HorseFormProvider()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Shadwell',
-        theme: ThemeData(
-          primarySwatch: myColor,
+      child: OverlaySupport(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Shadwell',
+          theme: ThemeData(
+            primarySwatch: myColor,
+          ),
+          home: SplashScreen(),
         ),
-        home: SplashScreen(),
       ),
     );
   }

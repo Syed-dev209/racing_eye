@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:racing_eye/Controller/allHorsesController.dart';
+import 'package:racing_eye/Controller/notificationController.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Controller/statsController.dart';
 import 'package:racing_eye/Screens/dashboardBase.dart';
@@ -34,11 +35,16 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
+  PushNotificationServices? notificationServices;
+
   @override
   void initState() {
     // ignore: todo
     // TODO: implement initState
     super.initState();
+    notificationServices = PushNotificationServices();
+    notificationServices!.initializeNotifications();
+    notificationServices!.getDeviceToken();
     loadData();
   }
 

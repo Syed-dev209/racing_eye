@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "41428416759",
+    "project_id": "shadwell",
+    "storage_bucket": "shadwell.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41428416759:android:2b50f8c286d002c11e3bf2",
+        "android_client_info": {
+          "package_name": "com.racing.racing_eye"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41428416759-5pkvqsmdlrdm1j4sdqtb1afnpn64at5a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAre5ZbmtowRtvFGtcRIx8Xekya9TZkqAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41428416759-5pkvqsmdlrdm1j4sdqtb1afnpn64at5a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
