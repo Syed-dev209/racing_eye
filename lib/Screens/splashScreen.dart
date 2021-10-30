@@ -8,6 +8,7 @@ import 'package:racing_eye/Controller/statsController.dart';
 import 'package:racing_eye/Screens/dashboardBase.dart';
 import 'package:racing_eye/Screens/loginScreen.dart';
 import 'package:racing_eye/main.dart';
+import 'dart:io' show Platform;
 
 import 'introRaceScreen.dart';
 
@@ -17,11 +18,11 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final box = GetStorage();
   loadData() async {
     await getStatus(context).then((value) async {
       await getAllHorsesData(context).then((value) async {
         await getAllOwnerList(context).then((value) {
-          final box = GetStorage();
           bool check = box.read("login") ?? false;
           if (check) {
             Navigator.pushReplacement(
@@ -35,6 +36,15 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
+  checkToken() async {
+    bool check = box.read("token") ?? false;
+    print("token check $check");
+    if (!check) {
+      String token = await notificationServices!.getDeviceToken();
+      await registerDeviceToken(token, Platform.isAndroid ? "android" : "ios");
+    }
+  }
+
   PushNotificationServices? notificationServices;
 
   @override
@@ -44,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     notificationServices = PushNotificationServices();
     notificationServices!.initializeNotifications();
-    notificationServices!.getDeviceToken();
+    checkToken();
     loadData();
   }
 
