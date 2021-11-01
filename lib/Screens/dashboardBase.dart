@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:racing_eye/Screens/dashboardScreen.dart';
+import 'package:racing_eye/Screens/globalSearchScreen.dart';
 import 'package:racing_eye/Screens/horseRacesScreen.dart';
 import 'package:racing_eye/Screens/searchScreen.dart';
 
@@ -83,7 +84,7 @@ class _DashboardBaseState extends State<DashboardBase> {
             if (index == 0) {
               pageSelector = DashboardScreen();
             } else if (index == 1) {
-              pageSelector = SearchScreen();
+              pageSelector = GlobalSearchScreen();
             } else {
               pageSelector = HorseRaceScreen();
             }

@@ -152,8 +152,8 @@ class _FormDataTableState extends State<FormDataTable> {
                                 )),
                                 DataCell(Text(e.courseRpAbbrev_3.toString())),
                                 DataCell(Text("${e.raceOutcomeCode!}")),
-                                DataCell(Text(e.horseStyleName!)),
-                                DataCell(Text(e.oddsDesc!)),
+                                DataCell(Text(e.horseStyleName ?? "N/A")),
+                                DataCell(Text(e.oddsDesc ?? "N/A")),
                               ]);
                         }).toList()),
             ),
