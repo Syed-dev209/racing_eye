@@ -41,8 +41,11 @@ const MaterialColor myColor = const MaterialColor(0xFF02458A, <int, Color>{
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.grey));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+        // statusBarColor: Colors.grey, // Color for Android
+        statusBarBrightness:
+            Brightness.dark // Dark == white status bar -- for IOS.
+        ));
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => StatsProvider()),
@@ -66,7 +69,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: myColor,
           ),
-          home: SplashScreen(),
+          home: SafeArea(child: SplashScreen()),
         ),
       ),
     );

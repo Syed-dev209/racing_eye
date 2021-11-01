@@ -81,130 +81,132 @@ class _HorseDetailsState extends State<HorseDetails>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.98,
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20.0,
-              ),
-              CustomWhiteAppBar(
-                headerText: "Horse Details",
-                showTrailing: true,
-              ),
-              SizedBox(
-                height: 25.0,
-              ),
+    return SafeArea(
+      child: Scaffold(
+        body: SafeArea(
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.98,
+            width: double.maxFinite,
+            padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20.0,
+                ),
+                CustomWhiteAppBar(
+                  headerText: "Horse Details",
+                  showTrailing: true,
+                ),
+                SizedBox(
+                  height: 25.0,
+                ),
 
-              Expanded(
-                child: Column(
-                  children: [
-                    loaded1
-                        ? HorseDetailsCard(
-                            //data: Provider.of<HorseProfileProvider>(context, listen: false)
-                            // .profile!,
-                            )
-                        : Center(
-                            child: Container(
-                              height: 100.0,
-                              width: double.maxFinite,
-                              child: Center(
-                                child: CircularProgressIndicator(),
+                Expanded(
+                  child: Column(
+                    children: [
+                      loaded1
+                          ? HorseDetailsCard(
+                              //data: Provider.of<HorseProfileProvider>(context, listen: false)
+                              // .profile!,
+                              )
+                          : Center(
+                              child: Container(
+                                height: 100.0,
+                                width: double.maxFinite,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
                               ),
                             ),
-                          ),
-                    SizedBox(
-                      height: 25.0,
-                    ),
-                    Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12.0),
-                        height: 40.0,
-                        width: double.maxFinite,
-                        decoration: BoxDecoration(
-                            color: Color(0xffD8E2EE),
-                            borderRadius: BorderRadius.circular(20.0)),
-                        child: TabBar(
-                          tabs: tabs,
-                          controller: controller,
-                          unselectedLabelColor: Color(0xFF02458A),
-                          unselectedLabelStyle: TextStyle(
-                              fontSize: 12.0, fontWeight: FontWeight.bold),
-                          labelStyle: TextStyle(
-                              fontSize: 12.0, fontWeight: FontWeight.bold),
-                          labelColor: Colors.white,
-                          //  indicatorSize: TabBarIndicatorSize.tab,
-                          indicatorPadding: EdgeInsets.zero,
-                          indicator: BubbleTabIndicator(
-                            indicatorRadius: 20.0,
-                            indicatorHeight: 35.0,
-                            indicatorColor: Color(0xFF02458A),
-                            // tabBarIndicatorSize: TabBarIndicatorSize.tab,
-                          ),
-                        )),
-                    Expanded(
-                      child: TabBarView(
-                        physics: NeverScrollableScrollPhysics(),
-                        controller: controller,
-                        children: [
-                          loaded3
-                              ? HorseDataTables(
-                                  dataTable: HorseFormDataTable(),
-                                )
-                              : Center(
-                                  child: Container(
-                                    height: 500.0,
-                                    width: double.maxFinite,
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  ),
-                                ),
-                          loaded5
-                              ? HorseDataTables(
-                                  dataTable: HorseEntriesDataTable(),
-                                )
-                              : Center(
-                                  child: Container(
-                                    height: 500.0,
-                                    width: double.maxFinite,
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  ),
-                                ),
-                          loaded4
-                              ? HorseDataTables(
-                                  dataTable: HorseSalesDataTable(),
-                                )
-                              : Center(
-                                  child: Container(
-                                    height: 500.0,
-                                    width: double.maxFinite,
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  ),
-                                ),
-                        ],
+                      SizedBox(
+                        height: 25.0,
                       ),
-                    )
-                  ],
-                ),
-              )
-              // : Center(
-              //     child: Container(
-              //       height: 500.0,
-              //       width: double.maxFinite,
-              //       child: Center(
-              //         child: CircularProgressIndicator(),
-              //       ),
-              //     ),
-              //   ),
-            ],
+                      Container(
+                          padding: EdgeInsets.symmetric(horizontal: 12.0),
+                          height: 40.0,
+                          width: double.maxFinite,
+                          decoration: BoxDecoration(
+                              color: Color(0xffD8E2EE),
+                              borderRadius: BorderRadius.circular(20.0)),
+                          child: TabBar(
+                            tabs: tabs,
+                            controller: controller,
+                            unselectedLabelColor: Color(0xFF02458A),
+                            unselectedLabelStyle: TextStyle(
+                                fontSize: 12.0, fontWeight: FontWeight.bold),
+                            labelStyle: TextStyle(
+                                fontSize: 12.0, fontWeight: FontWeight.bold),
+                            labelColor: Colors.white,
+                            //  indicatorSize: TabBarIndicatorSize.tab,
+                            indicatorPadding: EdgeInsets.zero,
+                            indicator: BubbleTabIndicator(
+                              indicatorRadius: 20.0,
+                              indicatorHeight: 35.0,
+                              indicatorColor: Color(0xFF02458A),
+                              // tabBarIndicatorSize: TabBarIndicatorSize.tab,
+                            ),
+                          )),
+                      Expanded(
+                        child: TabBarView(
+                          physics: NeverScrollableScrollPhysics(),
+                          controller: controller,
+                          children: [
+                            loaded3
+                                ? HorseDataTables(
+                                    dataTable: HorseFormDataTable(),
+                                  )
+                                : Center(
+                                    child: Container(
+                                      height: 500.0,
+                                      width: double.maxFinite,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    ),
+                                  ),
+                            loaded5
+                                ? HorseDataTables(
+                                    dataTable: HorseEntriesDataTable(),
+                                  )
+                                : Center(
+                                    child: Container(
+                                      height: 500.0,
+                                      width: double.maxFinite,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    ),
+                                  ),
+                            loaded4
+                                ? HorseDataTables(
+                                    dataTable: HorseSalesDataTable(),
+                                  )
+                                : Center(
+                                    child: Container(
+                                      height: 500.0,
+                                      width: double.maxFinite,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    ),
+                                  ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                )
+                // : Center(
+                //     child: Container(
+                //       height: 500.0,
+                //       width: double.maxFinite,
+                //       child: Center(
+                //         child: CircularProgressIndicator(),
+                //       ),
+                //     ),
+                //   ),
+              ],
+            ),
           ),
         ),
       ),
