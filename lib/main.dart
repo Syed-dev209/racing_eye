@@ -16,7 +16,6 @@ import 'package:get_storage/get_storage.dart';
 import 'Models/horseEntriesModel.dart';
 import 'Models/horseRecordsModel.dart';
 import 'Models/horseSalesModel.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +40,13 @@ const MaterialColor myColor = const MaterialColor(0xFF02458A, <int, Color>{
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+        // statusBarColor: Colors.grey, // Color for Android
+        statusBarBrightness:
+            Brightness.dark // Dark == white status bar -- for IOS.
+        ));
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => StatsProvider()),
@@ -64,7 +70,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: myColor,
           ),
-          home: SplashScreen(),
+          home: SafeArea(child: SplashScreen()),
         ),
       ),
     );

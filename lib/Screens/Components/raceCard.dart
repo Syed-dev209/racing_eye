@@ -40,7 +40,7 @@ class RacesCard extends StatelessWidget {
                         raceId: dataModel.raceInstanceUid.toString(),
                       )));
         } else {
-          Navigator.push(
+          Navigator.pushReplacement(
               context, CupertinoPageRoute(builder: (_) => LoginScreen()));
         }
       },
