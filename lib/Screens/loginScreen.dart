@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:provider/provider.dart';
 import 'package:racing_eye/Controller/authController.dart';
+import 'package:racing_eye/Controller/navigatorKey.dart';
+import 'package:racing_eye/Controller/notificationController.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Screens/aboutUsScreen.dart';
 import 'package:racing_eye/Screens/dashboardBase.dart';
@@ -220,6 +223,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                             if (value == "1") {
                                               final box = GetStorage();
                                               box.write("login", true);
+                                              PushNotificationServices
+                                                  services =
+                                                  PushNotificationServices();
+                                              services.initializeNotifications(
+                                                  context, true);
+                                              // Provider.of<LoginChecker>(context,
+                                              //         listen: false)
+                                              //     .setUserStatus = true;
                                               Navigator.pushReplacement(
                                                   context,
                                                   CupertinoPageRoute(

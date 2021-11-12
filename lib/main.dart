@@ -13,9 +13,11 @@ import 'package:racing_eye/Models/raceDetailsModel.dart';
 import 'package:racing_eye/Models/statsModel.dart';
 import 'package:racing_eye/Screens/splashScreen.dart';
 import 'package:get_storage/get_storage.dart';
+import 'Controller/navigatorKey.dart';
 import 'Models/horseEntriesModel.dart';
 import 'Models/horseRecordsModel.dart';
 import 'Models/horseSalesModel.dart';
+import 'dart:io' show Platform;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,11 +42,11 @@ const MaterialColor myColor = const MaterialColor(0xFF02458A, <int, Color>{
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-        // statusBarColor: Colors.grey, // Color for Android
-        statusBarBrightness:
-            Brightness.dark // Dark == white status bar -- for IOS.
+        statusBarColor: Colors.grey, // Color for Android
+        statusBarBrightness: Platform.isIOS
+            ? Brightness.dark
+            : Brightness.light // Dark == white status bar -- for IOS.
         ));
 
     return MultiProvider(
@@ -62,9 +64,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => HorseEntriesProvider()),
         ChangeNotifierProvider(create: (_) => HorseRecordProvider()),
         ChangeNotifierProvider(create: (_) => HorseFormProvider()),
+        ChangeNotifierProvider(create: (_) => LoginChecker()),
       ],
       child: OverlaySupport(
         child: MaterialApp(
+          navigatorKey: GlobalVariable.navState,
           debugShowCheckedModeBanner: false,
           title: 'Shadwell',
           theme: ThemeData(
