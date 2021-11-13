@@ -23,46 +23,48 @@ class _OwnerListState extends State<OwnerList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.964,
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),
-          child: Column(
-            children: [
-              CustomWhiteAppBar(
-                headerText: 'Branches',
-                showTrailing: false,
-              ),
-              SizedBox(
-                height: 45.0,
-              ),
-              Expanded(child:
-                  Consumer<OwnerDataProvider>(builder: (context, data, _) {
-                return data.ownerList.isNotEmpty
-                    ? ListView.builder(
-                        itemCount: data.ownerList.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(bottom: 15.0),
-                            child: OwnerCard(
-                              bgColorWhite: true,
-                              ownerData: data.ownerList[index],
-                            ),
-                          );
-                        })
-                    : Center(
-                        child: Text(
-                          "No Owners",
-                          style: TextStyle(
-                              color: myColor.shade50.withOpacity(0.6),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24.0),
-                        ),
-                      );
-              }))
-            ],
+    return SafeArea(
+      child: Scaffold(
+        body: SafeArea(
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.964,
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),
+            child: Column(
+              children: [
+                CustomWhiteAppBar(
+                  headerText: 'Branches',
+                  showTrailing: false,
+                ),
+                SizedBox(
+                  height: 45.0,
+                ),
+                Expanded(child:
+                    Consumer<OwnerDataProvider>(builder: (context, data, _) {
+                  return data.ownerList.isNotEmpty
+                      ? ListView.builder(
+                          itemCount: data.ownerList.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.only(bottom: 15.0),
+                              child: OwnerCard(
+                                bgColorWhite: true,
+                                ownerData: data.ownerList[index],
+                              ),
+                            );
+                          })
+                      : Center(
+                          child: Text(
+                            "No Owners",
+                            style: TextStyle(
+                                color: myColor.shade50.withOpacity(0.6),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24.0),
+                          ),
+                        );
+                }))
+              ],
+            ),
           ),
         ),
       ),

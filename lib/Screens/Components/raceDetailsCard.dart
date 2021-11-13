@@ -23,8 +23,7 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (widget.runnerData.ownerName!.toLowerCase() ==
-        "shadwell estate company ltd") {
+    if (widget.runnerData.inHouse! != "no") {
       isOwner = true;
     }
   }

@@ -41,35 +41,37 @@ class _OwnerDetailsState extends State<OwnerDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
-          height: MediaQuery.of(context).size.height * 0.964,
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              CustomWhiteAppBar(
-                headerText: 'Branch Details',
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              OwnerCard(
-                ownerData: widget.ownerData,
-                bgColorWhite: false,
-                netAmount: netAmount,
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Expanded(
-                  child: OwnerDataTable(
-                refreshAmount: updateNetAmount,
-                ownersData: widget.ownerData,
-              ))
-            ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+            height: MediaQuery.of(context).size.height * 0.964,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              children: [
+                CustomWhiteAppBar(
+                  headerText: 'Branch Details',
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                OwnerCard(
+                  ownerData: widget.ownerData,
+                  bgColorWhite: false,
+                  netAmount: netAmount,
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                Expanded(
+                    child: OwnerDataTable(
+                  refreshAmount: updateNetAmount,
+                  ownersData: widget.ownerData,
+                ))
+              ],
+            ),
           ),
         ),
       ),

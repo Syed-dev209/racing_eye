@@ -31,7 +31,7 @@ class _AvailableRacesState extends State<AvailableRaces> {
               children: [
                 Container(
                   padding: EdgeInsets.only(bottom: 10.0),
-                  height: size.height * 0.23,
+                  height: size.height * 0.2,
                   width: double.maxFinite,
                   color: Colors.white,
                   child: Column(
@@ -43,9 +43,9 @@ class _AvailableRacesState extends State<AvailableRaces> {
                           height: 140,
                         ),
                       ),
-                      SizedBox(
-                        height: 55.0,
-                      ),
+                      // SizedBox(
+                      //   height: 55.0,
+                      // ),
                       Text(
                         "No Available Races",
                         style:
@@ -58,7 +58,7 @@ class _AvailableRacesState extends State<AvailableRaces> {
                   height: 15.0,
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: MediaQuery.of(context).size.height * 0.38,
                   width: double.maxFinite,
                   color: Colors.white,
                   padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),

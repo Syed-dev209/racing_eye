@@ -67,89 +67,93 @@ class _IntroRaceScreenState extends State<IntroRaceScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      //backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Text(
-          'Horse Races',
-          style: TextStyle(
-              fontWeight: FontWeight.w600, fontSize: 20.0, color: Colors.black),
+    return SafeArea(
+      child: Scaffold(
+        //backgroundColor: Colors.white,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: Text(
+            'Horse Races',
+            style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 20.0,
+                color: Colors.black),
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: Container(
-          height: size.height * 0.98,
-          width: size.width,
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          child: StreamBuilder<List<RaceDetailsModel?>?>(
-            stream: raceController!.stream,
-            builder: (context, snapshot) {
-              if (!snapshot.hasError &&
-                  snapshot.connectionState == ConnectionState.waiting) {
-                print(snapshot.error);
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
+        body: SafeArea(
+          child: Container(
+            height: size.height * 0.98,
+            width: size.width,
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: StreamBuilder<List<RaceDetailsModel?>?>(
+              stream: raceController!.stream,
+              builder: (context, snapshot) {
+                if (!snapshot.hasError &&
+                    snapshot.connectionState == ConnectionState.waiting) {
+                  print(snapshot.error);
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
 
-              if (!snapshot.hasData &&
-                  snapshot.connectionState == ConnectionState.done) {
-                return Center(
-                  child: Text(
-                    "No Races",
-                    style: TextStyle(
-                        color: myColor.shade50.withOpacity(0.6),
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold),
-                  ),
-                );
-              }
-              List data = [];
-              for (var i in snapshot.data!) {
-                data.add(i);
-              }
-              return data.isNotEmpty
-                  ? ListView.separated(
-                      itemBuilder: (context, i) {
-                        return RacesCard(
-                          dataModel: data[i],
-                          navigate: false,
-                        );
-                      },
-                      separatorBuilder: (context, i) => SizedBox(
-                            height: 12,
-                          ),
-                      itemCount: data.length)
-                  : Center(
-                      child: Text(
-                        "No Races",
-                        style: TextStyle(
-                            color: myColor.shade50.withOpacity(0.6),
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    );
-            },
+                if (!snapshot.hasData &&
+                    snapshot.connectionState == ConnectionState.done) {
+                  return Center(
+                    child: Text(
+                      "No Races",
+                      style: TextStyle(
+                          color: myColor.shade50.withOpacity(0.6),
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  );
+                }
+                List data = [];
+                for (var i in snapshot.data!) {
+                  data.add(i);
+                }
+                return data.isNotEmpty
+                    ? ListView.separated(
+                        itemBuilder: (context, i) {
+                          return RacesCard(
+                            dataModel: data[i],
+                            navigate: false,
+                          );
+                        },
+                        separatorBuilder: (context, i) => SizedBox(
+                              height: 12,
+                            ),
+                        itemCount: data.length)
+                    : Center(
+                        child: Text(
+                          "No Races",
+                          style: TextStyle(
+                              color: myColor.shade50.withOpacity(0.6),
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      );
+              },
+            ),
           ),
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12))),
-        onPressed: () {
-          Navigator.push(
-              context, CupertinoPageRoute(builder: (_) => LoginScreen()));
-        },
-        child: Text(
-          "Login",
-          style: TextStyle(
-              fontWeight: FontWeight.w600, color: Colors.white, fontSize: 18),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12))),
+          onPressed: () {
+            Navigator.push(
+                context, CupertinoPageRoute(builder: (_) => LoginScreen()));
+          },
+          child: Text(
+            "Login",
+            style: TextStyle(
+                fontWeight: FontWeight.w600, color: Colors.white, fontSize: 18),
+          ),
         ),
       ),
     );

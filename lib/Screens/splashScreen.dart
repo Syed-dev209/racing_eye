@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:provider/provider.dart';
 import 'package:racing_eye/Controller/allHorsesController.dart';
+import 'package:racing_eye/Controller/navigatorKey.dart';
 import 'package:racing_eye/Controller/notificationController.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Controller/statsController.dart';
@@ -19,11 +21,14 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final box = GetStorage();
+  bool loggedIn = false;
   loadData() async {
     await getStatus(context).then((value) async {
       await getAllHorsesData(context).then((value) async {
         await getAllOwnerList(context).then((value) {
           bool check = box.read("login") ?? false;
+          // Provider.of<LoginChecker>(context, listen: false).setUserStatus = check;
+          loggedIn = check;
           if (check) {
             Navigator.pushReplacement(
                 context, CupertinoPageRoute(builder: (_) => DashboardBase()));
@@ -33,6 +38,8 @@ class _SplashScreenState extends State<SplashScreen> {
           }
         });
       });
+    }).then((value) {
+      notificationServices!.initializeNotifications(context, loggedIn);
     });
   }
 
@@ -53,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     notificationServices = PushNotificationServices();
-    notificationServices!.initializeNotifications();
+    notificationServices!.requestPermission();
     checkToken();
     loadData();
   }
