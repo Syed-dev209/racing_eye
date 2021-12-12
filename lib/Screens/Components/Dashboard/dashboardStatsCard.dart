@@ -38,7 +38,8 @@ class DashboardStatsCard extends StatelessWidget {
                         fontSize: 21.0),
                     softWrap: true,
                     //overflow: TextOverflow.clip
-                    minFontSize: 15,
+                    minFontSize: 11,
+                    maxLines: 1,
                   ),
                 ),
               ]),

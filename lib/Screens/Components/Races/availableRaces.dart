@@ -29,29 +29,31 @@ class _AvailableRacesState extends State<AvailableRaces> {
             )
           : Column(
               children: [
-                Container(
-                  padding: EdgeInsets.only(bottom: 10.0),
-                  height: size.height * 0.2,
-                  width: double.maxFinite,
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Image.asset(
-                          "images/noRaces2.png",
-                          height: 140,
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    height: size.height * 0.2,
+                    width: double.maxFinite,
+                    color: Colors.white,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Image.asset(
+                            "images/noRaces2.png",
+                            height: 140,
+                          ),
                         ),
-                      ),
-                      // SizedBox(
-                      //   height: 55.0,
-                      // ),
-                      Text(
-                        "No Available Races",
-                        style:
-                            TextStyle(color: Color(0xff848484), fontSize: 18.0),
-                      )
-                    ],
+                        // SizedBox(
+                        //   height: 55.0,
+                        // ),
+                        Text(
+                          "No Available Races",
+                          style:
+                              TextStyle(color: Color(0xff848484), fontSize: 18.0),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(

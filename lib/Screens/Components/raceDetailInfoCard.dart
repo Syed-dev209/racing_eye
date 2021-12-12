@@ -34,7 +34,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200.0,
+      height: 130.0,
       width: double.maxFinite,
       decoration: BoxDecoration(
           color: myColor.shade50, borderRadius: BorderRadius.circular(18.0)),
@@ -160,57 +160,57 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
           SizedBox(
             height: 10,
           ),
-          Text(
-            "Prizes: ",
-            style: TextStyle(
-                color: Colors.white, fontSize: 19, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 5.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              prizeRow(
-                  !emptyList
-                      ? widget.data.prizes![0].positionNo!.toString()
-                      : "1",
-                  !emptyList
-                      ? widget.data.prizes![0].prizeSterling.toString()
-                      : "0.00"),
-              prizeRow(
-                  !emptyList
-                      ? widget.data.prizes![1].positionNo.toString()
-                      : "2",
-                  !emptyList
-                      ? widget.data.prizes![1].prizeSterling.toString()
-                      : "0.00"),
-              prizeRow(
-                  !emptyList
-                      ? widget.data.prizes![2].positionNo!.toString()
-                      : "3",
-                  !emptyList
-                      ? widget.data.prizes![2].prizeSterling.toString()
-                      : "0.00"),
-            ],
-          ),
-          SizedBox(
-            height: 7.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              prizeRow(
-                  !emptyList
-                      ? widget.data.prizes![3].positionNo!.toString()
-                      : "4",
-                  !emptyList
-                      ? widget.data.prizes![3].prizeSterling.toString()
-                      : "0.00"),
-              // prizeRow("1", "AED 8000"),
-              // prizeRow("1", "AED 8000"),
-            ],
-          ),
+          // Text(
+          //   "Prizes: ",
+          //   style: TextStyle(
+          //       color: Colors.white, fontSize: 19, fontWeight: FontWeight.bold),
+          // ),
+          // SizedBox(
+          //   height: 5.0,
+          // ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     prizeRow(
+          //         !emptyList
+          //             ? widget.data.prizes![0].positionNo!.toString()
+          //             : "1",
+          //         !emptyList
+          //             ? widget.data.prizes![0].prizeSterling.toString()
+          //             : "0.00"),
+          //     prizeRow(
+          //         !emptyList
+          //             ? widget.data.prizes![1].positionNo.toString()
+          //             : "2",
+          //         !emptyList
+          //             ? widget.data.prizes![1].prizeSterling.toString()
+          //             : "0.00"),
+          //     prizeRow(
+          //         !emptyList
+          //             ? widget.data.prizes![2].positionNo!.toString()
+          //             : "3",
+          //         !emptyList
+          //             ? widget.data.prizes![2].prizeSterling.toString()
+          //             : "0.00"),
+          //   ],
+          // ),
+          // SizedBox(
+          //   height: 7.0,
+          // ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     prizeRow(
+          //         !emptyList
+          //             ? widget.data.prizes![3].positionNo!.toString()
+          //             : "4",
+          //         !emptyList
+          //             ? widget.data.prizes![3].prizeSterling.toString()
+          //             : "0.00"),
+          //     // prizeRow("1", "AED 8000"),
+          //     // prizeRow("1", "AED 8000"),
+          //   ],
+          // ),
         ],
       ),
     );

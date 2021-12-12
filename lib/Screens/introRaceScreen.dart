@@ -146,7 +146,7 @@ class _IntroRaceScreenState extends State<IntroRaceScreen> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12))),
           onPressed: () {
-            Navigator.push(
+            Navigator.pushReplacement(
                 context, CupertinoPageRoute(builder: (_) => LoginScreen()));
           },
           child: Text(

@@ -23,138 +23,140 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.8936,
+      height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       color: Color(0xff02468D),
-      child: SingleChildScrollView(child: Consumer<StatsProvider>(
+      child: Consumer<StatsProvider>(
         builder: (context, data, _) {
-          return Column(
-            children: [
-              SizedBox(
-                height: 10.0,
+      return SingleChildScrollView(
+        child: Column(
+          children: [
+            // SizedBox(
+            //   height: 10.0,
+            // ),
+            Center(
+              child: Image.asset(
+                'images/appIcon.png',
+                height: 100,
               ),
-              Center(
-                child: Image.asset(
-                  'images/appIcon.png',
-                  height: 100,
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
+            ),
+            // SizedBox(
+            //   height: 10.0,
+            // ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: DashboardStatsCard(
+                      title: "Year",
+                      value: data.data!.year!,
+                    ),
+                  ),
+                  Expanded(
                       child: DashboardStatsCard(
-                        title: "Year",
-                        value: data.data!.year!,
-                      ),
+                    title: "Win",
+                    value: data.data!.wins!,
+                  )),
+                  Expanded(
+                    child: DashboardStatsCard(
+                      title: "Runs",
+                      value: data.data!.runs!,
                     ),
-                    Expanded(
-                        child: DashboardStatsCard(
-                      title: "Win",
-                      value: data.data!.wins!,
-                    )),
-                    Expanded(
-                      child: DashboardStatsCard(
-                        title: "Runs",
-                        value: data.data!.runs!,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: DashboardStatsCard(
+                      title: "Win%",
+                      value: "${data.data!.percentWinsRuns!}%",
+                    ),
+                  ),
+                  Expanded(
+                    child: DashboardStatsCard(
+                      title: "Total Earnings",
+                      value:
+                          format.format(double.parse(data.data!.earnings!)),
+                    ),
+                  ),
+                  Expanded(
                       child: DashboardStatsCard(
-                        title: "Win%",
-                        value: "${data.data!.percentWinsRuns!}%",
-                      ),
-                    ),
-                    Expanded(
-                      child: DashboardStatsCard(
-                        title: "Total Earnings",
-                        value:
-                            format.format(double.parse(data.data!.earnings!)),
-                      ),
-                    ),
-                    Expanded(
-                        child: DashboardStatsCard(
-                      title: "Stake",
-                      value: format.format(double.parse(data.data!.stake!)),
-                    )),
-                  ],
-                ),
+                    title: "Stake",
+                    value: format.format(double.parse(data.data!.stake!)),
+                  )),
+                ],
               ),
-              SizedBox(
-                height: 25.0,
+            ),
+            SizedBox(
+              height: 21.5,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.41,
+              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 25.0),
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  color: Color(0xfff3f3f3),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(40.0),
+                      topLeft: Radius.circular(40.0))),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        DashboardContentCard(
+                          title: "Branches",
+                          imagePath: "images/owners.png",
+                          goToPage: OwnerList(),
+                        ),
+                        SizedBox(
+                          width: 15.0,
+                        ),
+                        DashboardContentCard(
+                          title: "Card/Results",
+                          imagePath: "images/resultsCard.png",
+                          goToPage: HorseRaceScreen(),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        DashboardContentCard(
+                          title: "Statistics",
+                          imagePath: "images/statistics.png",
+                          goToPage: SearchScreen(),
+                        ),
+                        SizedBox(
+                          width: 15.0,
+                        ),
+                        DashboardContentCard(
+                          title: "Horses",
+                          imagePath: "images/horses.png",
+                          goToPage: HorsesList(),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.495,
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 25.0),
-                width: double.maxFinite,
-                decoration: BoxDecoration(
-                    color: Color(0xfff3f3f3),
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(40.0),
-                        topLeft: Radius.circular(40.0))),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          DashboardContentCard(
-                            title: "Branches",
-                            imagePath: "images/owners.png",
-                            goToPage: OwnerList(),
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          DashboardContentCard(
-                            title: "Card/Results",
-                            imagePath: "images/resultsCard.png",
-                            goToPage: HorseRaceScreen(),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          DashboardContentCard(
-                            title: "Statistics",
-                            imagePath: "images/statistics.png",
-                            goToPage: SearchScreen(),
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          DashboardContentCard(
-                            title: "Horses",
-                            imagePath: "images/horses.png",
-                            goToPage: HorsesList(),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          );
+            )
+          ],
+        ),
+      );
         },
-      )),
+      ),
     );
   }
 }

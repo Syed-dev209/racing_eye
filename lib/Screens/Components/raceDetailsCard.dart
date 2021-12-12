@@ -54,10 +54,7 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                       fit: BoxFit.fill,
                       height: 40,
                       placeholderBuilder: (f) {
-                        return Icon(
-                          Icons.error,
-                          color: Colors.redAccent,
-                        );
+                        return Image.asset("images/defaultShirt.PNG");
                       },
                     ),
                   ),

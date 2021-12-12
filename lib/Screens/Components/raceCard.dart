@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:blur/blur.dart';
@@ -92,6 +93,7 @@ class RacesCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
+                            flex:9,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -117,19 +119,23 @@ class RacesCard extends StatelessWidget {
                                   height: 5,
                                 ),
                                 navigate
-                                    ? Text(
+                                    ? AutoSizeText(
                                         "Horse : ${dataModel.horseName}",
                                         style: TextStyle(
                                             color: Color(0xff666666),
                                             fontSize: 13.0),
+                                  minFontSize: 9,
+                                  maxLines: 1,
                                       )
                                     : Text(''),
                               ],
                             ),
                           ),
-                          Image.asset(
-                            'images/arrowForward.png',
-                            height: 35,
+                          Expanded(
+                            child: Image.asset(
+                              'images/arrowForward.png',
+                              height: 35,
+                            ),
                           )
                         ],
                       ),
