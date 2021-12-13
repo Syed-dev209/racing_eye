@@ -29,6 +29,9 @@ class RacesCard extends StatelessWidget {
     if (dataModel.courseImage != null) {
       image = dataModel.courseImage!;
     }
+    else{
+      image ="https://azbigmedia.com/wp-content/uploads/2020/08/horse-racing-tracks.png";
+    }
 
     return GestureDetector(
       onTap: () {

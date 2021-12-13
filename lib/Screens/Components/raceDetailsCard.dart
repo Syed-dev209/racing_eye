@@ -60,13 +60,21 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                   ),
                   Align(
                     alignment: Alignment.topLeft,
-                    child: CircleAvatar(
-                      radius: 11.0,
-                      backgroundColor: myColor.shade100,
+                    child: Container(
+                     height: 20,
+                      width: 20,
+                      padding: EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        color: myColor.shade50,
+                        shape: BoxShape.circle,
+                      ),
                       child: Center(
-                        child: Text(
+                        child: AutoSizeText(
                           widget.index.toString(),
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white,fontSize: 13),
+                          minFontSize: 6,
+                          maxLines: 1,
+                          softWrap: true,
                         ),
                       ),
                     ),
