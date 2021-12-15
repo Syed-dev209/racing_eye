@@ -113,10 +113,19 @@ class RacesCard extends StatelessWidget {
                                 SizedBox(
                                   height: 8.0,
                                 ),
-                                Text(
-                                  "Course : ${dataModel.courseStyleName}",
-                                  style: TextStyle(
-                                      color: Color(0xff666666), fontSize: 13.0),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Course : ${dataModel.courseStyleName}",
+                                      style: TextStyle(
+                                          color: Color(0xff666666), fontSize: 13.0),
+                                    ),
+                                    SizedBox(width: 15,),
+                                    Image.network(
+                                      dataModel.courseCountryCode??"https://www.pinclipart.com/picdir/middle/448-4485361_png-file-svg-flag-icon-png-clipart.png",
+                                      height: 20,
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -228,8 +237,22 @@ class RacesCard extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
+              ),
               // : Text('')
+              // Container(
+              //   height: 50,
+              //   width: 40,
+              //   decoration: BoxDecoration(
+              //     color: Colors.white,
+              //     borderRadius: BorderRadius.only(topLeft: Radius.circular(20)),
+              //   ),
+              //   child: Center(
+              //     child: Image.network(
+              //         dataModel.courseCountryCode??"https://www.pinclipart.com/picdir/middle/448-4485361_png-file-svg-flag-icon-png-clipart.png",
+              //     ),
+              //   ),
+              // ),
+
             ],
           ),
         ),
