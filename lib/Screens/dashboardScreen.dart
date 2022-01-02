@@ -29,6 +29,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: Consumer<StatsProvider>(
         builder: (context, data, _) {
       return SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
         child: Column(
           children: [
             // SizedBox(
@@ -51,18 +52,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   Expanded(
                     child: DashboardStatsCard(
                       title: "Year",
-                      value: data.data!.year!,
+                      value: data.data!.year??"0.0ß",
                     ),
                   ),
-                  Expanded(
-                      child: DashboardStatsCard(
-                    title: "Win",
-                    value: data.data!.wins!,
-                  )),
+                  // Expanded(
+                  //     child: DashboardStatsCard(
+                  //   title: "Win",
+                  //   value: data.data!.wins!,
+                  // )),
                   Expanded(
                     child: DashboardStatsCard(
                       title: "Runs",
-                      value: data.data!.runs!,
+                      value: data.data!.runs??"0.0",
                     ),
                   ),
                 ],
@@ -74,23 +75,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Expanded(
+                      child: DashboardStatsCard(
+                    title: "Win",
+                    value: data.data!.wins??"0.0",
+                  )),
+                  Expanded(
                     child: DashboardStatsCard(
                       title: "Win%",
-                      value: "${data.data!.percentWinsRuns!}%",
+                      value: "${data.data!.percentWinsRuns??"0"}%",
                     ),
                   ),
-                  Expanded(
-                    child: DashboardStatsCard(
-                      title: "Total Earnings",
-                      value:
-                          format.format(double.parse(data.data!.earnings!)),
-                    ),
-                  ),
-                  Expanded(
-                      child: DashboardStatsCard(
-                    title: "Stake",
-                    value: format.format(double.parse(data.data!.stake!)),
-                  )),
+                  // Expanded(
+                  //   child: DashboardStatsCard(
+                  //     title: "Total Earnings",
+                  //     value:
+                  //         format.format(double.parse(data.data!.earnings!)),
+                  //   ),
+                  // ),
+                  // Expanded(
+                  //     child: DashboardStatsCard(
+                  //   title: "Stake",
+                  //   value: format.format(double.parse(data.data!.stake!)),
+                  // )),
                 ],
               ),
             ),
@@ -98,7 +104,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               height: 21.5,
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.42,
+              height: MediaQuery.of(context).size.height * 0.45,
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 25.0),
               width: double.maxFinite,
               decoration: BoxDecoration(

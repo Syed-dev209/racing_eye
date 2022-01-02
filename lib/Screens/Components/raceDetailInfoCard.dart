@@ -106,7 +106,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                 width: 15.0,
               ),
               Text(
-                "Course: ${widget.data.courseStyleName}",
+                "Course: ${widget.data.courseStyleName??"N/A"}",
                 style: TextStyle(color: Color(0xff9AB5D1)),
               )
             ],
@@ -149,7 +149,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                       width: 3.0,
                     ),
                     Text(
-                      "${widget.data.distanceFurlongRounded}f",
+                      "${widget.data.distanceFurlongRounded??"0"}m",
                       style: TextStyle(color: Color(0xff9AB5D1)),
                     )
                   ],
