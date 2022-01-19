@@ -18,11 +18,12 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   List<String> years = [
     "Select",
-    "2021",
+    (DateTime.now().year-1).toString(),
+    DateTime.now().year.toString(),
   ];
   List<OwnersData> ownerNames = [];
-  String startYear = "2021";
-  String endYear = "2021";
+  String startYear = (DateTime.now().year-1).toString();
+  String endYear = (DateTime.now().year-1).toString();
   OwnersData? ownerName;
   bool loaded = true;
 

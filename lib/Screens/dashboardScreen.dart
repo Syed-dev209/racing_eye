@@ -23,88 +23,101 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
+      height: MediaQuery.of(context).size.height*0.8558,
       width: MediaQuery.of(context).size.width,
       color: Color(0xff02468D),
       child: Consumer<StatsProvider>(
         builder: (context, data, _) {
-      return SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
-        child: Column(
-          children: [
-            // SizedBox(
-            //   height: 10.0,
-            // ),
-            Center(
-              child: Image.asset(
-                'images/appIcon.png',
-                height: 100,
-              ),
-            ),
-            // SizedBox(
-            //   height: 10.0,
-            // ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    child: DashboardStatsCard(
-                      title: "Year",
-                      value: data.data!.year??"0.0ß",
+      return Column(
+        children: [
+          // SizedBox(
+          //   height: 10.0,
+          // ),
+          Expanded(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      'images/appIcon.png',
+                      height: 100,
                     ),
                   ),
-                  // Expanded(
-                  //     child: DashboardStatsCard(
-                  //   title: "Win",
-                  //   value: data.data!.wins!,
-                  // )),
-                  Expanded(
-                    child: DashboardStatsCard(
-                      title: "Runs",
-                      value: data.data!.runs??"0.0",
+                ),
+                // SizedBox(
+                //   height: 10.0,
+                // ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          child: DashboardStatsCard(
+                            title: "Year",
+                            value: data.data!.year??"0.0ß",
+                          ),
+                        ),
+                        // Expanded(
+                        //     child: DashboardStatsCard(
+                        //   title: "Win",
+                        //   value: data.data!.wins!,
+                        // )),
+                        Expanded(
+                          child: DashboardStatsCard(
+                            title: "Runs",
+                            value: data.data!.runs??"0.0",
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                      child: DashboardStatsCard(
-                    title: "Win",
-                    value: data.data!.wins??"0.0",
-                  )),
-                  Expanded(
-                    child: DashboardStatsCard(
-                      title: "Win%",
-                      value: "${data.data!.percentWinsRuns??"0"}%",
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                            child: DashboardStatsCard(
+                              title: "Win",
+                              value: data.data!.wins??"0.0",
+                            )),
+                        Expanded(
+                          child: DashboardStatsCard(
+                            title: "Win%",
+                            value: "${data.data!.percentWinsRuns??"0"}%",
+                          ),
+                        ),
+                        // Expanded(
+                        //   child: DashboardStatsCard(
+                        //     title: "Total Earnings",
+                        //     value:
+                        //         format.format(double.parse(data.data!.earnings!)),
+                        //   ),
+                        // ),
+                        // Expanded(
+                        //     child: DashboardStatsCard(
+                        //   title: "Stake",
+                        //   value: format.format(double.parse(data.data!.stake!)),
+                        // )),
+                      ],
                     ),
                   ),
-                  // Expanded(
-                  //   child: DashboardStatsCard(
-                  //     title: "Total Earnings",
-                  //     value:
-                  //         format.format(double.parse(data.data!.earnings!)),
-                  //   ),
-                  // ),
-                  // Expanded(
-                  //     child: DashboardStatsCard(
-                  //   title: "Stake",
-                  //   value: format.format(double.parse(data.data!.stake!)),
-                  // )),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 21.5,
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.45,
+          ),
+
+          SizedBox(
+            height: 21.5,
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.5,
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 25.0),
               width: double.maxFinite,
               decoration: BoxDecoration(
@@ -112,7 +125,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(40.0),
                       topLeft: Radius.circular(40.0))),
-              child: Column(
+              child:
+              Column(
                 children: [
                   Expanded(
                     child: Row(
@@ -157,9 +171,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                 ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       );
         },
       ),
