@@ -32,7 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
     Provider.of<OwnerSearchStatsProvider>(context, listen: false).clearList();
     for (var i
         in Provider.of<OwnerDataProvider>(context, listen: false).ownerList) {
-      await getOwnerStats(i.uid!, startYear, context);
+      await getOwnerStats(i.uid!, startYear, endYear,context);
     }
     setState(() {
       loaded = true;
@@ -106,14 +106,14 @@ class _SearchScreenState extends State<SearchScreen> {
                           for (var i in Provider.of<OwnerDataProvider>(context,
                                   listen: false)
                               .ownerList) {
-                            await getOwnerStats(i.uid!, startYear, context);
+                            await getOwnerStats(i.uid!, startYear, endYear,context);
                           }
                         } else {
                           Provider.of<OwnerSearchStatsProvider>(context,
                                   listen: false)
                               .clearList();
                           await getOwnerStats(
-                              ownerName!.uid!, startYear, context);
+                              ownerName!.uid!, startYear, endYear,context);
                         }
                         setState(() {
                           loaded = true;
@@ -147,14 +147,14 @@ class _SearchScreenState extends State<SearchScreen> {
                           for (var i in Provider.of<OwnerDataProvider>(context,
                                   listen: false)
                               .ownerList) {
-                            await getOwnerStats(i.uid!, startYear, context);
+                            await getOwnerStats(i.uid!, startYear,endYear ,context);
                           }
                         } else {
                           Provider.of<OwnerSearchStatsProvider>(context,
                                   listen: false)
                               .clearList();
                           await getOwnerStats(
-                              ownerName!.uid!, startYear, context);
+                              ownerName!.uid!, startYear, endYear,context);
                         }
                         setState(() {
                           loaded = true;
@@ -185,12 +185,12 @@ class _SearchScreenState extends State<SearchScreen> {
                   for (var i
                       in Provider.of<OwnerDataProvider>(context, listen: false)
                           .ownerList) {
-                    await getOwnerStats(i.uid!, startYear, context);
+                    await getOwnerStats(i.uid!, startYear,endYear, context);
                   }
                 } else {
                   Provider.of<OwnerSearchStatsProvider>(context, listen: false)
                       .clearList();
-                  await getOwnerStats(val.uid!, startYear, context);
+                  await getOwnerStats(val.uid!, startYear,endYear, context);
                 }
                 setState(() {
                   loaded = true;

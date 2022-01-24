@@ -57,13 +57,16 @@ Future<List<OwnerEntries>?> getOwnerEntries(int ownerId) async {
 Future<List<OwnerLast14Days>?> getOwnerLast14DaysData(int ownerId) async {
   String url =
       "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/last_14_days";
-  try {
+  //try {
     // var response = await http.get(
     //     Uri.https("https://racingeye.ae", "/shadwell/owner/forms",
     //         {"owner_id": ownerId}),
     //     headers: {"Api-Key": apiKey});
     var response = await dio.get("https://racingeye.ae/shadwell/owner/forms",
-        queryParameters: {"owner_id": ownerId},
+        queryParameters:
+        {
+      "owner_id": ownerId
+        },
         options: Options(headers: {"Api-Key": apiKey}));
 
     print("OWNER FORM===>${response.data}");
@@ -73,10 +76,10 @@ Future<List<OwnerLast14Days>?> getOwnerLast14DaysData(int ownerId) async {
     }
     // var decodeData = jsonDecode(response.body);
     return models;
-  } catch (e) {
-    print(e);
-    return null;
-  }
+  // } catch (e) {
+  //   print(e);
+  //   return null;
+  // }
 }
 
 Future<List<StatsSummary>?> getOwnerStatsSummary(int ownerId) async {

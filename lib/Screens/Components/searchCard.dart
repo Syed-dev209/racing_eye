@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -96,23 +97,25 @@ class SearchedCard extends StatelessWidget {
             SizedBox(
               height: 10.0,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                details("Year", data.year!),
-                Container(
-                  height: 30.0,
-                  width: 2.0,
-                  color: Color(0xffe6e6e6),
-                ),
-                details("Wins", data.wins!.toString()),
-                Container(
-                  height: 30.0,
-                  width: 2.0,
-                  color: Color(0xffe6e6e6),
-                ),
-                details("Runs", data.runs!.toString()),
-              ],
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  details("Year", data.year!),
+                  Container(
+                    height: 30.0,
+                    width: 2.0,
+                    color: Color(0xffe6e6e6),
+                  ),
+                  details("Wins", data.wins!.toString()),
+                  Container(
+                    height: 30.0,
+                    width: 2.0,
+                    color: Color(0xffe6e6e6),
+                  ),
+                  details("Runs", data.runs!.toString()),
+                ],
+              ),
             ),
             SizedBox(
               height: 18.0,
@@ -129,27 +132,29 @@ class SearchedCard extends StatelessWidget {
                         )),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                details("Wins", "${data.percentWinsRuns}%"),
-                SizedBox(
-                  width: 9.0,
-                ),
-                Container(
-                  height: 30.0,
-                  width: 2.0,
-                  color: Color(0xffe6e6e6),
-                ),
-                details("Total Earnings",
-                    format.format(double.parse(data.earnings!))),
-                Container(
-                  height: 30.0,
-                  width: 2.0,
-                  color: Color(0xffe6e6e6),
-                ),
-                details("Stake", format.format(double.parse(data.stake!))),
-              ],
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  details("Wins", "${data.percentWinsRuns}%"),
+                  SizedBox(
+                    width: 9.0,
+                  ),
+                  Container(
+                    height: 30.0,
+                    width: 2.0,
+                    color: Color(0xffe6e6e6),
+                  ),
+                  details("Total Earnings",
+                      format.format(double.parse(data.earnings!))),
+                  Container(
+                    height: 30.0,
+                    width: 2.0,
+                    color: Color(0xffe6e6e6),
+                  ),
+                  details("Stake", format.format(double.parse(data.stake!))),
+                ],
+              ),
             )
           ],
         ),
@@ -165,12 +170,15 @@ class SearchedCard extends StatelessWidget {
           title,
           style: TextStyle(color: Color(0xff000080), fontSize: 16.0),
         ),
-        Center(
-          child: Text(
-            value,
-            style: TextStyle(
-                color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
-            textAlign: TextAlign.center,
+        Expanded(
+          child: Center(
+            child: AutoSizeText(
+              value,
+              style: TextStyle(
+                  color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
+              textAlign: TextAlign.center,
+              minFontSize: 12,
+            ),
           ),
         )
       ],

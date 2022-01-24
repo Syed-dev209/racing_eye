@@ -44,8 +44,8 @@ android {
         applicationId "com.racing.racing_eye"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 1
-        versionName "13.0"
+        versionCode 14
+        versionName "14.0"
     }
     signingConfigs {
         release {
