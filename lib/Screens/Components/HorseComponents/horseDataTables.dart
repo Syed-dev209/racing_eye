@@ -360,7 +360,7 @@ class _HorseEntriesDataTableState extends State<HorseEntriesDataTable> {
                     String month = monthList[date.month - 1];
                     return DataRow(
                         onSelectChanged: (val) {
-                          print(e.raceInstanceUid);
+
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
@@ -442,7 +442,7 @@ class _HorseSalesDataTableState extends State<HorseSalesDataTable> {
   }
 
   Widget dataBox(HorseSalesModel modeldata) {
-    print("${modeldata.price}");
+
     double price = double.parse(modeldata.price == "" || modeldata.price == null
         ? "0.00"
         : modeldata.price!);

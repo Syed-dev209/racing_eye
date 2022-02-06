@@ -46,9 +46,9 @@ class _HorsesListState extends State<HorsesList> {
     ownerName = ownerNames.first;
     preservedHorseList =
         Provider.of<HorseDetailProvider>(context, listen: false).dataModel;
-    for (var i in preservedHorseList) {
-      print(i.horseAge);
-    }
+    // for (var i in preservedHorseList) {
+    //   print(i.horseAge);
+    // }
   }
 
   @override
@@ -136,17 +136,15 @@ class _HorsesListState extends State<HorsesList> {
                                     setState(() {
                                       age = val;
                                     });
-
                                     if (age == ages.first) {
                                       data.addHorseList(preservedHorseList);
                                     } else {
                                       List<HorsesDetailModel> searchedList = [];
                                       for (var i in preservedHorseList) {
-                                        print(val);
-
-                                        print(i.horseAge);
-                                        if (i.horseAge!.contains(RegExp(val,
-                                            caseSensitive: false))) {
+                                        DateTime parseData = DateTime.parse(i.horseDateOfBirth!);
+                                        DateTime now = DateTime.now();
+                                        int age = now.year - parseData.year;
+                                        if (age == int.parse(val)) {
                                           searchedList.add(i);
                                         }
                                       }
@@ -169,7 +167,7 @@ class _HorsesListState extends State<HorsesList> {
                                   } else {
                                     List<HorsesDetailModel> searchedList = [];
                                     for (var i in preservedHorseList) {
-                                      print(i.ownerName!.toLowerCase());
+
                                       if (i.ownerName!.toLowerCase() ==
                                           ownerName!.ownerName!.toLowerCase()) {
                                         searchedList.add(i);

@@ -26,7 +26,7 @@ class _RaceDetailsScreenState extends State<RaceDetailsScreen> {
   StreamController<List<RaceRunnersModel>?>? runnersController;
 
   getRaceData(context) async {
-    print(widget.raceId ?? "hhbfsd,fdbn");
+
     if (widget.raceId != null) {
       await getRaceDescription(context: context, raceId: widget.raceId!)
           .then((value) {
@@ -35,10 +35,10 @@ class _RaceDetailsScreenState extends State<RaceDetailsScreen> {
         });
       });
       await getRaceRunner(context, widget.raceId!).then((value) {
-        print("Receiving val===>$value");
-        print(value != null);
+
+
         if (value != null) {
-          print("adding data in tp stream");
+
           runnersController!.add(value);
           return value;
         } else {
@@ -111,7 +111,7 @@ class _RaceDetailsScreenState extends State<RaceDetailsScreen> {
                       //     ),
                       //   );
                       // }
-                      print(data.runners.isNotEmpty);
+
                       return Column(
                         children: [
                           loaded2
@@ -131,7 +131,7 @@ class _RaceDetailsScreenState extends State<RaceDetailsScreen> {
                               if (!data.hasError &&
                                   data.connectionState ==
                                       ConnectionState.waiting) {
-                                print(data.error);
+
                                 return Center(
                                   child: CircularProgressIndicator(),
                                 );

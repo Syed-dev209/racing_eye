@@ -13,7 +13,7 @@ class OwnerCard extends StatelessWidget {
   final formatCurrency = NumberFormat.simpleCurrency(name: "GBP");
   @override
   Widget build(BuildContext context) {
-    print("Owner flag image ${ownerData!.countryFlag}");
+
     return GestureDetector(
       onTap: () {
         Navigator.push(

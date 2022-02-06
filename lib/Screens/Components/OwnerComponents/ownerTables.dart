@@ -65,7 +65,7 @@ class _FormDataTableState extends State<FormDataTable> {
 
   @override
   Widget build(BuildContext context) {
-    print("Owner Id;- ${widget.ownerId}");
+
     return widget.list.isNotEmpty
         ? SizedBox(
             width: double.maxFinite,
@@ -137,8 +137,20 @@ class _FormDataTableState extends State<FormDataTable> {
                           } else {
                             i = i + 1;
                           }
-                          DateTime date = DateTime.parse(e.raceDatetime!);
-                          String month = monthList[date.month - 1];
+                          //e.raceDatetime = null;
+                          DateTime date;
+                          String month,parsedDate;
+                          if(e.raceDatetime!=null){
+                            date = DateTime.parse(e.raceDatetime!);
+                            month = monthList[date.month - 1];
+                            parsedDate = "${date.day}$month${date.year.toString().substring(2)}";
+                          }else{
+                            date = DateTime.now();
+                            month = "N/A";
+                            parsedDate = "N/A";
+                          }
+
+
                           return DataRow(
                               color: MaterialStateColor.resolveWith(
                                 (states) => e.index! % 2 != 0
@@ -147,7 +159,7 @@ class _FormDataTableState extends State<FormDataTable> {
                               ),
                               cells: [
                                 DataCell(Text(
-                                  "${date.day}$month${date.year.toString().substring(2)}",
+                                  "$parsedDate",
                                   textAlign: TextAlign.center,
                                 )),
                                 DataCell(Text(e.courseRpAbbrev_3.toString())),
@@ -428,7 +440,7 @@ class _HorsesDataTableState extends State<HorsesDataTable> {
                             e.place_1stNumber.toString())), //place 1st number
                         DataCell(Text(e.racesNumber ?? "N/A")), //races number
                         DataCell(Text(
-                            "${formatCurrency.format(10.5)}")), //net total prize
+                            "${formatCurrency.format(double.parse(e.netTotalPrizeMoney??"0.0"))}")), //net total prize
                         //DataCell(Text(e.sp)),
                       ]);
                 }).toList()
@@ -675,9 +687,19 @@ class _StatsDataTableState extends State<StatsDataTable> {
                     ],
                     rows: widget.raceLists!.isNotEmpty
                         ? widget.raceLists!.map((e) {
-                            DateTime date = DateTime.parse(e.raceDatetime!);
-                            String month = monthList[date.month - 1];
-                            i = i + 1;
+                      DateTime date;
+                      String month,parsedDate;
+                      //e.raceDatetime=null;
+                      if(e.raceDatetime!=null){
+                        date = DateTime.parse(e.raceDatetime!);
+                        month = monthList[date.month - 1];
+                        parsedDate = "${date.day}$month${date.year.toString().substring(2)}";
+                      }else{
+                        date = DateTime.now();
+                        month = "N/A";
+                        parsedDate = "N/A";
+                      }
+                      i = i + 1;
                             return DataRow(
                                 onSelectChanged: (val) {
                                   Navigator.push(
@@ -694,7 +716,7 @@ class _StatsDataTableState extends State<StatsDataTable> {
                                 ),
                                 cells: [
                                   DataCell(Text(
-                                      "${date.day}$month${date.year.toString().substring(2)}")),
+                                      "$parsedDate")),
                                   DataCell(Container(
                                     width: 170,
                                     child: Text(

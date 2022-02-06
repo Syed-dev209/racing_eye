@@ -11,7 +11,9 @@ class HorseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime parseData = DateTime.parse(horseModel.horseDateOfBirth!);
     DateTime now = DateTime.now();
-    final age = now.year - parseData.year;
+    int age = now.year - parseData.year;
+    //age = (age/365).round();
+    // age = int.parse(horseModel.horseAge??"0.0");
     return Padding(
       padding: EdgeInsets.only(bottom: 15.0),
       child: GestureDetector(

@@ -112,7 +112,7 @@ class _OwnerDataTableState extends State<OwnerDataTable>
 
   generateLists() async {
     await getOwnerLast14DaysData(widget.ownersData.uid!).then((value) async {
-      print(value);
+
       if (value != null) {
         setState(() {
           formList.addAll(value);

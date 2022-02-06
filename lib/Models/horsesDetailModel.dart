@@ -50,7 +50,7 @@ class HorsesDetailModel {
     horseCountryCode = json["horse_country_code"]?.toString();
     horseDateOfBirth = json["horse_date_of_birth"]?.toString();
     horseDateOfDeath = json["horse_date_of_death"]?.toString();
-    horseAge = json["age"]?.toString();
+    horseAge = json["age"]??"0";
     dateGelded = json["date_gelded"]?.toString();
     ownerName = json["owner_name"]?.toString();
     ownerUid = json["owner_uid"]?.toInt();

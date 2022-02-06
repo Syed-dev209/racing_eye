@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   checkToken() async {
     bool check = box.read("token") ?? false;
-    print("token check $check");
+
     if (!check) {
       String token = await notificationServices!.getDeviceToken();
       await registerDeviceToken(token, Platform.isAndroid ? "android" : "ios");

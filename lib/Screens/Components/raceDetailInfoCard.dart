@@ -74,7 +74,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                       width: 5.0,
                     ),
                     Text(
-                      "${dateTime!.hour}:${dateTime!.minute}",
+                      "${dateTime!.hour}:${dateTime!.minute>9?dateTime!.minute: "${dateTime!.minute}0" }",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     )

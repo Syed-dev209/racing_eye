@@ -92,7 +92,7 @@ class _IntroRaceScreenState extends State<IntroRaceScreen> {
               builder: (context, snapshot) {
                 if (!snapshot.hasError &&
                     snapshot.connectionState == ConnectionState.waiting) {
-                  print(snapshot.error);
+
                   return Center(
                     child: CircularProgressIndicator(),
                   );

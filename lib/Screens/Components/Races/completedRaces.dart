@@ -24,7 +24,7 @@ class _CompletedRacesState extends State<CompletedRaces> {
     super.initState();
     preserveList = Provider.of<CompletedRaceProvider>(context, listen: false)
         .completeRaces;
-    print("Length=========${preserveList.length}");
+
   }
 
   @override
@@ -54,7 +54,7 @@ class _CompletedRacesState extends State<CompletedRaces> {
                     }
                   });
 
-                  print("Length=========${preserveList.length}");
+
                   List<RaceDetailsModel> list = [];
                   for (var i in provider) {
                     int month = DateTime.parse(i.raceDatetime!).month;
@@ -63,7 +63,7 @@ class _CompletedRacesState extends State<CompletedRaces> {
                       list.add(i);
                     }
                   }
-                  print(list.length);
+
                   Provider.of<CompletedRaceProvider>(context, listen: false)
                       .addList(list);
                 },

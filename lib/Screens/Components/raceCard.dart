@@ -35,7 +35,7 @@ class RacesCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        print(dataModel.raceInstanceUid);
+
         if (navigate) {
           Navigator.push(
               context,

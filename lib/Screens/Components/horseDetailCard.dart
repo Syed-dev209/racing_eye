@@ -13,8 +13,12 @@ class HorseDetailsCard extends StatefulWidget {
 class _HorseDetailsCardState extends State<HorseDetailsCard> {
   double animatedHeight = 0.0;
   bool isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
+    DateTime parseData = DateTime.parse(Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseDateOfBirth!);
+    DateTime now = DateTime.now();
+    int age = now.year - parseData.year;
     return Card(
       elevation: 0.0,
       shape: RoundedRectangleBorder(
@@ -63,7 +67,7 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "${Provider.of<HorseProfileProvider>(context, listen: false).profile!.age!.substring(0, 1)} Yeasrs old, ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseSexCode} ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseColourCode}",
+                              "$age Years old, ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseSexCode} ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseColourCode}",
                               style: TextStyle(color: Colors.white),
                             ),
                             Container(
