@@ -1,10 +1,12 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:racing_eye/Models/horseProfileModel.dart';
 import 'package:racing_eye/main.dart';
 
 class HorseDetailsCard extends StatefulWidget {
-  const HorseDetailsCard({Key? key}) : super(key: key);
+  bool expand = false;
+  HorseDetailsCard({this.expand=false}) ;
 
   @override
   _HorseDetailsCardState createState() => _HorseDetailsCardState();
@@ -13,13 +15,27 @@ class HorseDetailsCard extends StatefulWidget {
 class _HorseDetailsCardState extends State<HorseDetailsCard> {
   double animatedHeight = 0.0;
   bool isExpanded = false;
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(widget.expand){
+      isExpanded = true;
+      animatedHeight =  180.0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    DateTime parseData = DateTime.parse(Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseDateOfBirth!);
-    DateTime now = DateTime.now();
-    int age = now.year - parseData.year;
-    return Card(
+    DateTime parseData;
+    DateTime now;
+    int age=0;
+    if(Provider.of<HorseProfileProvider>(context, listen: false).profile!=null){
+      parseData = DateTime.parse(Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseDateOfBirth!);
+      now = DateTime.now();
+      age = now.year - parseData.year;
+    }
+    return Provider.of<HorseProfileProvider>(context, listen: false).profile!=null?Card(
       elevation: 0.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(17.0),
@@ -67,7 +83,7 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "$age Years old, ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseSexCode} ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseColourCode}",
+                              "${age} Years old, ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseSexCode} ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseColourCode}",
                               style: TextStyle(color: Colors.white),
                             ),
                             Container(
@@ -200,7 +216,7 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
           ],
         ),
       ),
-    );
+    ):Text("No details found");
   }
 
   Widget dataRow({required String title, required String name}) {
@@ -208,19 +224,25 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-                color: Color(0xff6790bb),
-                fontWeight: FontWeight.w500,
-                fontSize: 16.0),
+          Expanded(
+            child: Text(
+              title,
+              style: TextStyle(
+                  color: Color(0xff6790bb),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16.0),
+            ),
           ),
-          Text(
-            name,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
+          Expanded(
+            child: AutoSizeText(
+              name,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.end,
+              minFontSize: 5,
             ),
           )
         ],

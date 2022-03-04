@@ -49,6 +49,7 @@ getCompletedRaces(context) async {
 }
 
 Future getRaceDescription({context, required String raceId}) async {
+  print(raceId);
   String url = "https://re.victoriayachts.ae/api/?q=racecards/$raceId";
   // var response = await http.get(
   //     Uri.https(

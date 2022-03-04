@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -35,13 +37,16 @@ Future getHorseProfile(context, String horseId) async {
   });
   if (response.statusCode == 200) {
     var decodedData = jsonDecode(response.body);
+    log(decodedData.toString());
     List<HorseProfileModel> models = [];
+    print(models.length);
     for (var i in decodedData) {
       models.add(HorseProfileModel.fromJson(i));
     }
+
     Provider.of<HorseProfileProvider>(context, listen: false).clearProvider();
-    Provider.of<HorseProfileProvider>(context, listen: false)
-        .addProfile(models[0]);
+      Provider.of<HorseProfileProvider>(context, listen: false)
+          .addProfile(models.isNotEmpty?models[0]:null);
   }
 }
 
@@ -121,4 +126,51 @@ Future getHorseEntries(context, String horseId) async {
     Provider.of<HorseEntriesProvider>(context, listen: false)
         .addDataModel(models);
   }
+}
+
+
+Future getAllHorseData(context, String horseId)async{
+  //https://racingeye.ae/shadwell/horse-details?horse_id=964565
+  String url = "https://racingeye.ae/shadwell/horse-details";
+  var response = await Dio().get(url,queryParameters: {
+    "horse_id":horseId
+  },options: Options(
+    headers: {
+      "Api-Key": apiKey
+    }
+  ));
+  log(response.data.toString());
+  ///profile
+  Provider.of<HorseProfileProvider>(context, listen: false).clearProvider();
+  Provider.of<HorseProfileProvider>(context, listen: false)
+      .addProfile(HorseProfileModel.fromJson(response.data["overview"]));
+
+  ///entries
+  List<HorseEntriesModel> models = [];
+  if(response.data["entries"]!=null){
+    for (var i in response.data["entries"]) {
+      models.add(HorseEntriesModel.fromJson(i));
+    }
+  }
+  Provider.of<HorseEntriesProvider>(context, listen: false).clearProvider();
+  Provider.of<HorseEntriesProvider>(context, listen: false)
+      .addDataModel(models);
+  ///form
+List<HorseFormModel> formList =[];
+  Map<String,dynamic> forms = response.data["form"];
+  forms.forEach((key, value) {
+    formList.add(HorseFormModel.fromJson(value));
+  });
+  log("Form length ${formList.length}");
+  Provider.of<HorseFormProvider>(context, listen: false).clearProvider();
+  Provider.of<HorseFormProvider>(context, listen: false).addFormData(formList);
+///sales
+  List<HorseSalesModel> sales = [];
+  for (var i in response.data["sales"]) {
+    sales.add(HorseSalesModel.fromJson(i));
+  }
+  Provider.of<HorseSalesProvider>(context, listen: false).clearProvider();
+  Provider.of<HorseSalesProvider>(context, listen: false)
+      .addSalesModel(sales);
+
 }

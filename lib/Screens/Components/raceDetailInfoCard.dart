@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:racing_eye/Models/raceDescModel.dart';
 import 'package:racing_eye/Screens/Components/OwnerComponents/ownerTables.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
@@ -18,12 +19,22 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
   DateTime? dateTime;
   bool emptyList = false;
   bool noData = false;
-
+  String? time;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     dateTime = DateTime.parse(widget.data.raceDatetime!);
+    var temp = DateTime.parse(widget.data.raceDatetime! + 'Z');
+    print(temp);
+    var dateTimeCheck = DateFormat("yyyy-MM-dd HH:mm:ss").parse(temp.toString(), true);
+    var dateLocal = dateTimeCheck.toLocal();
+    print(dateLocal);
+    String date = dateTime!.day.toString();
+    String month = monthList[dateTime!.month - 1];
+    String minute = dateLocal.minute.toString();
+    time =
+        "${dateLocal.hour}:${minute.length == 2 ? minute : "0$minute"} ";
     // if (widget.data.prizes!.isEmpty) {
     //   setState(() {
     //     emptyList = true;
@@ -74,7 +85,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                       width: 5.0,
                     ),
                     Text(
-                      "${dateTime!.hour}:${dateTime!.minute>9?dateTime!.minute: "${dateTime!.minute}0" }",
+                      "$time",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     )
@@ -137,22 +148,28 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
               SizedBox(
                 width: 15.0,
               ),
-              Container(
-                child: Row(
-                  children: [
-                    Text(
-                      "Distance: ",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: 3.0,
-                    ),
-                    Text(
-                      "${widget.data.distanceFurlongRounded??"0"}m",
-                      style: TextStyle(color: Color(0xff9AB5D1)),
-                    )
-                  ],
+              Flexible(
+                child: Container(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "Distance: ",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 3.0,
+                      ),
+                      Expanded(
+                        child: Text(
+                          "${widget.data.distanceFurlongRounded??"0"}m",
+                          style: TextStyle(color: Color(0xff9AB5D1)),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               )
             ],

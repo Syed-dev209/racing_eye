@@ -38,6 +38,7 @@ class RaceRunnersModel {
   String? silkImagePath;
   String? raceInstanceUid;
   String? inHouse;
+  String? horseId;
 
   RaceRunnersModel(
       {this.id,
@@ -55,7 +56,9 @@ class RaceRunnersModel {
       this.ownerName,
       this.silkImagePath,
       this.raceInstanceUid,
-      this.inHouse});
+      this.inHouse,
+        this.horseId
+      });
   RaceRunnersModel.fromJson(Map<String, dynamic> json) {
     id = json["id"]?.toInt();
     runnderId = json["runnder_id"]?.toString();
@@ -73,6 +76,7 @@ class RaceRunnersModel {
     silkImagePath = json["silk_image_path"]?.toString();
     raceInstanceUid = json["race_instance_uid"]?.toString();
     inHouse = json["inhouse"].toString();
+    horseId = json["horse_uid"];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();

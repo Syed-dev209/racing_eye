@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:blur/blur.dart';
+import 'package:intl/intl.dart';
 import 'package:racing_eye/Models/raceDetailsModel.dart';
 import 'package:racing_eye/Screens/loginScreen.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
@@ -19,12 +20,19 @@ class RacesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(dataModel.raceDatetime!);
+    var temp = DateTime.parse(dataModel.raceDatetime! + 'Z');
+    print(temp);
+    var dateTimeCheck = DateFormat("yyyy-MM-dd HH:mm:ss").parse(temp.toString(), true);
+    var dateLocal = dateTimeCheck.toLocal();
+    print(dateLocal);
+
     DateTime dateTime = DateTime.parse(dataModel.raceDatetime!);
     String date = dateTime.day.toString();
     String month = monthList[dateTime.month - 1];
-    String minute = dateTime.minute.toString();
+    String minute = dateLocal.minute.toString();
     String time =
-        "${dateTime.hour}:${minute.length == 2 ? minute : "0$minute"} ";
+        "${dateLocal.hour}:${minute.length == 2 ? minute : "0$minute"} ";
     String image = "GB-52-F";
     if (dataModel.courseImage != null) {
       image = dataModel.courseImage!;

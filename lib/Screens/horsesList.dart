@@ -28,6 +28,7 @@ class _HorsesListState extends State<HorsesList> {
   @override
   void initState() {
     super.initState();
+    print("in init");
     ownerNames.add(OwnersData(
         id: 0,
         uid: 0,
@@ -39,17 +40,26 @@ class _HorsesListState extends State<HorsesList> {
         createdAt: " ",
         updatedAt: " ",
         countryFlag: " "));
-    for (var data
-        in Provider.of<OwnerDataProvider>(context, listen: false).ownerList) {
+    for (var data in Provider.of<OwnerDataProvider>(context, listen: false).ownerList) {
       ownerNames.add(data);
     }
     ownerName = ownerNames.first;
-    preservedHorseList =
-        Provider.of<HorseDetailProvider>(context, listen: false).dataModel;
+    final prov = Provider.of<HorseDetailProvider>(context, listen: false).dataModel;
+    for(var i in prov){
+      preservedHorseList.add(i);
+    }
     // for (var i in preservedHorseList) {
     //   print(i.horseAge);
     // }
   }
+@override
+  void deactivate() {
+    // TODO: implement deactivate
+  Provider.of<HorseDetailProvider>(context,listen: false).dataModel=preservedHorseList;
+    super.deactivate();
+
+
+}
 
   @override
   Widget build(BuildContext context) {
@@ -81,19 +91,22 @@ class _HorsesListState extends State<HorsesList> {
                             child: TextFormField(
                               controller: searchedItem,
                               onChanged: (val) {
+                                print(val.isNotEmpty);
                                 if (val.isNotEmpty) {
                                   // print("=====> $val");
                                   List<HorsesDetailModel> searchedList = [];
-                                  for (var i in data.dataModel) {
-                                    if (i.horseName!.contains(RegExp(
+                                  for (var i in preservedHorseList) {
+                                    if (i.horseName!.contains(
+                                        RegExp(
                                         searchedItem.text,
-                                        caseSensitive: false))) {
+                                        caseSensitive: false)
+                                    )) {
                                       // print("Current ${i.horseName}");
                                       // print("found");
                                       searchedList.add(i);
                                     }
                                   }
-                                  // print(searchedList.toString());
+                                  print(searchedList.length);
                                   data.addHorseList(searchedList);
                                 } else {
                                   // print("Value empty");
