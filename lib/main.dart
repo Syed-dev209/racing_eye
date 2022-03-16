@@ -68,6 +68,12 @@ class MyApp extends StatelessWidget {
       ],
       child: OverlaySupport(
         child: MaterialApp(
+          builder: (context, child) {
+            return MediaQuery(
+              child: child!,
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+            );
+          },
           navigatorKey: GlobalVariable.navState,
           debugShowCheckedModeBanner: false,
           title: 'Shadwell',
