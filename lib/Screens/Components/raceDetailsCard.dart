@@ -80,7 +80,8 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                         ),
                         child: Center(
                           child: AutoSizeText(
-                            widget.index.toString(),
+                            //"1000",
+                             widget.index.toString(),
                             style: TextStyle(color: Colors.white,fontSize: 13),
                             minFontSize: 2,
                             maxLines: 1,

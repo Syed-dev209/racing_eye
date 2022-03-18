@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
           bool check = box.read("login") ?? false;
           // Provider.of<LoginChecker>(context, listen: false).setUserStatus = check;
           loggedIn = check;
-          if (check) {
+          if (!check) {
             Navigator.pushReplacement(
                 context, CupertinoPageRoute(builder: (_) => DashboardBase()));
           } else {
