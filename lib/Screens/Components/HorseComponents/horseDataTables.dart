@@ -33,7 +33,8 @@ class _HorseDataTablesState extends State<HorseDataTables> {
 // ignore: slash_for_doc_comments
 /**********************Form Data Table********************************************* */
 class HorseFormDataTable extends StatefulWidget {
-  const HorseFormDataTable({Key? key}) : super(key: key);
+  bool showUpper=true;
+  HorseFormDataTable({this.showUpper=true});
 
   @override
   _HorseFormDataTableState createState() => _HorseFormDataTableState();
@@ -51,7 +52,8 @@ class _HorseFormDataTableState extends State<HorseFormDataTable> {
             builder: (context, data, _) {
               return SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: data != null
+                child: widget.showUpper?
+                data != null
                     ? DataTable(
                         headingRowColor: MaterialStateColor.resolveWith(
                           (states) => Color(0xffF3F3F3),
@@ -172,7 +174,7 @@ class _HorseFormDataTableState extends State<HorseFormDataTable> {
                               fontSize: 19,
                               fontWeight: FontWeight.bold),
                         ),
-                      ),
+                      ):Text(""),
               );
             },
           ),

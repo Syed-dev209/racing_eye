@@ -23,12 +23,12 @@ class _RaceRunnerDetailScreenState extends State<RaceRunnerDetailScreen>
     Tab(
       text: " Form",
     ),
-    Tab(
-      text: " Entries",
-    ),
-    Tab(
-      text: " Sales",
-    ),
+    // Tab(
+    //   text: " Entries",
+    // ),
+    // Tab(
+    //   text: " Sales",
+    // ),
   ];
   TabController? controller;
   bool loaded1 = false;
@@ -136,7 +136,7 @@ class _RaceRunnerDetailScreenState extends State<RaceRunnerDetailScreen>
                           children: [
                             loaded3
                                 ? HorseDataTables(
-                              dataTable: HorseFormDataTable(),
+                              dataTable: HorseFormDataTable(showUpper: false,),
                             )
                                 : Center(
                               child: Container(
@@ -147,32 +147,32 @@ class _RaceRunnerDetailScreenState extends State<RaceRunnerDetailScreen>
                                 ),
                               ),
                             ),
-                            loaded5
-                                ? HorseDataTables(
-                              dataTable: HorseEntriesDataTable(),
-                            )
-                                : Center(
-                              child: Container(
-                                height: 500.0,
-                                width: double.maxFinite,
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ),
-                            ),
-                            loaded4
-                                ? HorseDataTables(
-                              dataTable: HorseSalesDataTable(),
-                            )
-                                : Center(
-                              child: Container(
-                                height: 500.0,
-                                width: double.maxFinite,
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ),
-                            ),
+                            // loaded5
+                            //     ? HorseDataTables(
+                            //   dataTable: HorseEntriesDataTable(),
+                            // )
+                            //     : Center(
+                            //   child: Container(
+                            //     height: 500.0,
+                            //     width: double.maxFinite,
+                            //     child: Center(
+                            //       child: CircularProgressIndicator(),
+                            //     ),
+                            //   ),
+                            // ),
+                            // loaded4
+                            //     ? HorseDataTables(
+                            //   dataTable: HorseSalesDataTable(),
+                            // )
+                            //     : Center(
+                            //   child: Container(
+                            //     height: 500.0,
+                            //     width: double.maxFinite,
+                            //     child: Center(
+                            //       child: CircularProgressIndicator(),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       )

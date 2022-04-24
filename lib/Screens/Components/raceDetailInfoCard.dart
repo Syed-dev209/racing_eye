@@ -20,6 +20,8 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
   bool emptyList = false;
   bool noData = false;
   String? time;
+  late String date;
+  late String month;
   @override
   void initState() {
     // TODO: implement initState
@@ -30,11 +32,11 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
     var dateTimeCheck = DateFormat("yyyy-MM-dd HH:mm:ss").parse(temp.toString(), true);
     var dateLocal = dateTimeCheck.toLocal();
     print(dateLocal);
-    String date = dateTime!.day.toString();
-    String month = monthList[dateTime!.month - 1];
     String minute = dateLocal.minute.toString();
     time =
         "${dateLocal.hour}:${minute.length == 2 ? minute : "0$minute"} ";
+    date = "${dateLocal.day}";
+    month = monthList[dateLocal.month-1];
     // if (widget.data.prizes!.isEmpty) {
     //   setState(() {
     //     emptyList = true;
@@ -105,7 +107,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                     Image.asset("images/calenderWhite.png"),
                     SizedBox(width: 5),
                     Text(
-                      "${dateTime!.day} ${monthList[dateTime!.month - 1]}",
+                      "$date $month",
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Color(0xff9AB5D1)),

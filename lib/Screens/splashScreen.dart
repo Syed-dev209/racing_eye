@@ -27,9 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
       await getAllHorsesData(context).then((value) async {
         await getAllOwnerList(context).then((value) {
           bool check = box.read("login") ?? false;
-          // Provider.of<LoginChecker>(context, listen: false).setUserStatus = check;
+          //Provider.of<LoginChecker>(context, listen: false).setUserStatus = check;
           loggedIn = check;
-          if (!check) {
+          if (check) {
             Navigator.pushReplacement(
                 context, CupertinoPageRoute(builder: (_) => DashboardBase()));
           } else {

@@ -7,7 +7,10 @@ import 'package:racing_eye/Models/statsModel.dart';
 
 Future getStatus(context) async {
   String url = "https://racingeye.ae/shadwell/stats";
-  var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
+  var response = await http.get(
+      Uri.parse(url),
+      headers: {"Api-Key": apiKey}
+      );
 
   if (response.statusCode == 200) {
     var decodedData = jsonDecode(response.body);

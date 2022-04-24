@@ -100,18 +100,6 @@ class _RaceDetailsScreenState extends State<RaceDetailsScreen> {
                   Expanded(
                     child: Consumer<RaceResultsProvider>(
                         builder: (context, data, child) {
-                      // if (data.raceData.isEmpty) {
-                      //   return Center(
-                      //     child: Text(
-                      //       "No details",
-                      //       style: TextStyle(
-                      //           color: myColor.withOpacity(0.6),
-                      //           fontSize: 20,
-                      //           fontWeight: FontWeight.bold),
-                      //     ),
-                      //   );
-                      // }
-
                       return Column(
                         children: [
                           loaded2

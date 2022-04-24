@@ -28,7 +28,7 @@ class RacesCard extends StatelessWidget {
     print(dateLocal);
 
     DateTime dateTime = DateTime.parse(dataModel.raceDatetime!);
-    String date = dateTime.day.toString();
+    String date = dateLocal.day.toString();
     String month = monthList[dateTime.month - 1];
     String minute = dateLocal.minute.toString();
     String time =

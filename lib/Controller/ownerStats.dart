@@ -10,11 +10,6 @@ Future getOwnerStats(int ownerId, String year, String endYear,context) async {
   print(ownerId);
   String url =
       "https://re.victoriayachts.ae/stats?owner_id=$ownerId&year=$year";
-  // var response = await http.get(
-  //     Uri.https("https://racingeye.ae", "/shadwell/stats", {
-  //       "owner_id": ownerId,
-  //     }),
-  //     headers: {"Api-Key": apiKey});
 
   var response = await dio.get("https://racingeye.ae/shadwell/stats",
       queryParameters: {"owner_id": ownerId,"year_start":year,"year_end":endYear},
