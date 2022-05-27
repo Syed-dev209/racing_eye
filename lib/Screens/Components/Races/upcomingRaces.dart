@@ -20,6 +20,7 @@ class _UpcomingRacesState extends State<UpcomingRaces> {
             itemCount: data.comingRaces.length,
             itemBuilder: (context, index) {
               return RacesCard(
+                index: 1,
                 dataModel: data.comingRaces[index],
               );
             }),

@@ -9,42 +9,65 @@ import 'package:racing_eye/Models/raceDetailsModel.dart';
 import 'package:racing_eye/Models/raceRunnersModel.dart';
 
 var dio = Dio();
-getAvailableRaces(context) async {
-  String url = "https://racingeye.ae/shadwell/races/available";
-  var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
-  if (response.statusCode == 200) {
-    var decodedData = jsonDecode(response.body);
-    Provider.of<AvailableRaceProvider>(context, listen: false).clearProvider();
-    for (var i in decodedData) {
+Future getAvailableRaces(context) async {
+  try {
+    String url = "https://racingeye.ae/shadwell/races/available";
+    var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
+    if (response.statusCode == 200) {
+      var decodedData = jsonDecode(response.body);
       Provider.of<AvailableRaceProvider>(context, listen: false)
-          .addRace(RaceDetailsModel.fromJson(i));
+          .clearProvider();
+      for (var i in decodedData) {
+        Provider.of<AvailableRaceProvider>(context, listen: false)
+            .addRace(RaceDetailsModel.fromJson(i));
+      }
+      return '';
+    } else {
+      return null;
     }
+  } catch (e) {
+    return null;
   }
 }
 
-getUpcomingRaces(context) async {
-  String url = "https://racingeye.ae/shadwell/races/upcoming";
-  var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
-  if (response.statusCode == 200) {
-    var decodedData = jsonDecode(response.body);
-    Provider.of<UpcomingRaceProvider>(context, listen: false).clearProvider();
-    for (var i in decodedData) {
-      Provider.of<UpcomingRaceProvider>(context, listen: false)
-          .addRace(RaceDetailsModel.fromJson(i));
+Future getUpcomingRaces(context) async {
+  try {
+    String url = "https://racingeye.ae/shadwell/races/upcoming";
+    var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
+    if (response.statusCode == 200) {
+      var decodedData = jsonDecode(response.body);
+      Provider.of<UpcomingRaceProvider>(context, listen: false).clearProvider();
+      for (var i in decodedData) {
+        Provider.of<UpcomingRaceProvider>(context, listen: false)
+            .addRace(RaceDetailsModel.fromJson(i));
+      }
+      return '';
+    } else {
+      return null;
     }
+  } catch (e) {
+    return null;
   }
 }
 
-getCompletedRaces(context) async {
-  String url = "https://racingeye.ae/shadwell/races/completed";
-  var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
-  if (response.statusCode == 200) {
-    var decodedData = jsonDecode(response.body);
-    Provider.of<CompletedRaceProvider>(context, listen: false).clearProvider();
-    for (var i in decodedData) {
+Future getCompletedRaces(context) async {
+  try {
+    String url = "https://racingeye.ae/shadwell/races/completed";
+    var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
+    if (response.statusCode == 200) {
+      var decodedData = jsonDecode(response.body);
       Provider.of<CompletedRaceProvider>(context, listen: false)
-          .addRace(RaceDetailsModel.fromJson(i));
+          .clearProvider();
+      for (var i in decodedData) {
+        Provider.of<CompletedRaceProvider>(context, listen: false)
+            .addRace(RaceDetailsModel.fromJson(i));
+      }
+      return '';
+    } else {
+      return null;
     }
+  } catch (e) {
+    return null;
   }
 }
 
@@ -75,25 +98,23 @@ Future getRaceDescription({context, required String raceId}) async {
 }
 
 Future<List<RaceRunnersModel>?> getRaceRunner(context, String raceId) async {
-  String url = "https://re.victoriayachts.ae/api/?q=racecards/runners/$raceId";
-  // var response = await http.get(
-  //     Uri.https(
-  //         "https://racingeye.ae", "/shadwell/runners/", {"race_id": raceId}),
-  //     headers: {"Api-Key": apiKey});
-  var response = await dio.get("https://racingeye.ae/shadwell/runners/",
-      queryParameters: {"race_id": raceId},
-      options: Options(headers: {"Api-Key": apiKey}));
-  if (response.statusCode == 200) {
-    List<RaceRunnersModel> models = [];
-    for (var i in response.data) {
-      models.add(RaceRunnersModel.fromJson(i));
+  try {
+    String url =
+        "https://re.victoriayachts.ae/api/?q=racecards/runners/$raceId";
+    var response = await dio.get("https://racingeye.ae/shadwell/runners/",
+        queryParameters: {"race_id": raceId},
+        options: Options(headers: {"Api-Key": apiKey}));
+    if (response.statusCode == 200) {
+      List<RaceRunnersModel> models = [];
+      for (var i in response.data) {
+        models.add(RaceRunnersModel.fromJson(i));
+      }
+
+      return models;
+    } else {
+      return null;
     }
-    print(models);
-    return models;
-    //var decodedData = jsonDecode(response.);
-    // Provider.of<RaceResultsProvider>(context, listen: false)
-    //     .addRaceRunners(models);
-  } else {
+  } on DioError catch (e) {
     return null;
   }
 }

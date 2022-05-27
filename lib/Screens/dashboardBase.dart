@@ -4,6 +4,7 @@ import 'package:racing_eye/Screens/dashboardScreen.dart';
 import 'package:racing_eye/Screens/globalSearchScreen.dart';
 import 'package:racing_eye/Screens/horseRacesScreen.dart';
 import 'package:racing_eye/Screens/searchScreen.dart';
+import 'package:racing_eye/Screens/videosScreen.dart';
 
 class DashboardBase extends StatefulWidget {
   const DashboardBase({Key? key}) : super(key: key);
@@ -63,13 +64,14 @@ class _DashboardBaseState extends State<DashboardBase> {
                   height: 20.0,
                 ),
                 label: 'Results'),
-            // BottomNavigationBarItem(
-            //     icon: Image.asset(
-            //       selectedIndex == 3
-            //           ? 'images/topPredictorsAc.png'
-            //           : 'images/topPredictorsNac.png',
-            //       height: 20.0,
-            //     ),
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                  selectedIndex == 3
+                      ? 'images/topPredictorsAc.png'
+                      : 'images/topPredictorsNac.png',
+                  height: 20.0,
+                
+                ),label: "Videos")
             //     label: 'Top Predictors'),
             // BottomNavigationBarItem(
             //     icon: Image.asset(
@@ -86,8 +88,11 @@ class _DashboardBaseState extends State<DashboardBase> {
                 pageSelector = DashboardScreen();
               } else if (index == 1) {
                 pageSelector = GlobalSearchScreen();
-              } else {
+              } else if(index==2){
                 pageSelector = HorseRaceScreen();
+              }
+              else{
+                pageSelector = VideosScreen();
               }
               selectedIndex = index;
             });

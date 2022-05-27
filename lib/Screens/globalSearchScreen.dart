@@ -9,6 +9,7 @@ import 'package:racing_eye/Screens/Components/OwnerComponents/ownerCard.dart';
 import 'package:racing_eye/Screens/Components/dropDowns.dart';
 import 'package:racing_eye/Screens/Components/horsecard.dart';
 import 'package:racing_eye/Screens/Components/raceCard.dart';
+import 'package:racing_eye/Services/internet_connection.dart';
 
 import '../main.dart';
 import 'Components/customWhiteAppBar.dart';
@@ -28,7 +29,7 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
   TextEditingController searchController = TextEditingController();
   List<Widget> cards = [];
   bool loaded = true;
-
+  bool error = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -92,47 +93,57 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                   padding: EdgeInsets.symmetric(horizontal: 100, vertical: 13)),
-              onPressed: () {
+              onPressed: () async {
+                bool check = await InternetService.checkConnectivity();
                 String type = selectedOption!.toLowerCase();
                 setState(() {
                   cards.clear();
                   loaded = false;
                 });
-                globallySearch(type, searchController.text).then((value) {
-                  if (type == "horse") {
-                    ///horse
-                    List<HorsesDetailModel> horseDataList = [];
-                    horseDataList.addAll(value);
-                    for (var i in horseDataList) {
-                      cards.add(HorseCard(horseModel: i));
+                if (check) {
+                  globallySearch(type, searchController.text).then((value) {
+                    if (value != null) {
+                      if (type == "horse") {
+                        ///horse
+                        List<HorsesDetailModel> horseDataList = [];
+                        horseDataList.addAll(value);
+                        for (var i in horseDataList) {
+                          cards.add(HorseCard(horseModel: i));
+                        }
+                      } else if (type == "owner") {
+                        ///owner
+                        List<OwnersData> ownerDataList = [];
+                        ownerDataList.addAll(value);
+                        for (var i in ownerDataList) {
+                          cards.add(OwnerCard(ownerData: i));
+                        }
+                      } else if (type == "race") {
+                        ///race
+                        List<RaceDetailsModel> raceDataList = [];
+                        raceDataList.addAll(value);
+                        for (var i in raceDataList) {
+                          cards.add(RacesCard(dataModel: i,index: 0,));
+                        }
+                      } else {
+                        ///type=jockey
+                        List<RaceDetailsModel> jockeyDataList = [];
+                        jockeyDataList.addAll(value);
+                        for (var i in jockeyDataList) {
+                          cards.add(RacesCard(dataModel: i,index: 0,));
+                        }
+                      }
+                    } else {
+                      error = true;
                     }
-                  } else if (type == "owner") {
-                    ///owner
-                    List<OwnersData> ownerDataList = [];
-                    ownerDataList.addAll(value);
-                    for (var i in ownerDataList) {
-                      cards.add(OwnerCard(ownerData: i));
-                    }
-                  } else if (type == "race") {
-                    ///race
-                    List<RaceDetailsModel> raceDataList = [];
-                    raceDataList.addAll(value);
-                    for (var i in raceDataList) {
-                      cards.add(RacesCard(dataModel: i));
-                    }
-                  } else {
-                    ///type=jockey
-                    List<RaceDetailsModel> jockeyDataList = [];
-                    jockeyDataList.addAll(value);
-                    for (var i in jockeyDataList) {
-                      cards.add(RacesCard(dataModel: i));
-                    }
-                  }
-
-                  setState(() {
-                    loaded = true;
+                    setState(() {
+                      loaded = true;
+                    });
                   });
-                });
+                } else {
+                  loaded = true;
+                  error = true;
+                }
+                setState(() {});
               },
               child: Text('Search'),
             ),

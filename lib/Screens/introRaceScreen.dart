@@ -118,6 +118,7 @@ class _IntroRaceScreenState extends State<IntroRaceScreen> {
                     ? ListView.separated(
                         itemBuilder: (context, i) {
                           return RacesCard(
+                            index: 0,
                             dataModel: data[i],
                             navigate: false,
                           );

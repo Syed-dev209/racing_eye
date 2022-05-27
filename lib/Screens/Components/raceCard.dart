@@ -15,15 +15,17 @@ class RacesCard extends StatelessWidget {
   RaceDetailsModel dataModel;
   bool showTime = false;
   bool navigate = true;
+  int index;
   RacesCard(
-      {required this.dataModel, this.showTime = false, this.navigate = true});
+      {required this.dataModel, this.showTime = false, this.navigate = true,required this.index});
 
   @override
   Widget build(BuildContext context) {
     print(dataModel.raceDatetime!);
     var temp = DateTime.parse(dataModel.raceDatetime! + 'Z');
     print(temp);
-    var dateTimeCheck = DateFormat("yyyy-MM-dd HH:mm:ss").parse(temp.toString(), true);
+    var dateTimeCheck =
+        DateFormat("yyyy-MM-dd HH:mm:ss").parse(temp.toString(), true);
     var dateLocal = dateTimeCheck.toLocal();
     print(dateLocal);
 
@@ -36,19 +38,19 @@ class RacesCard extends StatelessWidget {
     String image = "GB-52-F";
     if (dataModel.courseImage != null) {
       image = dataModel.courseImage!;
-    }
-    else{
-      image ="https://azbigmedia.com/wp-content/uploads/2020/08/horse-racing-tracks.png";
+    } else {
+      image =
+          "https://azbigmedia.com/wp-content/uploads/2020/08/horse-racing-tracks.png";
     }
 
     return GestureDetector(
       onTap: () {
-
         if (navigate) {
           Navigator.push(
               context,
               CupertinoPageRoute(
                   builder: (_) => RaceDetailsScreen(
+                    index: index,
                         raceId: dataModel.raceInstanceUid.toString(),
                       )));
         } else {
@@ -104,7 +106,7 @@ class RacesCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            flex:9,
+                            flex: 9,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -126,11 +128,15 @@ class RacesCard extends StatelessWidget {
                                     Text(
                                       "Course : ${dataModel.courseStyleName}",
                                       style: TextStyle(
-                                          color: Color(0xff666666), fontSize: 13.0),
+                                          color: Color(0xff666666),
+                                          fontSize: 13.0),
                                     ),
-                                    SizedBox(width: 15,),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
                                     Image.network(
-                                      dataModel.courseCountryCode??"https://www.pinclipart.com/picdir/middle/448-4485361_png-file-svg-flag-icon-png-clipart.png",
+                                      dataModel.courseCountryCode ??
+                                          "https://www.pinclipart.com/picdir/middle/448-4485361_png-file-svg-flag-icon-png-clipart.png",
                                       height: 20,
                                     ),
                                   ],
@@ -144,8 +150,8 @@ class RacesCard extends StatelessWidget {
                                         style: TextStyle(
                                             color: Color(0xff666666),
                                             fontSize: 13.0),
-                                  minFontSize: 9,
-                                  maxLines: 1,
+                                        minFontSize: 9,
+                                        maxLines: 1,
                                       )
                                     : Text(''),
                               ],
@@ -260,7 +266,6 @@ class RacesCard extends StatelessWidget {
               //     ),
               //   ),
               // ),
-
             ],
           ),
         ),

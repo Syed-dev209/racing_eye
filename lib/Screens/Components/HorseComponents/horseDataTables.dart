@@ -367,6 +367,7 @@ class _HorseEntriesDataTableState extends State<HorseEntriesDataTable> {
                               context,
                               CupertinoPageRoute(
                                   builder: (_) => RaceDetailsScreen(
+                                    index: 0,
                                       raceId: e.raceInstanceUid.toString())));
                         },
                         // color: MaterialStateColor.resolveWith(

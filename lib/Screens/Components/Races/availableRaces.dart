@@ -23,6 +23,7 @@ class _AvailableRacesState extends State<AvailableRaces> {
                   itemCount: data.availRaces.length,
                   itemBuilder: (context, index) {
                     return RacesCard(
+                      index: 0,
                       dataModel: data.availRaces[index],
                     );
                   }),
@@ -82,6 +83,7 @@ class _AvailableRacesState extends State<AvailableRaces> {
                                 itemCount: data.comingRaces.length,
                                 itemBuilder: (context, index) {
                                   return RacesCard(
+                                    index: 1,
                                     dataModel: data.comingRaces[index],
                                   );
                                 });

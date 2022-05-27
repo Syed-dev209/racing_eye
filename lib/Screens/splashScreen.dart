@@ -7,8 +7,10 @@ import 'package:racing_eye/Controller/navigatorKey.dart';
 import 'package:racing_eye/Controller/notificationController.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Controller/statsController.dart';
+import 'package:racing_eye/Screens/Components/somethingWentWrong.dart';
 import 'package:racing_eye/Screens/dashboardBase.dart';
 import 'package:racing_eye/Screens/loginScreen.dart';
+import 'package:racing_eye/Services/internet_connection.dart';
 import 'package:racing_eye/main.dart';
 import 'dart:io' show Platform;
 
@@ -22,6 +24,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   final box = GetStorage();
   bool loggedIn = false;
+  bool error = false;
   loadData() async {
     await getStatus(context).then((value) async {
       await getAllHorsesData(context).then((value) async {
@@ -54,15 +57,27 @@ class _SplashScreenState extends State<SplashScreen> {
 
   PushNotificationServices? notificationServices;
 
+  initializeApp() {
+    InternetService.checkConnectivity().then((value) {
+      if (value) {
+        notificationServices!.requestPermission();
+        checkToken();
+        loadData();
+      } else {
+        setState(() {
+          error = true;
+        });
+      }
+    });
+  }
+
   @override
   void initState() {
     // ignore: todo
     // TODO: implement initState
     super.initState();
     notificationServices = PushNotificationServices();
-    notificationServices!.requestPermission();
-    checkToken();
-    loadData();
+    initializeApp();
   }
 
   @override
@@ -75,41 +90,37 @@ class _SplashScreenState extends State<SplashScreen> {
           width: double.maxFinite,
           color: myColor.shade50,
           padding: EdgeInsets.symmetric(horizontal: 15.0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'images/appIcon.png',
-                  //height: 90.0,
-                ),
-                SizedBox(
-                  height: 100.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(
-                      strokeWidth: 3,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                    ),
-                    // SizedBox(
-                    //   width: 30.0,
-                    // ),
-                    // Expanded(
-                    //   child: Text(
-                    //     "Please wait while we setup things for you...",
-                    //     style: TextStyle(
-                    //         color: Colors.white,
-                    //         fontWeight: FontWeight.w500,
-                    //         fontSize: 20.0),
-                    //   ),
-                    // )
-                  ],
+          child: !error
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'images/appIcon.png',
+                        //height: 90.0,
+                      ),
+                      SizedBox(
+                        height: 100.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(
+                            strokeWidth: 3,
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.white),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 )
-              ],
-            ),
-          ),
+              : SomethingWrongWidget(onReload: () {
+                  setState(() {
+                    error = false;
+                  });
+                  initializeApp();
+                }),
         ),
       ),
     );

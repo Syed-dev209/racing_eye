@@ -4,27 +4,25 @@
 class RaceRunnersModel {
 /*
 {
-  "id": 1069,
-  "runnder_id": "",
-  "start_number": "1",
+  "start_number": 1,
   "draw": "0",
-  "horse_name": "Addeybb",
-  "horse_age": "7",
-  "horse_colour_code": "CH",
-  "horse_sex_code": "G",
-  "jockey_name": "Tom Marquand",
-  "trainer_stylename": "William Haggas",
-  "created_at": "2021-10-12 19:23:36",
-  "updated_at": "2021-10-12 19:23:36",
-  "owner_name": "Sheikh Ahmed Al Maktoum",
-  "silk_image_path": "https://images.racingpost.com/svg/1/8/7/14781.svg",
-  "race_instance_uid": "789169"
-}
+  "horse_name": "Adayar",
+  "horse_age": "4",
+  "horse_colour_code": "B",
+  "horse_sex_code": "C",
+  "jockey_name": null,
+  "trainer_stylename": "Charlie Appleby",
+  "owner_name": "Godolphin",
+  "silk_image_path": "5/4/8/49845",
+  "race_instance_uid": "808803",
+  "horse_uid": "3241310",
+  "winning_position": 1000,
+  "inhouse": "no",
+  "running_status": "A"
+} 
 */
 
-  int? id;
-  String? runnderId;
-  String? startNumber;
+  int? startNumber;
   String? draw;
   String? horseName;
   String? horseAge;
@@ -32,69 +30,65 @@ class RaceRunnersModel {
   String? horseSexCode;
   String? jockeyName;
   String? trainerStylename;
-  String? createdAt;
-  String? updatedAt;
   String? ownerName;
   String? silkImagePath;
   String? raceInstanceUid;
-  String? inHouse;
-  String? horseId;
+  String? horseUid;
+  int? winningPosition;
+  String? inhouse;
+  String? runningStatus;
 
-  RaceRunnersModel(
-      {this.id,
-      this.runnderId,
-      this.startNumber,
-      this.draw,
-      this.horseName,
-      this.horseAge,
-      this.horseColourCode,
-      this.horseSexCode,
-      this.jockeyName,
-      this.trainerStylename,
-      this.createdAt,
-      this.updatedAt,
-      this.ownerName,
-      this.silkImagePath,
-      this.raceInstanceUid,
-      this.inHouse,
-        this.horseId
-      });
+  RaceRunnersModel({
+    this.startNumber,
+    this.draw,
+    this.horseName,
+    this.horseAge,
+    this.horseColourCode,
+    this.horseSexCode,
+    this.jockeyName,
+    this.trainerStylename,
+    this.ownerName,
+    this.silkImagePath,
+    this.raceInstanceUid,
+    this.horseUid,
+    this.winningPosition,
+    this.inhouse,
+    this.runningStatus,
+  });
   RaceRunnersModel.fromJson(Map<String, dynamic> json) {
-    id = json["id"]?.toInt();
-    runnderId = json["runnder_id"]?.toString();
-    startNumber = json["start_number"]?.toString();
-    draw = json["draw"]?.toString();
-    horseName = json["horse_name"]?.toString();
-    horseAge = json["horse_age"]?.toString();
-    horseColourCode = json["horse_colour_code"]?.toString();
-    horseSexCode = json["horse_sex_code"]?.toString();
-    jockeyName = json["jockey_name"]?.toString();
-    trainerStylename = json["trainer_stylename"]?.toString();
-    createdAt = json["created_at"]?.toString();
-    updatedAt = json["updated_at"]?.toString();
-    ownerName = json["owner_name"]?.toString();
-    silkImagePath = json["silk_image_path"]?.toString();
-    raceInstanceUid = json["race_instance_uid"]?.toString();
-    inHouse = json["inhouse"].toString();
-    horseId = json["horse_uid"];
+    startNumber = json['start_number']?.toInt();
+    draw = json['draw']?.toString();
+    horseName = json['horse_name']?.toString();
+    horseAge = json['horse_age']?.toString();
+    horseColourCode = json['horse_colour_code']?.toString();
+    horseSexCode = json['horse_sex_code']?.toString();
+    jockeyName = json['jockey_name']?.toString();
+    trainerStylename = json['trainer_stylename']?.toString();
+    ownerName = json['owner_name']?.toString();
+    silkImagePath = json['silk_image_path']?.toString();
+    raceInstanceUid = json['race_instance_uid']?.toString();
+    horseUid = json['horse_uid']?.toString();
+    winningPosition = json['winning_position']?.toInt();
+    inhouse = json['inhouse']?.toString();
+    runningStatus = json['running_status']?.toString();
   }
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data["id"] = id;
-    data["runnder_id"] = runnderId;
-    data["start_number"] = startNumber;
-    data["draw"] = draw;
-    data["horse_name"] = horseName;
-    data["horse_age"] = horseAge;
-    data["horse_colour_code"] = horseColourCode;
-    data["horse_sex_code"] = horseSexCode;
-    data["jockey_name"] = jockeyName;
-    data["trainer_stylename"] = trainerStylename;
-    data["created_at"] = createdAt;
-    data["updated_at"] = updatedAt;
-    data["owner_name"] = ownerName;
-    data["silk_image_path"] = silkImagePath;
-    data["race_instance_uid"] = raceInstanceUid;
+    final data = <String, dynamic>{};
+    data['start_number'] = startNumber;
+    data['draw'] = draw;
+    data['horse_name'] = horseName;
+    data['horse_age'] = horseAge;
+    data['horse_colour_code'] = horseColourCode;
+    data['horse_sex_code'] = horseSexCode;
+    data['jockey_name'] = jockeyName;
+    data['trainer_stylename'] = trainerStylename;
+    data['owner_name'] = ownerName;
+    data['silk_image_path'] = silkImagePath;
+    data['race_instance_uid'] = raceInstanceUid;
+    data['horse_uid'] = horseUid;
+    data['winning_position'] = winningPosition;
+    data['inhouse'] = inhouse;
+    data['running_status'] = runningStatus;
     return data;
   }
 }

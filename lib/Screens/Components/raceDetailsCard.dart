@@ -23,22 +23,33 @@ class RaceDetailsCard extends StatefulWidget {
 
 class _RaceDetailsCardState extends State<RaceDetailsCard> {
   bool isOwner = false;
+  String badge = '';
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (widget.runnerData.inHouse! != "no") {
+    if (widget.runnerData.inhouse! != "no") {
       isOwner = true;
+    }
+
+    if (widget.runnerData.runningStatus != "A") {
+      badge = widget.runnerData.runningStatus!;
+    } else {
+      badge = widget.index.toString();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        log(widget.runnerData.horseId.toString());
-        Navigator.push(context, CupertinoPageRoute(builder: (_)=>RaceRunnerDetailScreen(horseId: widget.runnerData.horseId.toString())));
+      onTap: () {
+        log(widget.runnerData.horseUid.toString());
+        Navigator.push(
+            context,
+            CupertinoPageRoute(
+                builder: (_) => RaceRunnerDetailScreen(
+                    horseId: widget.runnerData.horseUid.toString())));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -71,7 +82,7 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Container(
-                       height: 20,
+                        height: 20,
                         width: 20,
                         padding: EdgeInsets.all(2),
                         decoration: BoxDecoration(
@@ -81,8 +92,8 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                         child: Center(
                           child: AutoSizeText(
                             //"1000",
-                             widget.index.toString(),
-                            style: TextStyle(color: Colors.white,fontSize: 13),
+                            badge,
+                            style: TextStyle(color: Colors.white, fontSize: 13),
                             minFontSize: 2,
                             maxLines: 1,
                             softWrap: true,
@@ -114,7 +125,8 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                                           Shadow(
                                             offset: Offset(1.5, 1.5),
                                             blurRadius: 2.5,
-                                            color: Colors.black.withOpacity(0.6),
+                                            color:
+                                                Colors.black.withOpacity(0.6),
                                           ),
                                           // Shadow(
                                           //   offset: Offset(10.0, 10.0),
@@ -170,8 +182,8 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                     children: [
                       Text(
                         "Trainer: ",
-                        style:
-                            TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
                         softWrap: false,
                         overflow: TextOverflow.clip,
                       ),
@@ -201,8 +213,8 @@ class _RaceDetailsCardState extends State<RaceDetailsCard> {
                     children: [
                       Text(
                         "Jockey: ",
-                        style:
-                            TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
                         //minFontSize: 12,
                         overflow: TextOverflow.clip,
                         softWrap: false,

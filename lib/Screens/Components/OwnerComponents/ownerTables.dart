@@ -276,6 +276,7 @@ class _EntriesDataTableState extends State<EntriesDataTable> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (_) => RaceDetailsScreen(
+                                          index: 0,
                                             raceId:
                                                 e.raceInstanceUid.toString())));
                               }
@@ -706,6 +707,7 @@ class _StatsDataTableState extends State<StatsDataTable> {
                                       context,
                                       CupertinoPageRoute(
                                           builder: (_) => RaceDetailsScreen(
+                                            index: 0,
                                               raceId: e.raceInstanceUid
                                                   .toString())));
                                 },

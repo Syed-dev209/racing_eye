@@ -44,6 +44,8 @@ dependencies:
   firebase_messaging: ^10.0.9
   overlay_support: ^1.2.1
   badges: ^2.0.2
+  youtube_player_flutter: ^8.0.0
+  connectivity_plus: ^2.3.0
 
 dev_dependencies:
   flutter_test:

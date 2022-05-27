@@ -28,118 +28,144 @@ Future getAllHorsesData(context) async {
 }
 
 Future getHorseProfile(context, String horseId) async {
-  String url = "https://racingeye.ae/shadwell/horses/";
-  final uri = Uri.parse(url);
-  final newuri = uri.replace(queryParameters: {"horse_id": horseId});
-  var response = await http.get(newuri, headers: {
-    "Api-Key": apiKey,
-    HttpHeaders.contentTypeHeader: 'application/json'
-  });
-  if (response.statusCode == 200) {
-    var decodedData = jsonDecode(response.body);
-    log(decodedData.toString());
-    List<HorseProfileModel> models = [];
-    print(models.length);
-    for (var i in decodedData) {
-      models.add(HorseProfileModel.fromJson(i));
-    }
+  try {
+    String url = "https://racingeye.ae/shadwell/horses/";
+    final uri = Uri.parse(url);
+    final newuri = uri.replace(queryParameters: {"horse_id": horseId});
+    var response = await http.get(newuri, headers: {
+      "Api-Key": apiKey,
+      HttpHeaders.contentTypeHeader: 'application/json'
+    });
+    if (response.statusCode == 200) {
+      var decodedData = jsonDecode(response.body);
+      log(decodedData.toString());
+      List<HorseProfileModel> models = [];
+      print(models.length);
+      for (var i in decodedData) {
+        models.add(HorseProfileModel.fromJson(i));
+      }
 
-    Provider.of<HorseProfileProvider>(context, listen: false).clearProvider();
+      Provider.of<HorseProfileProvider>(context, listen: false).clearProvider();
       Provider.of<HorseProfileProvider>(context, listen: false)
-          .addProfile(models.isNotEmpty?models[0]:null);
+          .addProfile(models.isNotEmpty ? models[0] : null);
+    } else {
+      return null;
+    }
+  } catch (e) {
+    return null;
   }
 }
 
 Future getHorseRecords(context, String horseId) async {
-  print(horseId);
-  String url = "https://racingeye.ae/shadwell/horse/records/";
-  final uri = Uri.parse(url);
-  final newuri = uri.replace(queryParameters: {"horse_id": horseId});
-  var response = await http.get(newuri, headers: {
-    "Api-Key": apiKey,
-    HttpHeaders.contentTypeHeader: 'application/json'
-  });
-  if (response.statusCode == 200) {
-    var decodedData = jsonDecode(response.body);
-    Provider.of<HorseRecordProvider>(context, listen: false).clearProvider();
-    Provider.of<HorseRecordProvider>(context, listen: false)
-        .addHorserecods(decodedData);
+  try {
+    String url = "https://racingeye.ae/shadwell/horse/records/";
+    final uri = Uri.parse(url);
+    final newuri = uri.replace(queryParameters: {"horse_id": horseId});
+    var response = await http.get(newuri, headers: {
+      "Api-Key": apiKey,
+      HttpHeaders.contentTypeHeader: 'application/json'
+    });
+    if (response.statusCode == 200) {
+      var decodedData = jsonDecode(response.body);
+      Provider.of<HorseRecordProvider>(context, listen: false).clearProvider();
+      Provider.of<HorseRecordProvider>(context, listen: false)
+          .addHorserecods(decodedData);
+    } else {
+      return null;
+    }
+  } catch (e) {
+    return null;
   }
 }
 
 Future getHorseSalesData(context, String horseid) async {
-  String url = "https://racingeye.ae/shadwell/horse/sales/";
-  final uri = Uri.parse(url);
-  final newuri = uri.replace(queryParameters: {"horse_id": horseid});
-  var response = await http.get(newuri, headers: {
-    "Api-Key": apiKey,
-    HttpHeaders.contentTypeHeader: 'application/json'
-  });
-  if (response.statusCode == 200) {
-    var decodedData = jsonDecode(response.body);
+  try {
+    String url = "https://racingeye.ae/shadwell/horse/sales/";
+    final uri = Uri.parse(url);
+    final newuri = uri.replace(queryParameters: {"horse_id": horseid});
+    var response = await http.get(newuri, headers: {
+      "Api-Key": apiKey,
+      HttpHeaders.contentTypeHeader: 'application/json'
+    });
+    if (response.statusCode == 200) {
+      var decodedData = jsonDecode(response.body);
 
-    print("Sales status 200");
-    List<HorseSalesModel> sales = [];
-    for (var i in decodedData) {
-      sales.add(HorseSalesModel.fromJson(i));
+      print("Sales status 200");
+      List<HorseSalesModel> sales = [];
+      for (var i in decodedData) {
+        sales.add(HorseSalesModel.fromJson(i));
+      }
+      print(decodedData);
+      Provider.of<HorseSalesProvider>(context, listen: false).clearProvider();
+      Provider.of<HorseSalesProvider>(context, listen: false)
+          .addSalesModel(sales);
+    } else {
+      return null;
     }
-    print(decodedData);
-    Provider.of<HorseSalesProvider>(context, listen: false).clearProvider();
-    Provider.of<HorseSalesProvider>(context, listen: false)
-        .addSalesModel(sales);
+  } catch (e) {
+    return null;
   }
 }
 
 Future getHorseFormData(context, String horseId) async {
-  String url = "https://racingeye.ae/shadwell/horse/forms/";
-  final uri = Uri.parse(url);
-  final newuri = uri.replace(queryParameters: {"horse_id": horseId});
-  var response = await http.get(newuri, headers: {
-    "Api-Key": apiKey,
-    HttpHeaders.contentTypeHeader: 'application/json'
-  });
-  if (response.statusCode == 200) {
-    var decodedData = jsonDecode(response.body);
-    print(decodedData);
-    List<HorseFormModel> models = [];
-    for (var data in decodedData) {
-      models.add(HorseFormModel.fromJson(data));
+  try {
+    String url = "https://racingeye.ae/shadwell/horse/forms/";
+    final uri = Uri.parse(url);
+    final newuri = uri.replace(queryParameters: {"horse_id": horseId});
+    var response = await http.get(newuri, headers: {
+      "Api-Key": apiKey,
+      HttpHeaders.contentTypeHeader: 'application/json'
+    });
+    if (response.statusCode == 200) {
+      var decodedData = jsonDecode(response.body);
+      print(decodedData);
+      List<HorseFormModel> models = [];
+      for (var data in decodedData) {
+        models.add(HorseFormModel.fromJson(data));
+      }
+      print(models.length);
+      Provider.of<HorseFormProvider>(context, listen: false).clearProvider();
+      Provider.of<HorseFormProvider>(context, listen: false)
+          .addFormData(models);
+    } else {
+      return null;
     }
-    print(models.length);
-    Provider.of<HorseFormProvider>(context, listen: false).clearProvider();
-    Provider.of<HorseFormProvider>(context, listen: false).addFormData(models);
+  } catch (e) {
+    return null;
   }
 }
 
 Future getHorseEntries(context, String horseId) async {
-  String url = "https://racingeye.ae/shadwell/horse/entries/";
-  final uri = Uri.parse(url);
-  final newuri = uri.replace(queryParameters: {"horse_id": horseId});
-  var response = await http.get(newuri, headers: {"Api-Key": apiKey});
-  if (response.statusCode == 200) {
-    var decodedData = jsonDecode(response.body);
-    List<HorseEntriesModel> models = [];
-    for (var i in decodedData) {
-      models.add(HorseEntriesModel.fromJson(i));
+  try {
+    String url = "https://racingeye.ae/shadwell/horse/entries/";
+    final uri = Uri.parse(url);
+    final newuri = uri.replace(queryParameters: {"horse_id": horseId});
+    var response = await http.get(newuri, headers: {"Api-Key": apiKey});
+    if (response.statusCode == 200) {
+      var decodedData = jsonDecode(response.body);
+      List<HorseEntriesModel> models = [];
+      for (var i in decodedData) {
+        models.add(HorseEntriesModel.fromJson(i));
+      }
+      Provider.of<HorseEntriesProvider>(context, listen: false).clearProvider();
+      Provider.of<HorseEntriesProvider>(context, listen: false)
+          .addDataModel(models);
+    } else {
+      return null;
     }
-    Provider.of<HorseEntriesProvider>(context, listen: false).clearProvider();
-    Provider.of<HorseEntriesProvider>(context, listen: false)
-        .addDataModel(models);
+  } catch (e) {
+    return null;
   }
 }
 
-
-Future getAllHorseData(context, String horseId)async{
+Future getAllHorseData(context, String horseId) async {
   //https://racingeye.ae/shadwell/horse-details?horse_id=964565
   String url = "https://racingeye.ae/shadwell/horse-details";
-  var response = await Dio().get(url,queryParameters: {
-    "horse_id":horseId
-  },options: Options(
-    headers: {
-      "Api-Key": apiKey
-    }
-  ));
+  var response = await Dio().get(url,
+      queryParameters: {"horse_id": horseId},
+      options: Options(headers: {"Api-Key": apiKey}));
   log(response.data.toString());
+
   ///profile
   Provider.of<HorseProfileProvider>(context, listen: false).clearProvider();
   Provider.of<HorseProfileProvider>(context, listen: false)
@@ -147,7 +173,7 @@ Future getAllHorseData(context, String horseId)async{
 
   ///entries
   List<HorseEntriesModel> models = [];
-  if(response.data["entries"]!=null){
+  if (response.data["entries"] != null) {
     for (var i in response.data["entries"]) {
       models.add(HorseEntriesModel.fromJson(i));
     }
@@ -155,22 +181,22 @@ Future getAllHorseData(context, String horseId)async{
   Provider.of<HorseEntriesProvider>(context, listen: false).clearProvider();
   Provider.of<HorseEntriesProvider>(context, listen: false)
       .addDataModel(models);
+
   ///form
-List<HorseFormModel> formList =[];
-  Map<String,dynamic> forms = response.data["form"];
+  List<HorseFormModel> formList = [];
+  Map<String, dynamic> forms = response.data["form"];
   forms.forEach((key, value) {
     formList.add(HorseFormModel.fromJson(value));
   });
   log("Form length ${formList.length}");
   Provider.of<HorseFormProvider>(context, listen: false).clearProvider();
   Provider.of<HorseFormProvider>(context, listen: false).addFormData(formList);
-///sales
+
+  ///sales
   List<HorseSalesModel> sales = [];
   for (var i in response.data["sales"]) {
     sales.add(HorseSalesModel.fromJson(i));
   }
   Provider.of<HorseSalesProvider>(context, listen: false).clearProvider();
-  Provider.of<HorseSalesProvider>(context, listen: false)
-      .addSalesModel(sales);
-
+  Provider.of<HorseSalesProvider>(context, listen: false).addSalesModel(sales);
 }

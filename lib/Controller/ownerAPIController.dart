@@ -27,14 +27,7 @@ Future getAllOwnerList(context) async {
 }
 
 Future<List<OwnerEntries>?> getOwnerEntries(int ownerId) async {
-  // String url =
-  //     "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/entries";
   try {
-    // var response = await http.get(
-    //     Uri.https("https://racingeye.ae", "/shadwell/owner/entries",
-    //         {"owner_id": ownerId}),
-    //     headers: {"Api-Key": apiKey});
-
     var response = await dio.get("https://racingeye.ae/shadwell/owner/entries",
         queryParameters: {"owner_id": ownerId},
         options: Options(headers: {"Api-Key": apiKey}));
@@ -49,7 +42,7 @@ Future<List<OwnerEntries>?> getOwnerEntries(int ownerId) async {
     } else {
       return null;
     }
-  } catch (e) {
+  } on DioError catch (e) {
     return null;
   }
 }
@@ -57,25 +50,18 @@ Future<List<OwnerEntries>?> getOwnerEntries(int ownerId) async {
 Future<List<OwnerLast14Days>?> getOwnerLast14DaysData(int ownerId) async {
   String url =
       "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/last_14_days";
-  //try {
-    // var response = await http.get(
-    //     Uri.https("https://racingeye.ae", "/shadwell/owner/forms",
-    //         {"owner_id": ownerId}),
-    //     headers: {"Api-Key": apiKey});
-    var response = await dio.get("https://racingeye.ae/shadwell/owner/forms",
-        queryParameters:
-        {
-      "owner_id": ownerId
-        },
-        options: Options(headers: {"Api-Key": apiKey}));
+  //     headers: {"Api-Key": apiKey});
+  var response = await dio.get("https://racingeye.ae/shadwell/owner/forms",
+      queryParameters: {"owner_id": ownerId},
+      options: Options(headers: {"Api-Key": apiKey}));
 
-    print("OWNER FORM===>${response.data}");
-    List<OwnerLast14Days> models = [];
-    for (var i in response.data) {
-      models.add(OwnerLast14Days.fromJson(i));
-    }
-    // var decodeData = jsonDecode(response.body);
-    return models;
+  print("OWNER FORM===>${response.data}");
+  List<OwnerLast14Days> models = [];
+  for (var i in response.data) {
+    models.add(OwnerLast14Days.fromJson(i));
+  }
+  // var decodeData = jsonDecode(response.body);
+  return models;
   // } catch (e) {
   //   print(e);
   //   return null;
@@ -83,25 +69,31 @@ Future<List<OwnerLast14Days>?> getOwnerLast14DaysData(int ownerId) async {
 }
 
 Future<List<StatsSummary>?> getOwnerStatsSummary(int ownerId) async {
-  String url =
-      "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/statistical_summary";
-  //try {
-  // var response = await http.get(
-  //     Uri.https(
-  //         "https://racingeye.ae", "/shadwell/stats", {"owner_id": ownerId}),
-  //     headers: {"Api-Key": apiKey});
-  var response = await dio.get("https://racingeye.ae/shadwell/stats",
-      queryParameters: {"owner_id": ownerId},
-      options: Options(headers: {"Api-Key": apiKey}));
+  try {
+    String url =
+        "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/statistical_summary";
+    //try {
+    // var response = await http.get(
+    //     Uri.https(
+    //         "https://racingeye.ae", "/shadwell/stats", {"owner_id": ownerId}),
+    //     headers: {"Api-Key": apiKey});
+    var response = await dio.get("https://racingeye.ae/shadwell/stats",
+        queryParameters: {"owner_id": ownerId},
+        options: Options(headers: {"Api-Key": apiKey}));
 
-  print("OWNER STATS===>${response.data}");
-  List<StatsSummary> models = [];
-  for (var i in response.data) {
-    models.add(StatsSummary.fromJson(i));
+    if (response.statusCode == 200) {
+      List<StatsSummary> models = [];
+      for (var i in response.data) {
+        models.add(StatsSummary.fromJson(i));
+      }
+
+      return models;
+    } else {
+      return null;
+    }
+  } on DioError catch (e) {
+    return null;
   }
-
-  return models;
-
   // } catch (e) {
   //   print("Error in getting stats summary :- $e");
   //   return null;
@@ -109,25 +101,29 @@ Future<List<StatsSummary>?> getOwnerStatsSummary(int ownerId) async {
 }
 
 Future<List<BigRaceWinsModel>?> getOwnerBigRaceWins(int ownerId) async {
-  String url =
-      "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/big_race_wins";
-  //try {
-  // var response = await http.get(
-  //     Uri.https("https://racingeye.ae", "/shadwell/owner/bigwins",
-  //         {"owner_id": ownerId}),
-  //     headers: {"Api-Key": apiKey});
-  var response = await dio.get("https://racingeye.ae/shadwell/owner/bigwins",
-      queryParameters: {"owner_id": ownerId},
-      options: Options(headers: {"Api-Key": apiKey}));
-  if (response.statusCode == 200) {
-    //var decodedData = jsonDecode(response.body);
-    print("OWNER BIG RACE===>${response.data}");
-    List<BigRaceWinsModel> models = [];
-    for (var i in response.data) {
-      models.add(BigRaceWinsModel.fromJson(i));
+  try {
+    String url =
+        "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/big_race_wins";
+    //try {
+    // var response = await http.get(
+    //     Uri.https("https://racingeye.ae", "/shadwell/owner/bigwins",
+    //         {"owner_id": ownerId}),
+    //     headers: {"Api-Key": apiKey});
+    var response = await dio.get("https://racingeye.ae/shadwell/owner/bigwins",
+        queryParameters: {"owner_id": ownerId},
+        options: Options(headers: {"Api-Key": apiKey}));
+    if (response.statusCode == 200) {
+      //var decodedData = jsonDecode(response.body);
+      print("OWNER BIG RACE===>${response.data}");
+      List<BigRaceWinsModel> models = [];
+      for (var i in response.data) {
+        models.add(BigRaceWinsModel.fromJson(i));
+      }
+      return models;
+    } else {
+      return null;
     }
-    return models;
-  } else {
+  } on DioError catch (e) {
     return null;
   }
   // } catch (e) {
@@ -140,7 +136,7 @@ Future<List<BigRaceWinsModel>?> getOwnerBigRaceWins(int ownerId) async {
 Future<List<HorseModel>?> getOwnerHorses(int ownerId) async {
   String url =
       "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/horses";
-  //try{
+  try{
   //var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
 
   var response = await dio.get("https://racingeye.ae/shadwell/horses/",
@@ -156,9 +152,9 @@ Future<List<HorseModel>?> getOwnerHorses(int ownerId) async {
   } else {
     return null;
   }
-  //}
-  // catch(e){
-  //   print("Error in getting horses list :- $e");
-  //   return  null;
-  // }
+  }
+  on DioError catch(e){
+    print("Error in getting horses list :- $e");
+    return  null;
+  }
 }

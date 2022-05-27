@@ -49,6 +49,7 @@ class PushNotificationServices {
                     MaterialPageRoute(
                         builder: (_) => isLoggedIn
                             ? RaceDetailsScreen(
+                                index: 0,
                                 raceId: message.data['raceId'].toString())
                             : LoginScreen()));
               });
@@ -90,7 +91,7 @@ class PushNotificationServices {
             MaterialPageRoute(
                 builder: (_) => isLoggedIn
                     ? RaceDetailsScreen(
-                        raceId: message.data['raceId'].toString())
+                        index: 0, raceId: message.data['raceId'].toString())
                     : LoginScreen()));
       });
     });
@@ -104,6 +105,7 @@ class PushNotificationServices {
               MaterialPageRoute(
                   builder: (_) => isLoggedIn
                       ? RaceDetailsScreen(
+                          index: 0,
                           raceId: terminatedMessage.data['raceId'].toString())
                       : LoginScreen()));
         });

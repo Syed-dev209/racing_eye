@@ -98,6 +98,7 @@ class _CompletedRacesState extends State<CompletedRaces> {
                     itemCount: data.completeRaces.length,
                     itemBuilder: (context, index) {
                       return RacesCard(
+                        index: 2,
                         dataModel: data.completeRaces[index],
                         showTime: true,
                       );
