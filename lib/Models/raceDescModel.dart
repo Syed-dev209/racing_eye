@@ -44,31 +44,6 @@ class RaceResultsModelPrizes {
 }
 
 class RaceResultsModel {
-/*
-{
-  "horse_name": "Maksud",
-  "prizes": [
-    {
-      "position_no": 1,
-      "prize_sterling": 5400,
-      "prize_euro": null,
-      "prize_usd": 7398
-    }
-  ],
-  "rp_ages_allowed_desc": "2yo",
-  "distance_furlong_rounded": "7",
-  "race_instance_uid": "793796",
-  "id": 100,
-  "race_datetime": "2021-10-19T14:15:00+01:00",
-  "course_name": "NEWCASTLE (A.W)",
-  "course_style_name": "Newcastle (AW)",
-  "race_status_code": "4",
-  "race_instance_title": "Play Coral Racing-Super-Series For Free EBF Restricted Novice Stakes (Horses In Bands B/C/D) (GBB)",
-  "large_map_image_path": "https://re.victoriayachts.ae/courses/CURRAGH.jpg",
-  "course_image": "https://re.victoriayachts.ae/courses/CURRAGH.jpg"
-}
-*/
-
   String? horseName;
   List<RaceResultsModelPrizes>? prizes = [];
   String? rpAgesAllowedDesc;
@@ -82,6 +57,7 @@ class RaceResultsModel {
   String? raceInstanceTitle;
   String? largeMapImagePath;
   String? courseImage;
+  String? videoLink;
 
   RaceResultsModel({
     this.horseName,
@@ -97,6 +73,7 @@ class RaceResultsModel {
     this.raceInstanceTitle,
     this.largeMapImagePath,
     this.courseImage,
+    this.videoLink
   });
   RaceResultsModel.fromJson(Map<String, dynamic> json) {
     // print(json['prizes']);
@@ -126,6 +103,7 @@ class RaceResultsModel {
     raceInstanceTitle = json["race_instance_title"]?.toString();
     largeMapImagePath = json["large_map_image_path"]?.toString();
     courseImage = json["course_image"]?.toString();
+    videoLink = json['video_link']?.toString();
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();

@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:racing_eye/Models/raceDescModel.dart';
 import 'package:racing_eye/Screens/Components/OwnerComponents/ownerTables.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../main.dart';
 
@@ -22,6 +23,9 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
   String? time;
   late String date;
   late String month;
+  String? videoId;
+  YoutubePlayerController? _controller;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -29,19 +33,30 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
     dateTime = DateTime.parse(widget.data.raceDatetime!);
     var temp = DateTime.parse(widget.data.raceDatetime! + 'Z');
     print(temp);
-    var dateTimeCheck = DateFormat("yyyy-MM-dd HH:mm:ss").parse(temp.toString(), true);
+    var dateTimeCheck =
+        DateFormat("yyyy-MM-dd HH:mm:ss").parse(temp.toString(), true);
     var dateLocal = dateTimeCheck.toLocal();
     print(dateLocal);
     String minute = dateLocal.minute.toString();
-    time =
-        "${dateLocal.hour}:${minute.length == 2 ? minute : "0$minute"} ";
+    time = "${dateLocal.hour}:${minute.length == 2 ? minute : "0$minute"} ";
     date = "${dateLocal.day}";
-    month = monthList[dateLocal.month-1];
+    month = monthList[dateLocal.month - 1];
     // if (widget.data.prizes!.isEmpty) {
     //   setState(() {
     //     emptyList = true;
     //   });
     // }
+
+    if (widget.data.videoLink != null ||
+        (widget.data.videoLink?.isNotEmpty ?? false)) {
+      videoId = YoutubePlayer.convertUrlToId(widget.data.videoLink ??
+              "https://www.youtube.com/watch?v=wnkBaoy6OmQ") ??
+          "";
+      _controller = YoutubePlayerController(
+        initialVideoId: videoId!,
+        flags: YoutubePlayerFlags(hideThumbnail: true, enableCaption: false),
+      );
+    }
   }
 
   @override
@@ -119,7 +134,7 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                 width: 15.0,
               ),
               Text(
-                "Course: ${widget.data.courseStyleName??"N/A"}",
+                "Course: ${widget.data.courseStyleName ?? "N/A"}",
                 style: TextStyle(color: Color(0xff9AB5D1)),
               )
             ],
@@ -154,26 +169,38 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
                 child: Container(
                   child: Row(
                     children: [
-                      Expanded(
-                        child: Text(
-                          "Distance: ",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
+                      Text(
+                        "Distance: ",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         width: 3.0,
                       ),
                       Expanded(
                         child: Text(
-                          "${widget.data.distanceFurlongRounded??"0"}m",
+                          "${widget.data.distanceFurlongRounded ?? "0"}m",
                           style: TextStyle(color: Color(0xff9AB5D1)),
                         ),
                       )
                     ],
                   ),
                 ),
-              )
+              ),
+              if (widget.data.videoLink != null ||
+                  (widget.data.videoLink?.isNotEmpty ?? false))
+                Tooltip(
+                  message: 'Go to video',
+                  child: GestureDetector(
+                    onTap: () {
+                      playVideo();
+                    },
+                    child: Icon(
+                      Icons.ondemand_video,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
             ],
           ),
           SizedBox(
@@ -277,5 +304,25 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
         ],
       ),
     );
+  }
+
+  playVideo() {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (context) {
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.85,
+            width: double.maxFinite,
+            child: YoutubePlayerBuilder(
+              player: YoutubePlayer(
+                controller: _controller!,
+              ),
+              builder: (context, player) {
+                return player;
+              },
+            ),
+          );
+        });
   }
 }

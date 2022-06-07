@@ -64,14 +64,14 @@ class _DashboardBaseState extends State<DashboardBase> {
                   height: 20.0,
                 ),
                 label: 'Results'),
-            BottomNavigationBarItem(
-                icon: Image.asset(
-                  selectedIndex == 3
-                      ? 'images/topPredictorsAc.png'
-                      : 'images/topPredictorsNac.png',
-                  height: 20.0,
+            // BottomNavigationBarItem(
+            //     icon: Image.asset(
+            //       selectedIndex == 3
+            //           ? 'images/topPredictorsAc.png'
+            //           : 'images/topPredictorsNac.png',
+            //       height: 20.0,
                 
-                ),label: "Videos")
+            //     ),label: "Videos")
             //     label: 'Top Predictors'),
             // BottomNavigationBarItem(
             //     icon: Image.asset(
@@ -91,9 +91,9 @@ class _DashboardBaseState extends State<DashboardBase> {
               } else if(index==2){
                 pageSelector = HorseRaceScreen();
               }
-              else{
-                pageSelector = VideosScreen();
-              }
+              // else{
+              //   pageSelector = VideosScreen();
+              // }
               selectedIndex = index;
             });
           },

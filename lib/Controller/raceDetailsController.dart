@@ -73,25 +73,18 @@ Future getCompletedRaces(context) async {
 
 Future getRaceDescription({context, required String raceId}) async {
   print(raceId);
-  String url = "https://re.victoriayachts.ae/api/?q=racecards/$raceId";
-  // var response = await http.get(
-  //     Uri.https(
-  //         "https://racingeye.ae", "/shadwell/races/", {"race_id": raceId}),
-  //     headers: {"Api-Key": apiKey});
 
   var response = await dio.get("https://racingeye.ae/shadwell/races/",
       queryParameters: {"race_id": raceId},
       options: Options(headers: {"Api-Key": apiKey}));
   if (response.statusCode == 200) {
-    //var decodedData = jsonDecode(response.body);
-    // print(response.data);
+
     List<RaceResultsModel> models = [];
     for (var i in response.data) {
       print(i);
       models.add(RaceResultsModel.fromJson(i));
     }
     Provider.of<RaceResultsProvider>(context, listen: false).clearProvider();
-    //print(models.length);
     Provider.of<RaceResultsProvider>(context, listen: false)
         .addRaceDetails(models);
   }
