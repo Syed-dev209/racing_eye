@@ -16,5 +16,6 @@ Future getStatus(context) async {
     var decodedData = jsonDecode(response.body);
     Provider.of<StatsProvider>(context, listen: false)
         .setStatsData(StatsModel.fromJson(decodedData.first));
+      
   }
 }
