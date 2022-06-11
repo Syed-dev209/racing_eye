@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:racing_eye/Models/raceDescModel.dart';
 import 'package:racing_eye/Screens/Components/OwnerComponents/ownerTables.dart';
 import 'package:racing_eye/Screens/ownerDetails.dart';
+import 'package:racing_eye/Screens/video_player.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -29,31 +30,15 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
   YoutubePlayerController? _controller;
   String dummyUrl =
       "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4";
-  VideoPlayerController? videoPlayerController;
-  ChewieController? chewieController;
 
-  Future initializePlayer() async {
-    if (widget.data.videoLink!.contains('youtube')) {
+  initializePlayer() {
+    if (widget.data.videoLink!.contains('youtu')) {
       videoId = YoutubePlayer.convertUrlToId(widget.data.videoLink ??
               "https://www.youtube.com/watch?v=wnkBaoy6OmQ") ??
           "";
       _controller = YoutubePlayerController(
         initialVideoId: videoId!,
         flags: YoutubePlayerFlags(hideThumbnail: true, enableCaption: false),
-      );
-    } else {
-      videoPlayerController =
-          VideoPlayerController.network(widget.data.videoLink ?? dummyUrl);
-      await videoPlayerController!.initialize();
-      chewieController = ChewieController(
-        fullScreenByDefault: false,
-        allowFullScreen: false,
-        placeholder: Center(
-          child: CircularProgressIndicator(),
-        ),
-        videoPlayerController: videoPlayerController!,
-        autoPlay: true,
-        looping: false,
       );
     }
     setState(() {});
@@ -74,11 +59,6 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
     time = "${dateLocal.hour}:${minute.length == 2 ? minute : "0$minute"} ";
     date = "${dateLocal.day}";
     month = monthList[dateLocal.month - 1];
-    // if (widget.data.prizes!.isEmpty) {
-    //   setState(() {
-    //     emptyList = true;
-    //   });
-    // }
 
     if (widget.data.videoLink != null ||
         (widget.data.videoLink?.isNotEmpty ?? false)) {
@@ -91,16 +71,6 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
       // );
       initializePlayer();
     }
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    if (videoPlayerController != null || chewieController != null) {
-      videoPlayerController!.dispose();
-      chewieController!.dispose();
-    }
-    super.dispose();
   }
 
   @override
@@ -351,38 +321,30 @@ class _RaceDetailsInfoCardState extends State<RaceDetailsInfoCard> {
   }
 
   playVideo() async {
-    await initializePlayer();
-    await showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (context) {
-          return !(widget.data.videoLink?.contains('youtube') ?? false)
-              ? Container(
-                  height: MediaQuery.of(context).size.height * 0.85,
-                  width: double.maxFinite,
-                  child: chewieController != null
-                      ? Chewie(
-                          controller: chewieController!,
-                        )
-                      : SizedBox(
-                          height: 60, child: CircularProgressIndicator()),
-                )
-              : Container(
-                  height: MediaQuery.of(context).size.height * 0.85,
-                  width: double.maxFinite,
-                  child: YoutubePlayerBuilder(
-                    player: YoutubePlayer(
-                      controller: _controller!,
-                    ),
-                    builder: (context, player) {
-                      return player;
-                    },
-                  ),
-                );
-        });
-    if (videoPlayerController != null || chewieController != null) {
-      videoPlayerController!.dispose();
-      chewieController!.dispose();
+    if (widget.data.videoLink?.contains('youtu') ?? false) {
+      showModalBottomSheet(
+          isScrollControlled: true,
+          context: context,
+          builder: (context) {
+            return Container(
+              height: MediaQuery.of(context).size.height * 0.85,
+              width: double.maxFinite,
+              child: YoutubePlayerBuilder(
+                player: YoutubePlayer(
+                  controller: _controller!,
+                ),
+                builder: (context, player) {
+                  return player;
+                },
+              ),
+            );
+          });
+    } else {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) => VideoPlayerScreen(
+                  videoUrl: widget.data.videoLink ?? dummyUrl)));
     }
   }
 }
