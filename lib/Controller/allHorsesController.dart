@@ -28,7 +28,7 @@ Future getAllHorsesData(context) async {
 }
 
 Future getHorseProfile(context, String horseId) async {
-  try {
+ // try {
     String url = "https://racingeye.ae/shadwell/horses/";
     final uri = Uri.parse(url);
     final newuri = uri.replace(queryParameters: {"horse_id": horseId});
@@ -48,12 +48,13 @@ Future getHorseProfile(context, String horseId) async {
       Provider.of<HorseProfileProvider>(context, listen: false).clearProvider();
       Provider.of<HorseProfileProvider>(context, listen: false)
           .addProfile(models.isNotEmpty ? models[0] : null);
+      return true;
     } else {
       return null;
     }
-  } catch (e) {
-    return null;
-  }
+  // } catch (e) {
+  //   return null;
+  // }
 }
 
 Future getHorseRecords(context, String horseId) async {
@@ -70,6 +71,7 @@ Future getHorseRecords(context, String horseId) async {
       Provider.of<HorseRecordProvider>(context, listen: false).clearProvider();
       Provider.of<HorseRecordProvider>(context, listen: false)
           .addHorserecods(decodedData);
+      return true;
     } else {
       return null;
     }
@@ -79,7 +81,7 @@ Future getHorseRecords(context, String horseId) async {
 }
 
 Future getHorseSalesData(context, String horseid) async {
-  try {
+  //try {
     String url = "https://racingeye.ae/shadwell/horse/sales/";
     final uri = Uri.parse(url);
     final newuri = uri.replace(queryParameters: {"horse_id": horseid});
@@ -89,8 +91,6 @@ Future getHorseSalesData(context, String horseid) async {
     });
     if (response.statusCode == 200) {
       var decodedData = jsonDecode(response.body);
-
-      print("Sales status 200");
       List<HorseSalesModel> sales = [];
       for (var i in decodedData) {
         sales.add(HorseSalesModel.fromJson(i));
@@ -99,16 +99,17 @@ Future getHorseSalesData(context, String horseid) async {
       Provider.of<HorseSalesProvider>(context, listen: false).clearProvider();
       Provider.of<HorseSalesProvider>(context, listen: false)
           .addSalesModel(sales);
+      return true;
     } else {
       return null;
-    }
-  } catch (e) {
-    return null;
-  }
+     }
+  // } catch (e) {
+  //   return null;
+  // }
 }
 
 Future getHorseFormData(context, String horseId) async {
-  try {
+ // try {
     String url = "https://racingeye.ae/shadwell/horse/forms/";
     final uri = Uri.parse(url);
     final newuri = uri.replace(queryParameters: {"horse_id": horseId});
@@ -127,12 +128,13 @@ Future getHorseFormData(context, String horseId) async {
       Provider.of<HorseFormProvider>(context, listen: false).clearProvider();
       Provider.of<HorseFormProvider>(context, listen: false)
           .addFormData(models);
+      return true;
     } else {
       return null;
     }
-  } catch (e) {
-    return null;
-  }
+  // } catch (e) {
+  //   return null;
+  // }
 }
 
 Future getHorseEntries(context, String horseId) async {
@@ -150,6 +152,8 @@ Future getHorseEntries(context, String horseId) async {
       Provider.of<HorseEntriesProvider>(context, listen: false).clearProvider();
       Provider.of<HorseEntriesProvider>(context, listen: false)
           .addDataModel(models);
+
+      return true;
     } else {
       return null;
     }

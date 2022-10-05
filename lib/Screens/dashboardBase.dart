@@ -70,7 +70,7 @@ class _DashboardBaseState extends State<DashboardBase> {
             //           ? 'images/topPredictorsAc.png'
             //           : 'images/topPredictorsNac.png',
             //       height: 20.0,
-                
+
             //     ),label: "Videos")
             //     label: 'Top Predictors'),
             // BottomNavigationBarItem(
@@ -88,7 +88,7 @@ class _DashboardBaseState extends State<DashboardBase> {
                 pageSelector = DashboardScreen();
               } else if (index == 1) {
                 pageSelector = GlobalSearchScreen();
-              } else if(index==2){
+              } else if (index == 2) {
                 pageSelector = HorseRaceScreen();
               }
               // else{

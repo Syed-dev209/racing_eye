@@ -46,6 +46,9 @@ class _OwnerDetailsState extends State<OwnerDetails> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
+        appBar: CustomWhiteAppBar(
+          headerText: 'Branch Details',
+        ),
         body: SafeArea(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
@@ -53,12 +56,6 @@ class _OwnerDetailsState extends State<OwnerDetails> {
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: [
-                CustomWhiteAppBar(
-                  headerText: 'Branch Details',
-                ),
-                SizedBox(
-                  height: 15.0,
-                ),
                 OwnerCard(
                   ownerData: widget.ownerData,
                   bgColorWhite: false,

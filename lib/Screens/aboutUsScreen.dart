@@ -15,6 +15,10 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar:  CustomWhiteAppBar(
+                  headerText: "About us",
+                  showTrailing: false,
+                ),
         body: SafeArea(
           child: Container(
             height: MediaQuery.of(context).size.height * 0.98,
@@ -22,16 +26,6 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
             child: ListView(
               children: [
-                SizedBox(
-                  height: 15,
-                ),
-                CustomWhiteAppBar(
-                  headerText: "About us",
-                  showTrailing: false,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
                 Center(
                   child: Text(
                     "Welcome",

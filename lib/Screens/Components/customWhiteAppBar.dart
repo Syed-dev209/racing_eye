@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CustomWhiteAppBar extends StatelessWidget {
+class CustomWhiteAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String headerText;
   bool? showTrailing;
 
@@ -12,13 +12,15 @@ class CustomWhiteAppBar extends StatelessWidget {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
-      leading: GestureDetector(
-          onTap: () async {
-            bool check = await Navigator.maybePop(context);
+      leading: Navigator.canPop(context)
+          ? GestureDetector(
+              onTap: () async {
+                bool check = await Navigator.maybePop(context);
 
-            // Navigator.of(context, rootNavigator: true).pop();
-          },
-          child: SvgPicture.asset('images/SVGS/backButton.svg')),
+                // Navigator.of(context, rootNavigator: true).pop();
+              },
+              child: SvgPicture.asset('images/SVGS/backButton.svg'))
+          : null,
       title: Text(
         headerText,
         style: TextStyle(
@@ -33,9 +35,16 @@ class CustomWhiteAppBar extends StatelessWidget {
                 cacheHeight: 20,
                 cacheWidth: 20,
               ),
-              SvgPicture.asset('images/SVGS/searchIcon.svg')
+              SvgPicture.asset('images/SVGS/searchIcon.svg'),
+              const SizedBox(
+                width: 12,
+              )
             ]
           : [],
     );
   }
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

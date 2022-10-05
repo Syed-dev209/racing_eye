@@ -46,9 +46,6 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
       child: Column(
         children: [
-          SizedBox(
-            height: 20,
-          ),
           CustomWhiteAppBar(
             headerText: "Search",
             showTrailing: false,
@@ -122,14 +119,20 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
                         List<RaceDetailsModel> raceDataList = [];
                         raceDataList.addAll(value);
                         for (var i in raceDataList) {
-                          cards.add(RacesCard(dataModel: i,index: 0,));
+                          cards.add(RacesCard(
+                            dataModel: i,
+                            index: 0,
+                          ));
                         }
                       } else {
                         ///type=jockey
                         List<RaceDetailsModel> jockeyDataList = [];
                         jockeyDataList.addAll(value);
                         for (var i in jockeyDataList) {
-                          cards.add(RacesCard(dataModel: i,index: 0,));
+                          cards.add(RacesCard(
+                            dataModel: i,
+                            index: 0,
+                          ));
                         }
                       }
                     } else {

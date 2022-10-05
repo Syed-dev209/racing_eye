@@ -40,31 +40,37 @@ class _HorsesListState extends State<HorsesList> {
         createdAt: " ",
         updatedAt: " ",
         countryFlag: " "));
-    for (var data in Provider.of<OwnerDataProvider>(context, listen: false).ownerList) {
+    for (var data
+        in Provider.of<OwnerDataProvider>(context, listen: false).ownerList) {
       ownerNames.add(data);
     }
     ownerName = ownerNames.first;
-    final prov = Provider.of<HorseDetailProvider>(context, listen: false).dataModel;
-    for(var i in prov){
+    final prov =
+        Provider.of<HorseDetailProvider>(context, listen: false).dataModel;
+    for (var i in prov) {
       preservedHorseList.add(i);
     }
     // for (var i in preservedHorseList) {
     //   print(i.horseAge);
     // }
   }
-@override
+
+  @override
   void deactivate() {
     // TODO: implement deactivate
-  Provider.of<HorseDetailProvider>(context,listen: false).dataModel=preservedHorseList;
+    Provider.of<HorseDetailProvider>(context, listen: false).dataModel =
+        preservedHorseList;
     super.deactivate();
-
-
-}
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: CustomWhiteAppBar(
+          headerText: 'Horses',
+          showTrailing: false,
+        ),
         body: SafeArea(
           child: Container(
             height: MediaQuery.of(context).size.height * 0.98,
@@ -72,13 +78,6 @@ class _HorsesListState extends State<HorsesList> {
             padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),
             child: Column(
               children: [
-                CustomWhiteAppBar(
-                  headerText: 'Horses',
-                  showTrailing: false,
-                ),
-                SizedBox(
-                  height: 22.5,
-                ),
                 Expanded(
                   child: Consumer<HorseDetailProvider>(
                     builder: (context, data, _) {
@@ -96,11 +95,9 @@ class _HorsesListState extends State<HorsesList> {
                                   // print("=====> $val");
                                   List<HorsesDetailModel> searchedList = [];
                                   for (var i in preservedHorseList) {
-                                    if (i.horseName!.contains(
-                                        RegExp(
+                                    if (i.horseName!.contains(RegExp(
                                         searchedItem.text,
-                                        caseSensitive: false)
-                                    )) {
+                                        caseSensitive: false))) {
                                       // print("Current ${i.horseName}");
                                       // print("found");
                                       searchedList.add(i);
@@ -154,7 +151,8 @@ class _HorsesListState extends State<HorsesList> {
                                     } else {
                                       List<HorsesDetailModel> searchedList = [];
                                       for (var i in preservedHorseList) {
-                                        DateTime parseData = DateTime.parse(i.horseDateOfBirth!);
+                                        DateTime parseData =
+                                            DateTime.parse(i.horseDateOfBirth!);
                                         DateTime now = DateTime.now();
                                         int age = now.year - parseData.year;
                                         if (age == int.parse(val)) {
@@ -180,7 +178,6 @@ class _HorsesListState extends State<HorsesList> {
                                   } else {
                                     List<HorsesDetailModel> searchedList = [];
                                     for (var i in preservedHorseList) {
-
                                       if (i.ownerName!.toLowerCase() ==
                                           ownerName!.ownerName!.toLowerCase()) {
                                         searchedList.add(i);

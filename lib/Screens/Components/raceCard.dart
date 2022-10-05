@@ -17,7 +17,10 @@ class RacesCard extends StatelessWidget {
   bool navigate = true;
   int index;
   RacesCard(
-      {required this.dataModel, this.showTime = false, this.navigate = true,required this.index});
+      {required this.dataModel,
+      this.showTime = false,
+      this.navigate = true,
+      required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +53,7 @@ class RacesCard extends StatelessWidget {
               context,
               CupertinoPageRoute(
                   builder: (_) => RaceDetailsScreen(
-                    index: index,
+                        index: index,
                         raceId: dataModel.raceInstanceUid.toString(),
                       )));
         } else {
@@ -137,6 +140,12 @@ class RacesCard extends StatelessWidget {
                                     Image.network(
                                       dataModel.courseCountryCode ??
                                           "https://www.pinclipart.com/picdir/middle/448-4485361_png-file-svg-flag-icon-png-clipart.png",
+                                      errorBuilder: (a, s, f) {
+                                        return Image.network(
+                                          "https://www.pinclipart.com/picdir/middle/448-4485361_png-file-svg-flag-icon-png-clipart.png",
+                                          height: 20,
+                                        );
+                                      },
                                       height: 20,
                                     ),
                                   ],

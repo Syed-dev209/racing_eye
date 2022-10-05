@@ -33,7 +33,6 @@ class _VideosScreenState extends State<VideosScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     videosController = StreamController<List<VideosModel>?>();
     getVideos();
@@ -42,12 +41,9 @@ class _VideosScreenState extends State<VideosScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size(double.maxFinite, 56),
-        child: CustomWhiteAppBar(
-          headerText: "Live Streaming",
-          showTrailing: false,
-        ),
+      appBar: CustomWhiteAppBar(
+        headerText: "Live Streaming",
+        showTrailing: false,
       ),
       body: SafeArea(
           child: StreamBuilder<List<VideosModel>?>(

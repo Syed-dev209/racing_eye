@@ -64,8 +64,6 @@ class _RaceDetailsScreenState extends State<RaceDetailsScreen> {
 
   @override
   void initState() {
-    // ignore: todo
-    // TODO: implement initState
     super.initState();
     runnersController = StreamController<List<RaceRunnersModel>>();
     getRaceData(context);
@@ -82,26 +80,17 @@ class _RaceDetailsScreenState extends State<RaceDetailsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: CustomWhiteAppBar(
+          headerText: "Race Details/Results",
+          showTrailing: false,
+        ),
         body: SafeArea(
           child: Container(
-              height: MediaQuery.of(context).size.height * 0.98,
+              height: MediaQuery.of(context).size.height,
               width: double.maxFinite,
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  CustomWhiteAppBar(
-                    headerText: "Race Details/Results",
-                    showTrailing: false,
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  // loaded
-                  //     ?
-
                   !error
                       ? Expanded(
                           child: Consumer<RaceResultsProvider>(

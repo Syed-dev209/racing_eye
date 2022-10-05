@@ -44,7 +44,7 @@ class PushNotificationServices {
         showOverlayNotification((context) {
           return GestureDetector(
             onTap: () {
-              SchedulerBinding.instance!.addPostFrameCallback((_) {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
                 Navigator.of(GlobalVariable.navState.currentContext!).push(
                     MaterialPageRoute(
                         builder: (_) => isLoggedIn
@@ -84,9 +84,7 @@ class PushNotificationServices {
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       ///jab app background me hu kill nhi hui hu
-      print('A new onMessageOpenedApp event was published!');
-      print(message.data);
-      SchedulerBinding.instance!.addPostFrameCallback((_) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
         Navigator.of(GlobalVariable.navState.currentContext!).push(
             MaterialPageRoute(
                 builder: (_) => isLoggedIn
@@ -100,7 +98,7 @@ class PushNotificationServices {
     RemoteMessage? terminatedMessage = await _fcm.getInitialMessage();
     if (terminatedMessage != null) {
       if (terminatedMessage.notification != null) {
-        SchedulerBinding.instance!.addPostFrameCallback((_) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
           Navigator.of(GlobalVariable.navState.currentContext!).push(
               MaterialPageRoute(
                   builder: (_) => isLoggedIn
@@ -121,7 +119,6 @@ Future registerDeviceToken(String token, String device) async {
     var response = await dio.post(url,
         data: {"token": token, "device": device},
         options: Options(headers: {"Api-key": apiKey}));
-    print(response.data);
     if (response.statusCode == 200) {
       final box = GetStorage();
       box.write("token", true);

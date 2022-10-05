@@ -37,7 +37,7 @@ class _RaceRunnerDetailScreenState extends State<RaceRunnerDetailScreen>
   bool loaded4 = false;
 
   getData() async {
-    getAllHorseData(context, widget.horseId).then((value){
+    getAllHorseData(context, widget.horseId).then((value) {
       setState(() {
         loaded1 = true;
         loaded5 = true;
@@ -64,6 +64,10 @@ class _RaceRunnerDetailScreenState extends State<RaceRunnerDetailScreen>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: CustomWhiteAppBar(
+          headerText: "Horse Details",
+          showTrailing: true,
+        ),
         body: SafeArea(
           child: Container(
             height: MediaQuery.of(context).size.height * 0.98,
@@ -71,35 +75,24 @@ class _RaceRunnerDetailScreenState extends State<RaceRunnerDetailScreen>
             padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
             child: Column(
               children: [
-                SizedBox(
-                  height: 20.0,
-                ),
-                CustomWhiteAppBar(
-                  headerText: "Horse Details",
-                  showTrailing: true,
-                ),
-                SizedBox(
-                  height: 25.0,
-                ),
-
                 Expanded(
                   child: Column(
                     children: [
                       loaded1
                           ? HorseDetailsCard(
-                        expand: true,
-                        //data: Provider.of<HorseProfileProvider>(context, listen: false)
-                        // .profile!,
-                      )
+                              expand: true,
+                              //data: Provider.of<HorseProfileProvider>(context, listen: false)
+                              // .profile!,
+                            )
                           : Center(
-                        child: Container(
-                          height: 100.0,
-                          width: double.maxFinite,
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
-                      ),
+                              child: Container(
+                                height: 100.0,
+                                width: double.maxFinite,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                            ),
                       SizedBox(
                         height: 25.0,
                       ),
@@ -127,8 +120,7 @@ class _RaceRunnerDetailScreenState extends State<RaceRunnerDetailScreen>
                               indicatorColor: Color(0xFF02458A),
                               // tabBarIndicatorSize: TabBarIndicatorSize.tab,
                             ),
-                          )
-                      ),
+                          )),
                       Expanded(
                         child: TabBarView(
                           physics: NeverScrollableScrollPhysics(),
@@ -136,17 +128,19 @@ class _RaceRunnerDetailScreenState extends State<RaceRunnerDetailScreen>
                           children: [
                             loaded3
                                 ? HorseDataTables(
-                              dataTable: HorseFormDataTable(showUpper: false,),
-                            )
+                                    dataTable: HorseFormDataTable(
+                                      showUpper: false,
+                                    ),
+                                  )
                                 : Center(
-                              child: Container(
-                                height: 500.0,
-                                width: double.maxFinite,
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ),
-                            ),
+                                    child: Container(
+                                      height: 500.0,
+                                      width: double.maxFinite,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    ),
+                                  ),
                             // loaded5
                             //     ? HorseDataTables(
                             //   dataTable: HorseEntriesDataTable(),

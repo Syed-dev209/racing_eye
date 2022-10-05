@@ -41,48 +41,67 @@ class _HorseDetailsState extends State<HorseDetails>
   bool error = false;
 
   getData() async {
-    bool check = await InternetService.checkConnectivity();
-    if (check) {
-      await getHorseProfile(context, widget.horseId).then((value) {
-        if (value != null) {
-          loaded1 = true;
-        } else {
-          error = true;
-        }
-      });
-      await getHorseRecords(context, widget.horseId).then((value) {
-        if (value != null) {
-          loaded2 = true;
-        } else {
-          error = true;
-        }
-      });
-      await getHorseFormData(context, widget.horseId).then((value) {
-        if (value != null) {
-          loaded3 = true;
-        } else {
-          error = true;
-        }
-      });
+    try {
+      bool check = await InternetService.checkConnectivity();
+      if (check) {
+        await Future.wait([
+          getHorseProfile(context, widget.horseId),
+          getHorseRecords(context, widget.horseId),
+          getHorseFormData(context, widget.horseId),
+          getHorseEntries(context, widget.horseId),
+          getHorseSalesData(context, widget.horseId)
+        ]);
 
-      await getHorseEntries(context, widget.horseId).then((value) {
-        if (value != null) {
-          loaded5 = true;
-        } else {
-          error = true;
-        }
-      });
-      await getHorseSalesData(context, widget.horseId).then((value) {
-        if (value != null) {
-          loaded4 = true;
-        } else {
-          error = true;
-        }
-      });
-    } else {
+        loaded1 = true;
+        loaded2 = true;
+        loaded3 = true;
+        loaded4 = true;
+        loaded5 = true;
+
+        // await getHorseProfile(context, widget.horseId).then((value) {
+        //   if (value != null) {
+        //     loaded1 = true;
+        //   } else {
+        //     error = true;
+        //   }
+        // });
+        // await getHorseRecords(context, widget.horseId).then((value) {
+        //   if (value != null) {
+        //     loaded2 = true;
+        //   } else {
+        //     error = true;
+        //   }
+        // });
+        // await getHorseFormData(context, widget.horseId).then((value) {
+        //   if (value != null) {
+        //     loaded3 = true;
+        //   } else {
+        //     error = true;
+        //   }
+        // });
+
+        // await getHorseEntries(context, widget.horseId).then((value) {
+        //   if (value != null) {
+        //     loaded5 = true;
+        //   } else {
+        //     error = true;
+        //   }
+        // });
+        // await getHorseSalesData(context, widget.horseId).then((value) {
+        //   if (value != null) {
+        //     loaded4 = true;
+        //   } else {
+        //     error = true;
+        //   }
+        // });
+      } else {
+        error = true;
+      }
+      setState(() {});
+    } catch (e) {
       error = true;
+      setState(() {});
     }
-    setState(() {});
   }
 
   @override
@@ -102,6 +121,10 @@ class _HorseDetailsState extends State<HorseDetails>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: CustomWhiteAppBar(
+          headerText: "Horse Details",
+          showTrailing: true,
+        ),
         body: SafeArea(
           child: Container(
             height: MediaQuery.of(context).size.height * 0.98,
@@ -109,16 +132,6 @@ class _HorseDetailsState extends State<HorseDetails>
             padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
             child: Column(
               children: [
-                SizedBox(
-                  height: 20.0,
-                ),
-                CustomWhiteAppBar(
-                  headerText: "Horse Details",
-                  showTrailing: true,
-                ),
-                SizedBox(
-                  height: 25.0,
-                ),
                 !error
                     ? Expanded(
                         child: Column(

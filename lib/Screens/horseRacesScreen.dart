@@ -81,6 +81,10 @@ class _HorseRaceScreenState extends State<HorseRaceScreen>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: CustomWhiteAppBar(
+          headerText: 'Horse Races',
+          showTrailing: false,
+        ),
         body: SafeArea(
           child: Container(
             height: MediaQuery.of(context).size.height * 0.98,
@@ -89,17 +93,6 @@ class _HorseRaceScreenState extends State<HorseRaceScreen>
             child: !error
                 ? Column(
                     children: [
-                      Padding(
-                        padding:
-                            EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),
-                        child: CustomWhiteAppBar(
-                          headerText: 'Horse Races',
-                          showTrailing: false,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 25.0,
-                      ),
                       Padding(
                         padding:
                             EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),

@@ -25,24 +25,22 @@ class _OwnerListState extends State<OwnerList> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: CustomWhiteAppBar(
+          headerText: 'Branches',
+          showTrailing: false,
+        ),
         body: SafeArea(
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.964,
+            height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),
             child: Column(
               children: [
-                CustomWhiteAppBar(
-                  headerText: 'Branches',
-                  showTrailing: false,
-                ),
-                SizedBox(
-                  height: 45.0,
-                ),
                 Expanded(child:
                     Consumer<OwnerDataProvider>(builder: (context, data, _) {
                   return data.ownerList.isNotEmpty
                       ? ListView.builder(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
                           itemCount: data.ownerList.length,
                           itemBuilder: (context, index) {
                             return Padding(
