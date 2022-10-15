@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:racing_eye/Models/horseEntriesModel.dart';
 import 'package:racing_eye/Models/horseFormModel.dart';
-import 'package:racing_eye/Models/horseProfileModel.dart';
 import 'package:racing_eye/Models/horseRecordsModel.dart';
 import 'package:racing_eye/Models/horseSalesModel.dart';
 import 'package:racing_eye/Screens/Components/OwnerComponents/ownerTables.dart';

@@ -3,8 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:racing_eye/Screens/dashboardScreen.dart';
 import 'package:racing_eye/Screens/globalSearchScreen.dart';
 import 'package:racing_eye/Screens/horseRacesScreen.dart';
-import 'package:racing_eye/Screens/searchScreen.dart';
-import 'package:racing_eye/Screens/videosScreen.dart';
 
 class DashboardBase extends StatefulWidget {
   const DashboardBase({Key? key}) : super(key: key);

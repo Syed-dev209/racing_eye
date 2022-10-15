@@ -13,7 +13,12 @@ class InternetService {
         connection == ConnectivityResult.wifi) {
       return true;
     } else {
-      return false;
+      await Future.delayed(Duration(seconds: 2));
+      connection = await (Connectivity().checkConnectivity());
+      return (connection == ConnectivityResult.mobile ||
+              connection == ConnectivityResult.wifi)
+          ? true
+          : false;
     }
   }
 }

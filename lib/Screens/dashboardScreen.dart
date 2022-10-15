@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:racing_eye/Models/statsModel.dart';
-import 'package:racing_eye/Screens/dashboardBase.dart';
 import 'package:racing_eye/Screens/horseRacesScreen.dart';
 import 'package:racing_eye/Screens/horsesList.dart';
 import 'package:racing_eye/Screens/ownerList.dart';
@@ -109,7 +108,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       EdgeInsets.only(right: 25, left: 25, top: 25, bottom: 8),
                   width: double.maxFinite,
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Color(0xfff3f3f3),
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(40.0),
                           topLeft: Radius.circular(40.0))),

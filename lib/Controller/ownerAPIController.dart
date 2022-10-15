@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:racing_eye/Models/OwnerModel/bigRaceWins.dart';
 import 'package:racing_eye/Models/OwnerModel/horseModel.dart';
@@ -42,14 +40,12 @@ Future<List<OwnerEntries>?> getOwnerEntries(int ownerId) async {
     } else {
       return null;
     }
-  } on DioError catch (e) {
+  } on DioError catch (_) {
     return null;
   }
 }
 
 Future<List<OwnerLast14Days>?> getOwnerLast14DaysData(int ownerId) async {
-  String url =
-      "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/last_14_days";
   //     headers: {"Api-Key": apiKey});
   var response = await dio.get("https://racingeye.ae/shadwell/owner/forms",
       queryParameters: {"owner_id": ownerId},
@@ -70,8 +66,6 @@ Future<List<OwnerLast14Days>?> getOwnerLast14DaysData(int ownerId) async {
 
 Future<List<StatsSummary>?> getOwnerStatsSummary(int ownerId) async {
   try {
-    String url =
-        "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/statistical_summary";
     //try {
     // var response = await http.get(
     //     Uri.https(
@@ -91,7 +85,7 @@ Future<List<StatsSummary>?> getOwnerStatsSummary(int ownerId) async {
     } else {
       return null;
     }
-  } on DioError catch (e) {
+  } on DioError catch (_) {
     return null;
   }
   // } catch (e) {
@@ -102,8 +96,6 @@ Future<List<StatsSummary>?> getOwnerStatsSummary(int ownerId) async {
 
 Future<List<BigRaceWinsModel>?> getOwnerBigRaceWins(int ownerId) async {
   try {
-    String url =
-        "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/big_race_wins";
     //try {
     // var response = await http.get(
     //     Uri.https("https://racingeye.ae", "/shadwell/owner/bigwins",
@@ -123,7 +115,7 @@ Future<List<BigRaceWinsModel>?> getOwnerBigRaceWins(int ownerId) async {
     } else {
       return null;
     }
-  } on DioError catch (e) {
+  } on DioError catch (_) {
     return null;
   }
   // } catch (e) {
@@ -134,8 +126,6 @@ Future<List<BigRaceWinsModel>?> getOwnerBigRaceWins(int ownerId) async {
 
 ///remaining ----------------------------
 Future<List<HorseModel>?> getOwnerHorses(int ownerId) async {
-  String url =
-      "https://re.victoriayachts.ae/api/?q=profile/owner/$ownerId/horses";
   try{
   //var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
 

@@ -3,7 +3,6 @@ import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Models/OwnerModel/ownerData.dart';
 import 'package:racing_eye/Models/horsesDetailModel.dart';
 import 'package:racing_eye/Models/raceDetailsModel.dart';
-import 'package:racing_eye/Screens/globalSearchScreen.dart';
 
 var dio = Dio();
 
@@ -47,7 +46,7 @@ Future globallySearch(String type, String keyword) async {
     } else {
       return null;
     }
-  } on DioError catch (e) {
+  } on DioError catch (_) {
     return null;
   }
 }

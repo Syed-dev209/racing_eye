@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:racing_eye/Screens/loginScreen.dart';
-import 'package:racing_eye/widgets/custom_text_field.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override

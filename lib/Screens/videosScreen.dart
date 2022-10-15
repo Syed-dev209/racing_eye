@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:racing_eye/Controller/videosController.dart';
 import 'package:racing_eye/Models/videosModel.dart';
 import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
 import 'package:racing_eye/Screens/Components/somethingWentWrong.dart';
 import 'package:racing_eye/Screens/Components/videoWidget.dart';
-import 'package:racing_eye/main.dart';
 
 class VideosScreen extends StatefulWidget {
   const VideosScreen({Key? key}) : super(key: key);

@@ -15,7 +15,7 @@ class CustomWhiteAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: Navigator.canPop(context)
           ? GestureDetector(
               onTap: () async {
-                bool check = await Navigator.maybePop(context);
+                 await Navigator.maybePop(context);
 
                 // Navigator.of(context, rootNavigator: true).pop();
               },

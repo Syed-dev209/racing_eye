@@ -2,17 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:provider/provider.dart';
 import 'package:racing_eye/Controller/authController.dart';
-import 'package:racing_eye/Controller/navigatorKey.dart';
 import 'package:racing_eye/Controller/notificationController.dart';
-import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Screens/aboutUsScreen.dart';
 import 'package:racing_eye/Screens/dashboardBase.dart';
-import 'package:racing_eye/Screens/ownerDetails.dart';
-import 'package:racing_eye/Screens/ownerList.dart';
-import 'package:racing_eye/Screens/password_recovery.dart';
-import 'package:racing_eye/Screens/register_screen.dart';
 import 'package:racing_eye/main.dart';
 
 class LoginScreen extends StatefulWidget {

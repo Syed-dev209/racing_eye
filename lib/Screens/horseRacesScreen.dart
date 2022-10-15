@@ -1,5 +1,4 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:racing_eye/Controller/raceDetailsController.dart';
 import 'package:racing_eye/Screens/Components/Races/availableRaces.dart';
@@ -68,10 +67,17 @@ class _HorseRaceScreenState extends State<HorseRaceScreen>
     setState(() {});
   }
 
+  refresh() async {
+    setState(() {
+      loaded = false;
+      loaded2 = false;
+      loaded3 = false;
+    });
+    getRaceDetails();
+  }
+
   @override
   void initState() {
-    // ignore: todo
-    // TODO: implement initState
     super.initState();
     getRaceDetails();
     _tabController = TabController(length: tabs.length, vsync: this);
@@ -86,75 +92,88 @@ class _HorseRaceScreenState extends State<HorseRaceScreen>
           showTrailing: false,
         ),
         body: SafeArea(
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.98,
-            width: double.maxFinite,
-            //padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),
-            child: !error
-                ? Column(
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),
-                        child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 12.0),
-                            height: 40.0,
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                                color: Color(0xffD8E2EE),
-                                borderRadius: BorderRadius.circular(20.0)),
-                            child: TabBar(
-                              tabs: tabs,
+          child: RefreshIndicator(
+            onRefresh: () async {
+              refresh();
+            },
+            child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.88,
+                width: double.maxFinite,
+                //padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),
+                child: !error
+                    ? Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 15.0, right: 15.0, top: 25.0),
+                            child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 12.0),
+                                height: 40.0,
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                    color: Color(0xffD8E2EE),
+                                    borderRadius: BorderRadius.circular(20.0)),
+                                child: TabBar(
+                                  tabs: tabs,
+                                  controller: _tabController,
+                                  unselectedLabelColor: Color(0xFF02458A),
+                                  unselectedLabelStyle: TextStyle(
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.bold),
+                                  labelStyle: TextStyle(
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.bold),
+                                  labelColor: Colors.white,
+                                  //  indicatorSize: TabBarIndicatorSize.tab,
+                                  indicatorPadding: EdgeInsets.zero,
+                                  indicator: BubbleTabIndicator(
+                                    indicatorRadius: 20.0,
+                                    indicatorHeight: 35.0,
+                                    indicatorColor: Color(0xFF02458A),
+                                    // tabBarIndicatorSize: TabBarIndicatorSize.tab,
+                                  ),
+                                )),
+                          ),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Expanded(
+                            child: TabBarView(
                               controller: _tabController,
-                              unselectedLabelColor: Color(0xFF02458A),
-                              unselectedLabelStyle: TextStyle(
-                                  fontSize: 12.0, fontWeight: FontWeight.bold),
-                              labelStyle: TextStyle(
-                                  fontSize: 12.0, fontWeight: FontWeight.bold),
-                              labelColor: Colors.white,
-                              //  indicatorSize: TabBarIndicatorSize.tab,
-                              indicatorPadding: EdgeInsets.zero,
-                              indicator: BubbleTabIndicator(
-                                indicatorRadius: 20.0,
-                                indicatorHeight: 35.0,
-                                indicatorColor: Color(0xFF02458A),
-                                // tabBarIndicatorSize: TabBarIndicatorSize.tab,
-                              ),
-                            )),
-                      ),
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      Expanded(
-                        child: TabBarView(
-                          controller: _tabController,
-                          children: [
-                            loaded
-                                ? AvailableRaces()
-                                : Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                            loaded2
-                                ? UpcomingRaces()
-                                : Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                            loaded3
-                                ? CompletedRaces()
-                                : Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                          ],
-                        ),
+                              children: [
+                                loaded
+                                    ? AvailableRaces(
+                                      )
+                                    : Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                loaded2
+                                    ? UpcomingRaces()
+                                    : Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                loaded3
+                                    ? CompletedRaces(
+                                        refresh: refresh,
+                                      )
+                                    : Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                              ],
+                            ),
+                          )
+                        ],
                       )
-                    ],
-                  )
-                : SomethingWrongWidget(onReload: () {
-                    setState(() {
-                      error = false;
-                    });
-                    getRaceDetails();
-                  }),
+                    : SomethingWrongWidget(onReload: () {
+                        setState(() {
+                          error = false;
+                        });
+                        getRaceDetails();
+                      }),
+              ),
+            ),
           ),
         ),
       ),

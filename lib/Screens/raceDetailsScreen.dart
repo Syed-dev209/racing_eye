@@ -71,9 +71,8 @@ class _RaceDetailsScreenState extends State<RaceDetailsScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     runnersController!.close();
+    super.dispose();
   }
 
   @override

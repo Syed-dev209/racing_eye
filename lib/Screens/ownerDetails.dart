@@ -1,8 +1,5 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_tab_bar/custom_tab_bar.dart';
-import 'package:flutter_custom_tab_bar/indicator/standard_indicator.dart';
-import 'package:flutter_custom_tab_bar/library.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Models/OwnerModel/bigRaceWins.dart';
 import 'package:racing_eye/Models/OwnerModel/horseModel.dart';
@@ -12,7 +9,6 @@ import 'package:racing_eye/Models/OwnerModel/ownerLast14Days.dart';
 import 'package:racing_eye/Models/OwnerModel/statsSummary.dart';
 import 'package:racing_eye/Screens/Components/OwnerComponents/ownerTables.dart';
 import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
-import 'package:racing_eye/Screens/Components/imageplaceHolder.dart';
 import 'package:racing_eye/Screens/Components/OwnerComponents/ownerCard.dart';
 import 'package:racing_eye/Screens/Components/somethingWentWrong.dart';
 import 'package:racing_eye/Services/internet_connection.dart';

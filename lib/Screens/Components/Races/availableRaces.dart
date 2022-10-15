@@ -17,17 +17,16 @@ class _AvailableRacesState extends State<AvailableRaces> {
     final size = MediaQuery.of(context).size;
     return Consumer<AvailableRaceProvider>(builder: (context, data, _) {
       return data.availRaces.isNotEmpty
-          ? Padding(
-              padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),
-              child: ListView.builder(
-                  itemCount: data.availRaces.length,
-                  itemBuilder: (context, index) {
-                    return RacesCard(
-                      index: 0,
-                      dataModel: data.availRaces[index],
-                    );
-                  }),
-            )
+          ? ListView.builder(
+              padding:
+                  const EdgeInsets.only(left: 15.0, right: 15.0, top: 25.0),
+              itemCount: data.availRaces.length,
+              itemBuilder: (context, index) {
+                return RacesCard(
+                  index: 0,
+                  dataModel: data.availRaces[index],
+                );
+              })
           : Column(
               children: [
                 Expanded(
@@ -50,8 +49,8 @@ class _AvailableRacesState extends State<AvailableRaces> {
                         // ),
                         Text(
                           "No Available Races",
-                          style:
-                              TextStyle(color: Color(0xff848484), fontSize: 18.0),
+                          style: TextStyle(
+                              color: Color(0xff848484), fontSize: 18.0),
                         )
                       ],
                     ),

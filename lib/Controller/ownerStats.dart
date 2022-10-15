@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:racing_eye/Controller/ownerAPIController.dart';
 import 'package:racing_eye/Models/ownerSearchStatsModel.dart';
@@ -8,9 +6,6 @@ import 'package:racing_eye/Models/ownerSearchStatsModel.dart';
 var dio = Dio();
 Future getOwnerStats(int ownerId, String year, String endYear,context) async {
   print(ownerId);
-  String url =
-      "https://re.victoriayachts.ae/stats?owner_id=$ownerId&year=$year";
-
   var response = await dio.get("https://racingeye.ae/shadwell/stats",
       queryParameters: {"owner_id": ownerId,"year_start":year,"year_end":endYear},
       options: Options(headers: {"Api-Key": apiKey}));

@@ -4,7 +4,6 @@ import 'package:racing_eye/Models/OwnerModel/ownerData.dart';
 import 'package:racing_eye/Models/horsesDetailModel.dart';
 import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
 import 'package:racing_eye/Screens/Components/dropDowns.dart';
-import 'package:racing_eye/Screens/Components/imageplaceHolder.dart';
 import 'package:racing_eye/main.dart';
 
 import 'Components/horsecard.dart';

@@ -1,13 +1,10 @@
 import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:racing_eye/Controller/allHorsesController.dart';
-import 'package:racing_eye/Models/horseProfileModel.dart';
 import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
 import 'package:racing_eye/Screens/Components/horseDetailCard.dart';
 import 'package:racing_eye/Screens/Components/somethingWentWrong.dart';
 import 'package:racing_eye/Services/internet_connection.dart';
-import 'package:racing_eye/main.dart';
 
 import 'Components/HorseComponents/horseDataTables.dart';
 

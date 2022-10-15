@@ -8,7 +8,8 @@ import 'package:racing_eye/Screens/ownerDetails.dart';
 import 'package:racing_eye/main.dart';
 
 class CompletedRaces extends StatefulWidget {
-  const CompletedRaces({Key? key}) : super(key: key);
+  const CompletedRaces({Key? key, required this.refresh}) : super(key: key);
+  final Function refresh;
 
   @override
   _CompletedRacesState createState() => _CompletedRacesState();
@@ -20,11 +21,9 @@ class _CompletedRacesState extends State<CompletedRaces> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     preserveList = Provider.of<CompletedRaceProvider>(context, listen: false)
         .completeRaces;
-
   }
 
   @override
@@ -53,8 +52,6 @@ class _CompletedRacesState extends State<CompletedRaces> {
                       dateTime = picked;
                     }
                   });
-
-
                   List<RaceDetailsModel> list = [];
                   for (var i in provider) {
                     int month = DateTime.parse(i.raceDatetime!).month;
@@ -94,15 +91,20 @@ class _CompletedRacesState extends State<CompletedRaces> {
           Expanded(child:
               Consumer<CompletedRaceProvider>(builder: (context, data, _) {
             return data.completeRaces.isNotEmpty
-                ? ListView.builder(
-                    itemCount: data.completeRaces.length,
-                    itemBuilder: (context, index) {
-                      return RacesCard(
-                        index: 2,
-                        dataModel: data.completeRaces[index],
-                        showTime: true,
-                      );
-                    })
+                ? RefreshIndicator(
+                    onRefresh: () async {
+                      widget.refresh();
+                    },
+                    child: ListView.builder(
+                        itemCount: data.completeRaces.length,
+                        itemBuilder: (context, index) {
+                          return RacesCard(
+                            index: 2,
+                            dataModel: data.completeRaces[index],
+                            showTime: true,
+                          );
+                        }),
+                  )
                 : Center(
                     child: Text(
                       "No completed races",

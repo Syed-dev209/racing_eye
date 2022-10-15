@@ -24,7 +24,7 @@ Future<List<VideosModel>?> getAllVideos() async {
     } else {
       return null;
     }
-  } on DioError catch (e) {
+  } on DioError catch (_) {
     return null;
   }
 }

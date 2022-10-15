@@ -18,10 +18,7 @@ class SomethingWrongWidget extends StatelessWidget {
           ),
           Text(
             'Something went wrong. Check your Internet connection.\nTry again later',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400
-            ),
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
             textAlign: TextAlign.center,
           ),
           SizedBox(
@@ -34,7 +31,10 @@ class SomethingWrongWidget extends StatelessWidget {
               onPressed: () {
                 onReload();
               },
-              child: Text('Retry'))
+              child: Text(
+                'Retry',
+                style: TextStyle(color: Colors.white),
+              ))
         ],
       ),
     );

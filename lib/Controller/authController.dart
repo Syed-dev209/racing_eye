@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:racing_eye/Controller/ownerAPIController.dart';
 
 //https://racingeye.ae/shadwell/quick-login?password={PASSWORD}
 Future loginWithPassword(context, String pass) async {

@@ -92,8 +92,6 @@ Future getRaceDescription({context, required String raceId}) async {
 
 Future<List<RaceRunnersModel>?> getRaceRunner(context, String raceId) async {
   try {
-    String url =
-        "https://re.victoriayachts.ae/api/?q=racecards/runners/$raceId";
     var response = await dio.get("https://racingeye.ae/shadwell/runners/",
         queryParameters: {"race_id": raceId},
         options: Options(headers: {"Api-Key": apiKey}));
@@ -107,7 +105,7 @@ Future<List<RaceRunnersModel>?> getRaceRunner(context, String raceId) async {
     } else {
       return null;
     }
-  } on DioError catch (e) {
+  } on DioError catch (_) {
     return null;
   }
 }

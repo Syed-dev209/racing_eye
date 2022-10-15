@@ -83,7 +83,7 @@ class _HorseDetailsCardState extends State<HorseDetailsCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "${age} Years old, ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseSexCode} ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseColourCode}",
+                              "$age Years old, ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseSexCode} ${Provider.of<HorseProfileProvider>(context, listen: false).profile!.horseColourCode}",
                               style: TextStyle(color: Colors.white),
                             ),
                             Container(
