@@ -126,25 +126,24 @@ Future<List<BigRaceWinsModel>?> getOwnerBigRaceWins(int ownerId) async {
 
 ///remaining ----------------------------
 Future<List<HorseModel>?> getOwnerHorses(int ownerId) async {
-  try{
-  //var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
+  try {
+    //var response = await http.get(Uri.parse(url), headers: {"Api-Key": apiKey});
 
-  var response = await dio.get("https://racingeye.ae/shadwell/horses/",
-      queryParameters: {"owner_id": ownerId},
-      options: Options(headers: {"Api-Key": apiKey}));
-  if (response.statusCode == 200) {
-    //var decodedData = jsonDecode(response.body);
-    List<HorseModel> models = [];
-    for (var i in response.data) {
-      models.add(HorseModel.fromJson(i));
+    var response = await dio.get("https://racingeye.ae/shadwell/horses/",
+        queryParameters: {"owner_id": ownerId},
+        options: Options(headers: {"Api-Key": apiKey}));
+    if (response.statusCode == 200) {
+      //var decodedData = jsonDecode(response.body);
+      List<HorseModel> models = [];
+      for (var i in response.data['data']) {
+        models.add(HorseModel.fromJson(i));
+      }
+      return models;
+    } else {
+      return null;
     }
-    return models;
-  } else {
-    return null;
-  }
-  }
-  on DioError catch(e){
+  } on DioError catch (e) {
     print("Error in getting horses list :- $e");
-    return  null;
+    return null;
   }
 }

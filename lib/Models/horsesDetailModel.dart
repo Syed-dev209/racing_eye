@@ -50,7 +50,7 @@ class HorsesDetailModel {
     horseCountryCode = json["horse_country_code"]?.toString();
     horseDateOfBirth = json["horse_date_of_birth"]?.toString();
     horseDateOfDeath = json["horse_date_of_death"]?.toString();
-    horseAge = json["age"]??"0";
+    horseAge = json["age"] ?? "0";
     dateGelded = json["date_gelded"]?.toString();
     ownerName = json["owner_name"]?.toString();
     ownerUid = json["owner_uid"]?.toInt();
@@ -89,6 +89,9 @@ class HorsesDetailModel {
 
 class HorseDetailProvider extends ChangeNotifier {
   List<HorsesDetailModel> dataModel = [];
+  int currentLimit = 10;
+  bool loading = false;
+  int totalLimit = 0;
 
   addHorse(HorsesDetailModel data) {
     dataModel.add(data);
@@ -99,5 +102,26 @@ class HorseDetailProvider extends ChangeNotifier {
   addHorseList(List<HorsesDetailModel> data) {
     dataModel = data;
     notifyListeners();
+  }
+
+  setTotalLimit(int total) {
+    totalLimit = total;
+  }
+
+  setCurrentLimit(int limit) {
+    currentLimit = limit;
+    notifyListeners();
+  }
+
+  updateLoadingState(bool status) {
+    loading = status;
+    notifyListeners();
+  }
+
+  setToBasics() {
+    dataModel = [...dataModel.sublist(0, 9)];
+    currentLimit = 10;
+    loading = false;
+    totalLimit = 100;
   }
 }

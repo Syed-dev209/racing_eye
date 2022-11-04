@@ -114,7 +114,7 @@ class RacesCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  dataModel.raceInstanceTitle!,
+                                  dataModel.raceInstanceTitle ?? 'N/A',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,

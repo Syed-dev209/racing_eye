@@ -38,67 +38,68 @@ class _HorseDetailsState extends State<HorseDetails>
   bool error = false;
 
   getData() async {
-    try {
-      bool check = await InternetService.checkConnectivity();
-      if (check) {
-        await Future.wait([
-          getHorseProfile(context, widget.horseId),
-          getHorseRecords(context, widget.horseId),
-          getHorseFormData(context, widget.horseId),
-          getHorseEntries(context, widget.horseId),
-          getHorseSalesData(context, widget.horseId)
-        ]);
+    // try {
+    bool check = await InternetService.checkConnectivity();
+    if (check) {
+      // await Future.wait([
+      await getHorseProfile(context, widget.horseId);
+      await getHorseRecords(context, widget.horseId);
+      await getHorseFormData(context, widget.horseId);
+      await getHorseEntries(context, widget.horseId);
+      await getHorseSalesData(context, widget.horseId);
+      // ]);
 
-        loaded1 = true;
-        loaded2 = true;
-        loaded3 = true;
-        loaded4 = true;
-        loaded5 = true;
+      loaded1 = true;
+      loaded2 = true;
+      loaded3 = true;
+      loaded4 = true;
+      loaded5 = true;
 
-        // await getHorseProfile(context, widget.horseId).then((value) {
-        //   if (value != null) {
-        //     loaded1 = true;
-        //   } else {
-        //     error = true;
-        //   }
-        // });
-        // await getHorseRecords(context, widget.horseId).then((value) {
-        //   if (value != null) {
-        //     loaded2 = true;
-        //   } else {
-        //     error = true;
-        //   }
-        // });
-        // await getHorseFormData(context, widget.horseId).then((value) {
-        //   if (value != null) {
-        //     loaded3 = true;
-        //   } else {
-        //     error = true;
-        //   }
-        // });
+      // await getHorseProfile(context, widget.horseId).then((value) {
+      //   if (value != null) {
+      //     loaded1 = true;
+      //   } else {
+      //     error = true;
+      //   }
+      // });
+      // await getHorseRecords(context, widget.horseId).then((value) {
+      //   if (value != null) {
+      //     loaded2 = true;
+      //   } else {
+      //     error = true;
+      //   }
+      // });
+      // await getHorseFormData(context, widget.horseId).then((value) {
+      //   if (value != null) {
+      //     loaded3 = true;
+      //   } else {
+      //     error = true;
+      //   }
+      // });
 
-        // await getHorseEntries(context, widget.horseId).then((value) {
-        //   if (value != null) {
-        //     loaded5 = true;
-        //   } else {
-        //     error = true;
-        //   }
-        // });
-        // await getHorseSalesData(context, widget.horseId).then((value) {
-        //   if (value != null) {
-        //     loaded4 = true;
-        //   } else {
-        //     error = true;
-        //   }
-        // });
-      } else {
-        error = true;
-      }
-      setState(() {});
-    } catch (e) {
+      // await getHorseEntries(context, widget.horseId).then((value) {
+      //   if (value != null) {
+      //     loaded5 = true;
+      //   } else {
+      //     error = true;
+      //   }
+      // });
+      // await getHorseSalesData(context, widget.horseId).then((value) {
+      //   if (value != null) {
+      //     loaded4 = true;
+      //   } else {
+      //     error = true;
+      //   }
+      // });
+    } else {
       error = true;
-      setState(() {});
     }
+    setState(() {});
+    // } catch (e) {
+
+    //   error = true;
+    //   setState(() {});
+    // }
   }
 
   @override

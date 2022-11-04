@@ -9,9 +9,10 @@ class HorseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime parseData = DateTime.parse(horseModel.horseDateOfBirth!);
-    DateTime now = DateTime.now();
-    int age = now.year - parseData.year;
+    // DateTime parseData = DateTime.parse(
+    //     horseModel.horseDateOfBirth ?? DateTime.now().toString());
+    // DateTime now = DateTime.now();
+    // int age = now.year - parseData.year;
     //age = (age/365).round();
     // age = int.parse(horseModel.horseAge??"0.0");
     return Padding(
@@ -49,7 +50,7 @@ class HorseCard extends StatelessWidget {
                     height: 1.0,
                   ),
                   Text(
-                    '$age years old, ${horseModel.horseColourCode} ${horseModel.horseSexCode}',
+                    '${horseModel.horseAge} years old, ${horseModel.horseColourCode} ${horseModel.horseSexCode}',
                     style: TextStyle(color: Color(0xff1b5898)),
                   ),
                   Text(

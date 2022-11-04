@@ -1,5 +1,9 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:racing_eye/Controller/allHorsesController.dart';
 import 'package:racing_eye/Models/OwnerModel/ownerData.dart';
 import 'package:racing_eye/Models/horsesDetailModel.dart';
 import 'package:racing_eye/Screens/Components/customWhiteAppBar.dart';
@@ -16,18 +20,21 @@ class HorsesList extends StatefulWidget {
 }
 
 class _HorsesListState extends State<HorsesList> {
-  List<String> ages = ["Age", "1", "2", "3", "4"];
+  List<String> ages = ["Age", "1", "2", "3", "4", "6"];
   String age = "Age";
   String owner = "";
   List<OwnersData> ownerNames = [];
   OwnersData? ownerName;
   TextEditingController searchedItem = TextEditingController();
   List<HorsesDetailModel> preservedHorseList = [];
+  ScrollController scrollController = ScrollController();
+  int _debouncetime = 500;
+  Timer? _debounce;
+  String searchWord = '';
 
   @override
   void initState() {
     super.initState();
-    print("in init");
     ownerNames.add(OwnersData(
         id: 0,
         uid: 0,
@@ -49,16 +56,47 @@ class _HorsesListState extends State<HorsesList> {
     for (var i in prov) {
       preservedHorseList.add(i);
     }
-    // for (var i in preservedHorseList) {
-    //   print(i.horseAge);
-    // }
+
+    scrollController.addListener(() {
+      if (scrollController.position.atEdge) {
+        bool isTop = scrollController.position.pixels == 0;
+        if (!isTop) {
+          getHorses();
+        }
+      }
+    });
+  }
+
+  getHorses({String? searchKeyword, int? customLimit}) async {
+    final provider = Provider.of<HorseDetailProvider>(context, listen: false);
+    log(provider.totalLimit.toString());
+    // if (provider.currentLimit < provider.totalLimit) {
+    provider.updateLoadingState(true);
+    log("Current limit===> ${provider.currentLimit}");
+    int limit = 0;
+    if ((provider.totalLimit - provider.currentLimit) < 10) {
+      limit =
+          provider.currentLimit + (provider.totalLimit - provider.currentLimit);
+    } else {
+      limit = provider.currentLimit + 10;
+    }
+    log("requsted limit=> $limit");
+    if (limit <= provider.totalLimit) {}
+    await getAllHorsesData(context,
+        limit: customLimit ??= limit == 0 ? 10 : limit,
+        ownerId: ownerName == ownerNames.first ? null : ownerName?.uid,
+        age: int.tryParse(age),
+        searchWord: searchWord);
+    log("Changed limit===> ${provider.currentLimit}");
+    provider.updateLoadingState(false);
+    //}
   }
 
   @override
   void deactivate() {
-    // TODO: implement deactivate
     Provider.of<HorseDetailProvider>(context, listen: false).dataModel =
         preservedHorseList;
+    Provider.of<HorseDetailProvider>(context, listen: false).setToBasics();
     super.deactivate();
   }
 
@@ -89,26 +127,31 @@ class _HorsesListState extends State<HorsesList> {
                             child: TextFormField(
                               controller: searchedItem,
                               onChanged: (val) {
-                                print(val.isNotEmpty);
-                                if (val.isNotEmpty) {
-                                  // print("=====> $val");
-                                  List<HorsesDetailModel> searchedList = [];
-                                  for (var i in preservedHorseList) {
-                                    if (i.horseName!.contains(RegExp(
-                                        searchedItem.text,
-                                        caseSensitive: false))) {
-                                      // print("Current ${i.horseName}");
-                                      // print("found");
-                                      searchedList.add(i);
-                                    }
-                                  }
-                                  print(searchedList.length);
-                                  data.addHorseList(searchedList);
-                                } else {
-                                  // print("Value empty");
-                                  // print(preservedHorseList);
-                                  data.addHorseList(preservedHorseList);
-                                }
+                                searchWord = val;
+                                if (_debounce?.isActive ?? false)
+                                  _debounce?.cancel();
+                                _debounce = Timer(
+                                    Duration(milliseconds: _debouncetime), () {
+                                  ///here you perform your search
+                                  getHorses(
+                                      searchKeyword: searchWord,
+                                      customLimit: 10);
+                                });
+
+                                // if (val.isNotEmpty) {
+                                //   List<HorsesDetailModel> searchedList = [];
+                                //   for (var i in preservedHorseList) {
+                                //     if (i.horseName!.contains(RegExp(
+                                //         searchedItem.text,
+                                //         caseSensitive: false))) {
+                                //       searchedList.add(i);
+                                //     }
+                                //   }
+                                //   print(searchedList.length);
+                                //   data.addHorseList(searchedList);
+                                // } else {
+                                //   data.addHorseList(preservedHorseList);
+                                // }
                               },
                               decoration: InputDecoration(
                                   contentPadding:
@@ -145,21 +188,22 @@ class _HorsesListState extends State<HorsesList> {
                                     setState(() {
                                       age = val;
                                     });
-                                    if (age == ages.first) {
-                                      data.addHorseList(preservedHorseList);
-                                    } else {
-                                      List<HorsesDetailModel> searchedList = [];
-                                      for (var i in preservedHorseList) {
-                                        DateTime parseData =
-                                            DateTime.parse(i.horseDateOfBirth!);
-                                        DateTime now = DateTime.now();
-                                        int age = now.year - parseData.year;
-                                        if (age == int.parse(val)) {
-                                          searchedList.add(i);
-                                        }
-                                      }
-                                      data.addHorseList(searchedList);
-                                    }
+                                    getHorses(customLimit: 10);
+                                    // if (age == ages.first) {
+                                    //   data.addHorseList(preservedHorseList);
+                                    // } else {
+                                    //   List<HorsesDetailModel> searchedList = [];
+                                    //   for (var i in preservedHorseList) {
+                                    //     DateTime parseData =
+                                    //         DateTime.parse(i.horseDateOfBirth!);
+                                    //     DateTime now = DateTime.now();
+                                    //     int age = now.year - parseData.year;
+                                    //     if (age == int.parse(val)) {
+                                    //       searchedList.add(i);
+                                    //     }
+                                    //   }
+                                    //   data.addHorseList(searchedList);
+                                    // }
                                   },
                                 ),
                               ),
@@ -172,25 +216,34 @@ class _HorsesListState extends State<HorsesList> {
                                 child: dropDownAndroidOwner(
                                     ownerNames, ownerName!, (val) {
                                   ownerName = val;
-                                  if (ownerName == ownerNames.first) {
-                                    data.addHorseList(preservedHorseList);
-                                  } else {
-                                    List<HorsesDetailModel> searchedList = [];
-                                    for (var i in preservedHorseList) {
-                                      if (i.ownerName!.toLowerCase() ==
-                                          ownerName!.ownerName!.toLowerCase()) {
-                                        searchedList.add(i);
-                                      }
-                                    }
-                                    data.addHorseList(searchedList);
-                                  }
+                                  getHorses(customLimit: 10);
+                                  // if (ownerName == ownerNames.first) {
+                                  //   data.addHorseList(preservedHorseList);
+                                  // } else {
+                                  //   List<HorsesDetailModel> searchedList = [];
+                                  //   for (var i in preservedHorseList) {
+                                  //     if (i.ownerName!.toLowerCase() ==
+                                  //         ownerName!.ownerName!.toLowerCase()) {
+                                  //       searchedList.add(i);
+                                  //     }
+                                  //   }
+                                  //   data.addHorseList(searchedList);
+                                  // }
                                 }),
                               )
                             ],
                           ),
+                          data.loading
+                              ? Center(
+                                  child: LinearProgressIndicator(
+                                    backgroundColor: Colors.white,
+                                  ),
+                                )
+                              : SizedBox.shrink(),
                           data.dataModel.isNotEmpty
                               ? Expanded(
                                   child: ListView.builder(
+                                      controller: scrollController,
                                       itemCount: data.dataModel.length,
                                       itemBuilder: (context, index) {
                                         return HorseCard(
